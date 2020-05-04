@@ -5,8 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:F4E_design"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="StatusPage" Background="#FFF6F6F6">
+      d:DesignHeight="450" d:DesignWidth="598"
+      Title="StatusPage" Background="#FFF6F6F6" >
+    <Page.Resources>
+        <Style x:Key="ShadowRectStyle" TargetType="Rectangle">
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.913,0.53" StartPoint="0.067,0.526">
+                        <GradientStop Color="#FFACDAEE" Offset="0.314"/>
+                        <GradientStop Color="#00ACACAE"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="371*"/>
@@ -18,7 +33,7 @@
             <RowDefinition Height="55*"/>
             <RowDefinition Height="192*"/>
         </Grid.RowDefinitions>
-        <Image Source="1.png" Grid.Column="1" Margin="7"/>
+        <Image Source="images/Shield-Blue.png" Grid.Column="1" Margin="7"/>
         <Label Content="תמונת מצב" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34" Margin="0,10.5" Width="112.457"/>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -26,9 +41,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="4.png" Margin="5,0" VerticalAlignment="Top" />
-            <Image Source="3.png" Grid.Column="1" Margin="5,0" VerticalAlignment="Top"/>
-            <Image  Grid.Column="2" Source="2.png" Margin="5,0" VerticalAlignment="Top"/>
+            <Image Margin="5,0" VerticalAlignment="Top" Source="images/Schedule_Green.png"/>
+            <Image Grid.Column="1" Margin="5,0" VerticalAlignment="Top" Source="images/Server_Blue.png"/>
+            <Image  Grid.Column="2" Source="images/status_V.png" Margin="5,0" VerticalAlignment="Top"/>
 
             <Label HorizontalAlignment="Right" FontFamily="Assistant SemiBold" FontSize="18" Margin="0,0,15,0">מערכת שעות</Label>
             <Label x:Name="ScheduleActive" HorizontalAlignment="Right" FontFamily="Assistant Bold" FontSize="27
@@ -44,16 +59,29 @@
 
 
         </Grid>
-        <Label Content="מערכת מניעת עקיפה" Grid.Row="2" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34" Margin="0,11,0,12" Width="201.647"/>
+        <Image Source="images/Warm_Blue.png" Grid.Row="2" Grid.Column="1" Margin="7"/>
 
-        <Image Source="5.png" Grid.Row="2" Grid.Column="1" Margin="7"/>
-        <Rectangle Height="3" Grid.Row="3" VerticalAlignment="Bottom" StrokeThickness="0" HorizontalAlignment="Left" Width="742" Margin="0,0,0,189.857" >
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.913,0.53" StartPoint="0.067,0.526">
-                    <GradientStop Color="#FF0067AC" Offset="0.314"/>
-                    <GradientStop Color="#00ACACAE"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
+        <Label Content="מערכת מניעת עקיפה" Grid.Row="2" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34" Margin="0,11,0,12" Width="201.647"/>
+        <Grid Grid.Row="3" HorizontalAlignment="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Rectangle Height="2" Grid.Row="0" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+            <Rectangle Height="2" Grid.Row="0" VerticalAlignment="Bottom" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+            <Rectangle Height="2" Grid.Row="1" VerticalAlignment="Bottom" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+            <Label Content="תפיסת עריכה" FontFamily="Assistant SemiBold" FontSize="16" HorizontalAlignment="Right" Margin="0,3,0,7"/>
+            <Label Content="הסבר לגבי תפיסת עריכה" FontFamily="Assistant" FontSize="14
+                   " HorizontalAlignment="Right" Margin="0,25,0,7"/>
+
+            <Label Content="מניעת סגירה" Grid.Row="1" FontFamily="Assistant SemiBold" FontSize="16" HorizontalAlignment="Right" Margin="0,3,0,7"/>
+            <Label Content="הסבר לגבי מניעת סגירה" Grid.Row="1" FontFamily="Assistant" FontSize="14" HorizontalAlignment="Right" Margin="0,25,0,7"/>
+
+            <Label Content="במידה והגלישה חסומה שלא לצורך, ואינה מתחדשת באופן אוטומטי, לחץ כאן" Grid.Row="2" FontFamily="Assistant SemiBold" FontSize="16" HorizontalAlignment="Right" Margin="0,5,0,7"/>
+
+        </Grid>
+
+
     </Grid>
 </Page>

@@ -25,5 +25,32 @@ namespace F4E_design
             InitializeComponent();
         }
 
+      
+        //X button - close the window
+        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ReplacePage(object sender, MouseButtonEventArgs e)
+        {
+            Label obj = sender as Label;
+
+            ChooseTheNewLabel(obj);
+
+        }
+
+        private void ChooseTheNewLabel(Label obj)
+        {
+            foreach (Label child in Menu.Children.OfType<Label>())
+            {
+                child.FontFamily = new FontFamily("Assistant");
+                child.FontWeight = FontWeights.Normal;
+
+            }
+
+            obj.FontFamily = new FontFamily("Assistant-Bold");
+            obj.FontWeight = FontWeights.UltraBold;
+        }
     }
 }
