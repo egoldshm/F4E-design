@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -43,14 +44,16 @@ namespace F4E_design.Pages
                 string days = "אבגדהוז";
                 Button newButton = new Button();
                 newButton.SetValue(Grid.RowProperty, 0);
-                newButton.SetValue(Grid.ColumnProperty, 7 - j);
+                newButton.SetValue(Grid.ColumnProperty, j + 1);
                 newButton.Name = "day_button" + j;
                 newButton.BorderBrush = (Brush)converter.ConvertFromString("#FF0B52A7");
                 newButton.Background = (Brush)converter.ConvertFromString("#FFCBD8E6");
                 newButton.FontFamily = new FontFamily("Assistant Bold");
                 newButton.FontWeight = FontWeights.Bold;
                 newButton.FontSize = 13;
+
                 newButton.Click += ChooseFullDay;
+
                 newButton.MouseRightButtonUp += unchooseFullDay;
                 newButton.Content = days[j];
                 ScheduleGrid.Children.Add(newButton);
@@ -65,20 +68,25 @@ namespace F4E_design.Pages
                 string stringForLabel = i / 2 + ":" + (i % 2 == 0 ? "00" : "30");
                 hourLabel.Content = stringForLabel;
                 hourLabel.SetValue(Grid.RowProperty, i + 1);
-                hourLabel.SetValue(Grid.ColumnProperty, 8);
+                hourLabel.SetValue(Grid.ColumnProperty, 0);
                 hourLabel.FontFamily = new FontFamily("Assistant");
                 hourLabel.FontSize = 8;
+                hourLabel.MouseLeftButtonUp += ChooseHour;
+                hourLabel.MouseRightButtonDown += UnselectedHour;
                 ScheduleGrid.Children.Add(hourLabel);
                 for (int j = 0; j < 7; j++)
                 {
                     Button newButton = new Button();
                     newButton.SetValue(Grid.RowProperty, i + 1);
                     newButton.SetValue(Grid.ColumnProperty, j + 1);
-                    newButton.Name = "button_" + i + "_" + (6 - j);
+                    newButton.Name = "button_" + i + "_" + j;
                     this.RegisterName(newButton.Name, newButton);
                     newButton.BorderBrush = (Brush)converter.ConvertFromString("#FF0B52A7");
                     newButton.Background = Brushes.White;
-                    newButton.Click += clickOnHourButton;
+                    newButton.PreviewMouseLeftButtonDown += clickOnHourButton;
+
+                    //newButton.MouseMove += clickOnHourButton;
+                    //newButton.MouseDown += clickOnHourButton;
                     ScheduleGrid.Children.Add(newButton);
                 }
 
@@ -87,10 +95,39 @@ namespace F4E_design.Pages
 
         }
 
+      
+
+        private void UnselectedHour(object sender, MouseButtonEventArgs e)
+        {
+            Label labelSender = sender as Label;
+            int hour = (int)labelSender.GetValue(Grid.RowProperty) - 1;
+            for (int i = 0; i < 7; i++)
+            {
+                Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
+                button.Background = COLOR_OF_UNSELECTED_BUTTON;
+                tableOfHours[i, hour] = false;
+            }
+
+
+        }
+
+        private void ChooseHour(object sender, MouseButtonEventArgs e)
+        {
+            Label labelSender = sender as Label;
+            int hour = (int)labelSender.GetValue(Grid.RowProperty) - 1;
+            for (int i = 0; i < 7; i++)
+            {
+                Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
+                button.Background = COLOR_OF_SELECTED_BUTTON;
+                tableOfHours[i, hour] = true;
+
+            }
+
+        }
         private void unchooseFullDay(object sender, MouseButtonEventArgs e)
         {
             Button buttonSender = sender as Button;
-            int day = 7 - (int)buttonSender.GetValue(Grid.ColumnProperty);
+            int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
             for (int i = 0; i < 48; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
@@ -98,12 +135,13 @@ namespace F4E_design.Pages
                 tableOfHours[day, i] = false;
 
             }
+
         }
 
         private void ChooseFullDay(object sender, RoutedEventArgs e)
         {
             Button buttonSender = sender as Button;
-            int day = 7 - (int)buttonSender.GetValue(Grid.ColumnProperty);
+            int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
             for (int i = 0; i < 48; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
@@ -112,10 +150,14 @@ namespace F4E_design.Pages
 
             }
 
+
         }
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         private void clickOnHourButton(object sender, RoutedEventArgs e)
         {
+            ReleaseCapture();
             Button button = sender as Button;
             int day = 7 - (int)button.GetValue(Grid.ColumnProperty);
             int hour = (int)button.GetValue(Grid.RowProperty) - 1;
