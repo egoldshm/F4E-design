@@ -44,6 +44,9 @@ namespace F4E_design
                 case "about":
                     FrameWindow.Content = new AboutPage();
                     break;
+                case "scheduel":
+                    FrameWindow.Content = new SchedulePage();
+                    break;
             }
         }
 
