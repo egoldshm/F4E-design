@@ -1,4 +1,5 @@
-﻿using System;
+﻿using F4E_design.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,15 +30,27 @@ namespace F4E_design
         //X button - close the window
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void ReplacePage(object sender, MouseButtonEventArgs e)
         {
             Label obj = sender as Label;
-
             ChooseTheNewLabel(obj);
-
+            switch (obj.Name)
+            {
+                case "page1":
+                    FrameWindow.Content = new StatusPage();
+                    break;
+                case "page2":
+                    FrameWindow.Content = new Page1();
+                    break;
+                case "page3":
+                    FrameWindow.Content = new Page2();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void ChooseTheNewLabel(Label obj)
@@ -48,7 +61,6 @@ namespace F4E_design
                 child.FontWeight = FontWeights.Normal;
 
             }
-
             obj.FontFamily = new FontFamily("Assistant-Bold");
             obj.FontWeight = FontWeights.UltraBold;
         }

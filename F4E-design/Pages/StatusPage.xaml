@@ -19,8 +19,6 @@
             </Setter>
 
         </Style>
-
-
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

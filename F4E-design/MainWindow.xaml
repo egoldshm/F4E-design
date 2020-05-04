@@ -7,6 +7,16 @@
         mc:Ignorable="d" WindowStyle="None"
         Height="500" Width="750.13" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="MenuLabel" TargetType="Label">
+            <Setter Property="Foreground" Value="#FFFFFFFE"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="FontFamily" Value="Assistant"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid Background="#FFF6F6F6">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.96*"/>
@@ -21,6 +31,8 @@
             <Label FontFamily="Assistant-Bold" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,0,10,0" FlowDirection="RightToLeft" VerticalAlignment="Center"> שלום לך, ניב! </Label>
             <Image Margin="15" HorizontalAlignment="Left" MouseLeftButtonUp="Image_MouseLeftButtonUp" Source="close_button.png"/>
         </Grid>
+        
+        <!--Frame to page the replace-->
         <Frame x:Name="FrameWindow"  Grid.Row="1" Source="/F4E-design;component/pages/StatusPage.xaml" NavigationUIVisibility="Hidden" Margin="5,0,8,0"/>
 
         <!-- תפריט צד-->
@@ -49,12 +61,11 @@
                     <RowDefinition Height="*"/>
 
                 </Grid.RowDefinitions>
-                <Label Content="תמונת מצב" Foreground="#FFFFFFFE" HorizontalAlignment="Right" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" VerticalAlignment="Center" MouseLeftButtonUp="ReplacePage" FontWeight="Bold"/>
-                <Label Content="הגדרות סינון" Foreground="#FFFFFFFE" HorizontalAlignment="Right" FontFamily="Assistant" Grid.Row="1" FontSize="14" VerticalAlignment="Center" MouseLeftButtonUp="ReplacePage"/>
-                <Label Content="מערכת שעות" Foreground="#FFFFFFFE" HorizontalAlignment="Right" FontFamily="Assistant" Grid.Row="2" FontSize="14" VerticalAlignment="Center" MouseLeftButtonUp="ReplacePage"/>
-                <Label Content="הגדרות כלליות" Foreground="#FFFFFFFE" HorizontalAlignment="Right" FontFamily="Assistant" Grid.Row="3" FontSize="14" VerticalAlignment="Center" MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="page1" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold"/>
+                <Label x:Name="page2" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="page3" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="2"  MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="page4" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage"/>
             </Grid>
-
         </Grid>
         <!--
         Ratio:
