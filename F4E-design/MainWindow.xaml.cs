@@ -46,7 +46,7 @@ namespace F4E_design
                     FrameWindow.Content = new Page1();
                     break;
                 case "page3":
-                    FrameWindow.Content = new Page2();
+                    FrameWindow.Content = new SchedulePage();
                     break;
                 default:
                     break;

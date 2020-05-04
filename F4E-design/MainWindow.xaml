@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:F4E_design"
         mc:Ignorable="d" WindowStyle="None"
-        Height="500" Width="750.13" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
+        Height="500" Width="750.13" AllowsTransparency="True" Background="Transparent"
     WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
