@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace F4E_design.Pages
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for GeneralSettingsPage.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class GeneralSettingsPage : Page
     {
-        public Page1()
+        public GeneralSettingsPage()
         {
             InitializeComponent();
         }

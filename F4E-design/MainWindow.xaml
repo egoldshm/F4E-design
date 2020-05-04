@@ -61,10 +61,10 @@
                     <RowDefinition Height="*"/>
 
                 </Grid.RowDefinitions>
-                <Label x:Name="page1" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold"/>
-                <Label x:Name="page2" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage"/>
-                <Label x:Name="page3" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="2"  MouseLeftButtonUp="ReplacePage"/>
-                <Label x:Name="page4" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="current_starus" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold"/>
+                <Label x:Name="filtering_settings" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="scheduel" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="2"  MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage"/>
             </Grid>
         </Grid>
         <!--
