@@ -25,7 +25,6 @@ namespace F4E_design
         {
             InitializeComponent();
         }
-
       
         //X button - close the window
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -39,16 +38,8 @@ namespace F4E_design
             ChooseTheNewLabel(obj);
             switch (obj.Name)
             {
-                case "page1":
+                case "current_status":
                     FrameWindow.Content = new StatusPage();
-                    break;
-                case "page2":
-                    FrameWindow.Content = new Page1();
-                    break;
-                case "page3":
-                    FrameWindow.Content = new Page2();
-                    break;
-                default:
                     break;
             }
         }
@@ -59,7 +50,6 @@ namespace F4E_design
             {
                 child.FontFamily = new FontFamily("Assistant");
                 child.FontWeight = FontWeights.Normal;
-
             }
             obj.FontFamily = new FontFamily("Assistant-Bold");
             obj.FontWeight = FontWeights.UltraBold;
