@@ -41,6 +41,9 @@ namespace F4E_design
                 case "current_status":
                     FrameWindow.Content = new StatusPage();
                     break;
+                case "about":
+                    FrameWindow.Content = new AboutPage();
+                    break;
             }
         }
 

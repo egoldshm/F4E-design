@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:F4E_design"
         mc:Ignorable="d" WindowStyle="None"
         Height="500" Width="750.13" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
-    WindowStartupLocation="CenterScreen">
+        Icon="pages/images/logo.png"
+        Title="לוקחים אחריות"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#FFFFFFFE"/>
@@ -59,12 +61,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="current_starus" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold"/>
+                <Label x:Name="current_status" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold"/>
                 <Label x:Name="filtering_settings" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage"/>
                 <Label x:Name="scheduel" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="2"  MouseLeftButtonUp="ReplacePage"/>
                 <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="about" Content="אודות" Style="{StaticResource MenuLabel}" Grid.Row="4" MouseLeftButtonUp="ReplacePage"/>
             </Grid>
         </Grid>
         <!--

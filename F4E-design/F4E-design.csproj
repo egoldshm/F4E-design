@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GeneralSettingsPage.xaml.cs">
       <DependentUpon>GeneralSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\GeneralSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +132,15 @@
     <Resource Include="Pages\images\Shield-Blue.png" />
     <Resource Include="Pages\images\status_V.png" />
     <Resource Include="Pages\images\Warm_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pages\images\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pages\images\contact.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pages\images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
