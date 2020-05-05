@@ -59,11 +59,11 @@
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CategorizePage.xaml.cs">
+      <DependentUpon>CategorizePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FilterSettingsPage.xaml.cs">
       <DependentUpon>FilterSettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\GeneralSettingsPage.xaml.cs">
-      <DependentUpon>GeneralSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SchedulePage.xaml.cs">
       <DependentUpon>SchedulePage.xaml</DependentUpon>
@@ -87,11 +87,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\FilterSettingsPage.xaml">
+    <Page Include="Pages\CategorizePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\GeneralSettingsPage.xaml">
+    <Page Include="Pages\FilterSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,15 +152,12 @@
     <Resource Include="images\ScheduelPage\4_calender.png" />
     <Resource Include="images\ScheduelPage\5_save_changes.png" />
     <Resource Include="images\StatusPage\5_1.png" />
-    <Resource Include="images\StatusPage\Schedule_Green.png" />
-    <Resource Include="images\StatusPage\Server_Blue.png" />
     <Resource Include="images\StatusPage\Shield-Blue.png" />
-    <Resource Include="images\StatusPage\status_V.png" />
     <Resource Include="images\StatusPage\Warm_Blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\GeneralSettingsPage\off.png" />
-    <Resource Include="images\GeneralSettingsPage\on.png" />
+    <Resource Include="images\CategorizePage\off.png" />
+    <Resource Include="images\CategorizePage\on.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\FilterSettingsPage\4.png" />
@@ -171,14 +168,17 @@
     <Resource Include="images\FilterSettingsPage\filter.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\GeneralSettingsPage\4.png" />
-    <Resource Include="images\GeneralSettingsPage\3.png" />
-    <Resource Include="images\GeneralSettingsPage\2.png" />
-    <Resource Include="images\GeneralSettingsPage\6.png" />
-    <Resource Include="images\GeneralSettingsPage\5.png" />
+    <Resource Include="images\CategorizePage\4.png" />
+    <Resource Include="images\CategorizePage\3.png" />
+    <Resource Include="images\CategorizePage\2.png" />
+    <Resource Include="images\CategorizePage\6.png" />
+    <Resource Include="images\CategorizePage\5.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\GeneralSettingsPage\1.png" />
+    <Resource Include="images\CategorizePage\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\GeneralSettingsPage\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

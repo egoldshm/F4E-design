@@ -45,12 +45,15 @@ namespace F4E_design
                 case "filtering_settings":
                     FrameWindow.Content = new FilterSettingsPage();
                     break;
+                case "categorize":
+                    FrameWindow.Content = new FilterSettingsPage();
+                    break;
                 case "about":
                     FrameWindow.Content = new AboutPage();
                     break;
-                case "general_settings":
-                    FrameWindow.Content = new GeneralSettingsPage();
-                    break;
+                //case "general_settings":
+                //    FrameWindow.Content = new GeneralSettingsPage();
+                //    break;
                 case "scheduel":
                     FrameWindow.Content = new SchedulePage();
                     break;
