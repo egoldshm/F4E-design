@@ -59,6 +59,9 @@
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FilterSettingsPage.xaml.cs">
+      <DependentUpon>FilterSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GeneralSettingsPage.xaml.cs">
       <DependentUpon>GeneralSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FilterSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +123,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Resource Include="Fonts\Assistant-Bold.ttf" />
+    <Resource Include="Fonts\Assistant-ExtraBold.ttf" />
+    <Resource Include="Fonts\Assistant-ExtraLight.ttf" />
+    <Resource Include="Fonts\Assistant-Light.ttf" />
+    <Resource Include="Fonts\Assistant-Regular.ttf" />
+    <Resource Include="Fonts\Assistant-SemiBold.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -144,6 +157,28 @@
     <Resource Include="images\StatusPage\Shield-Blue.png" />
     <Resource Include="images\StatusPage\status_V.png" />
     <Resource Include="images\StatusPage\Warm_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\GeneralSettingsPage\off.png" />
+    <Resource Include="images\GeneralSettingsPage\on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\FilterSettingsPage\4.png" />
+    <Resource Include="images\FilterSettingsPage\3.png" />
+    <Resource Include="images\FilterSettingsPage\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\FilterSettingsPage\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\GeneralSettingsPage\4.png" />
+    <Resource Include="images\GeneralSettingsPage\3.png" />
+    <Resource Include="images\GeneralSettingsPage\2.png" />
+    <Resource Include="images\GeneralSettingsPage\6.png" />
+    <Resource Include="images\GeneralSettingsPage\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\GeneralSettingsPage\1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,12 +5,116 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:F4E_design.Pages"
       mc:Ignorable="d" 
-      Title="GeneralSettingsPage"
-      d:DesignHeight="450" d:DesignWidth="598" Background="#FFF6F6F6">
-    <Grid>
+      d:DesignHeight="415.75" d:DesignWidth="563.15"
+      Title="GeneralSettingsPage" Background="#FFF6F6F6">
+    <Page.Resources>
+        <Style x:Key="ShadowRectStyle" TargetType="Rectangle">
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.913,0.53" StartPoint="0.067,0.526">
+                        <GradientStop Color="#FFACDAEE" Offset="0.314"/>
+                        <GradientStop Color="#00ACACAE"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"                  
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="371*"/>
-            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="../images/GeneralSettingsPage/1.png" Grid.Column="2" Margin="12.1,27.97,18.15,7" VerticalAlignment="Top" Height="26.83" Width="26.83"/>
+
+        <Label Grid.Column="0" Grid.ColumnSpan="2" Content="קטגריות" FontFamily="{StaticResource Bold}" FontSize="14.5" HorizontalAlignment="Right" 
+               VerticalAlignment="Top" Margin="0,27.97,0,30"/>
+        <Label Grid.Column="0" Grid.ColumnSpan="2" Content="כאן תוכל לחסום גלישה באתרים על פי קטגוריות מוגדרות מראש" FontFamily="{StaticResource Semi-bold}" FontSize="10" HorizontalAlignment="Right" 
+               VerticalAlignment="Bottom" Margin="0,0,0,18.8"/>
+        <Rectangle Height="2" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+        <Image Source="../images/GeneralSettingsPage/2.png" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" 
+               Height="35.5" Width="35.5" Margin="15.9,7.56,4.54,7.56"/>
+
+
+        <Label Grid.Row="1" VerticalAlignment="Center" Content="רשתות חברתיות" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
+               HorizontalAlignment="Right" FontWeight="Bold"/>
+
+        <ToggleButton Width="41.6"  Height="23.43" Style="{DynamicResource ToggleButtonStyle}" Grid.Column="0" Grid.Row="1" Margin="84.3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
+
+
+        <Rectangle Height="2" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+        <Image Source="../images/GeneralSettingsPage/3.png" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Height="35.5" Width="35.5" Margin="15.9,7.56,4.54,7.56"/>
+
+        <Label Grid.Row="2" VerticalAlignment="Center" FlowDirection="RightToLeft" Content="הימורים" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
+               HorizontalAlignment="Right" FontWeight="Bold"/>
+        <ToggleButton Width="41.6"  Height="23.43" Style="{DynamicResource ToggleButtonStyle}" Grid.Column="0" Grid.Row="2" Margin="84.3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
+
+
+
+        <Rectangle Height="2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+        <Image Source="../images/GeneralSettingsPage/4.png" Grid.Row="3" Grid.Column="1"  VerticalAlignment="Center" Height="35.5" Width="35.5" Margin="15.9,7.56,4.54,7.56"/>
+
+        <Label Grid.Row="3" VerticalAlignment="Center" Content="חדשות" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
+               HorizontalAlignment="Right" FontWeight="Bold"/>
+        <ToggleButton Width="41.6"  Height="23.43" Style="{DynamicResource ToggleButtonStyle}" Grid.Column="0" Grid.Row="3" Margin="84.3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
+
+
+        <Rectangle Height="2" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+        <Image Source="../images/GeneralSettingsPage/5.png" Grid.Row="4" Grid.Column="1"  VerticalAlignment="Center" Height="35.5" Width="35.5" Margin="15.9,7.56,4.54,7.56"/>
+
+
+        <Label Grid.Row="4" VerticalAlignment="Center" Content="ספורט" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
+               HorizontalAlignment="Right" FontWeight="Bold"/>
+        <ToggleButton Width="41.6"  Height="23.43" Style="{DynamicResource ToggleButtonStyle}" Grid.Column="0" Grid.Row="4" Margin="84.3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
+
+
+        <Rectangle Height="2" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+        <Image Source="../images/GeneralSettingsPage/6.png" Grid.Row="5" Grid.Column="1"  VerticalAlignment="Center" Height="35.5" Width="35.5" Margin="15.9,7.56,4.54,7.56"/>
+
+        <Label Grid.Row="5" VerticalAlignment="Center" Content="נגנים / תמונות" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
+               HorizontalAlignment="Right" FontWeight="Bold"/>
+        <ToggleButton Width="41.6"  Height="23.43" Style="{DynamicResource ToggleButtonStyle}" Grid.Column="0" Grid.Row="5" Margin="84.3,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
+
+        <Rectangle Height="2" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+
+        <Button Foreground="White" Content="שמור שינויים" FontFamily="{StaticResource Bold}" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Width="116" Height="24.2" Margin="0,13.6,0,16.25" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF6187B2" Offset="1"/>
+                    <GradientStop Color="#FF2061AD"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
     </Grid>
 </Page>

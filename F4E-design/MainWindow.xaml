@@ -55,7 +55,7 @@
         </Grid>
 
         <!--Frame to page the replace-->
-        <Frame x:Name="FrameWindow"  Grid.Row="1" Source="/F4E-design;component/pages/StatusPage.xaml" NavigationUIVisibility="Hidden" Margin="5,0,8,0"/>
+        <Frame x:Name="FrameWindow"  Grid.Row="1" Source="/F4E-design;component/pages/StatusPage.xaml" NavigationUIVisibility="Hidden" />
 
         <!-- תפריט צד-->
         <Grid Grid.RowSpan="2" Grid.Column="1">

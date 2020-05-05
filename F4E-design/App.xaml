@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:F4E_design"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="Bold">/Fonts/#Assistant</FontFamily>
+        <FontFamily x:Key="Extra-bold">/Fonts/#Assistant ExtraBold</FontFamily>
+        <!--<FontFamily x:Key="test">/Fonts/#Assistant ExtraLight</FontFamily>-->
+        <!--<FontFamily x:Key="test">/Fonts/#Assistant Light</FontFamily>-->
+        <FontFamily x:Key="Regular">/Fonts/#Assistant</FontFamily>
+        <FontFamily x:Key="Semi-bold">/Fonts/#Assistant SemiBold</FontFamily>
+        
     </Application.Resources>
 </Application>
