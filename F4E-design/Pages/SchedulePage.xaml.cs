@@ -306,5 +306,11 @@ namespace F4E_design.Pages
         {
             return getStatusByDateTime(DateTime.Now);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            tableOfHours = new bool[7, 48];
+            FromArrayOfBoolToButton(tableOfHours);
+        }
     }
 }
