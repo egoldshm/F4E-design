@@ -65,9 +65,27 @@ namespace F4E_design
                 child.FontFamily = new FontFamily("Assistant");
                 child.FontWeight = FontWeights.Normal;
             }
+            foreach (Label child in BottomMenu.Children.OfType<Label>())
+            {
+                child.BorderThickness = new Thickness(0, 0, 0, 0);
+                child.FontFamily = new FontFamily("Assistant");
+                child.FontWeight = FontWeights.Normal;
+            }
             obj.BorderThickness = new Thickness(0, 0, 2.5, 0);
             obj.FontFamily = new FontFamily("Assistant-Bold");
             obj.FontWeight = FontWeights.UltraBold;
+        }
+
+        private void current_status_MouseMove(object sender, MouseEventArgs e)
+        {
+            Label label = sender as Label;
+            label.Foreground = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void current_status_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Label label = sender as Label;
+            label.Foreground = new SolidColorBrush(Colors.White);
         }
     }
 }

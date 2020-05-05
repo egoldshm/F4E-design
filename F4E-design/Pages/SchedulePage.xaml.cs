@@ -25,6 +25,8 @@ namespace F4E_design.Pages
         public static readonly Brush COLOR_OF_SELECTED_BUTTON = new SolidColorBrush(Color.FromRgb(232, 167, 149));
         public static readonly Brush COLOR_OF_UNSELECTED_BUTTON = Brushes.LightGray;
         public static readonly Brush COLOR_OF_DAY_BUTTON = (Brush)new BrushConverter().ConvertFromString("#FFCBD8E6");
+        public static readonly Brush COLOR_OF_SIGN_DAY_AND_HOUR = (Brush)new BrushConverter().ConvertFromString("#82B1CB");
+
 
         static private bool[,] tableOfHours = new bool[7, 48];
 
@@ -38,7 +40,8 @@ namespace F4E_design.Pages
             InitializeComponent();
             DefineTableOfSchedule();
             FromArrayOfBoolToButton(TableOfHours);
-            ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
+            getButtonByDateTime(DateTime.Now).Background = COLOR_OF_SELECTED_BUTTON;
+            //ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
         }
 
         public bool[,] TableOfHours { get => tableOfHours; set => tableOfHours = value; }
@@ -46,7 +49,7 @@ namespace F4E_design.Pages
         private void DefineTableOfSchedule()
         {
             //days button
-            string days = "אבגדהוז";
+            string days = "אבגדהוש";
             for (int j = 0; j < 7; j++)
             {
                 Button newButton = new Button();
@@ -85,8 +88,9 @@ namespace F4E_design.Pages
                 weeklyHour.Background = new SolidColorBrush(Colors.White) { Opacity = 0 };
                 weeklyHour.SetValue(Grid.RowProperty, i);
                 weeklyHour.SetValue(Grid.ColumnProperty, 0);
-                weeklyHour.FontFamily = new FontFamily("Assistant");
-                weeklyHour.FontSize = 8;
+                weeklyHour.FontFamily = new FontFamily("Assistant Bold");
+                weeklyHour.FontSize = 10;
+                //weeklyHour.FontWeight = FontWeights.Bold;
                 weeklyHour.GotMouseCapture += Button_GotMouseCapture;
                 weeklyHour.MouseMove += WeeklyHour_MouseMove;
                 weeklyHour.PreviewMouseDown += WeeklyHour_PreviewMouseDown;
@@ -209,7 +213,6 @@ namespace F4E_design.Pages
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
                 button.Background = COLOR_OF_UNSELECTED_BUTTON;
                 tableOfHours[day, i] = false;
-
             }
         }
 
@@ -225,22 +228,21 @@ namespace F4E_design.Pages
             }
         }
 
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-
         private void singleHour_MouseMove(object sender, RoutedEventArgs e)
         {
+            FrameworkElement element = (FrameworkElement)sender;
+            element.CaptureMouse();
+
             Button button = sender as Button;
             int day = (int)button.GetValue(Grid.ColumnProperty) - 1;
             int hour = (int)button.GetValue(Grid.RowProperty);
 
             //sign the hour button
             Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
-            hourButton.Background = Brushes.Aqua;
+            hourButton.Background = COLOR_OF_SIGN_DAY_AND_HOUR;
 
             Button dayButton = ScheduleGrid.FindName("day_button" + day) as Button;
-            dayButton.Background = Brushes.Aqua;
+            dayButton.Background = COLOR_OF_SIGN_DAY_AND_HOUR;
 
             if (Mouse.LeftButton.Equals(MouseButtonState.Pressed))
             {
@@ -283,5 +285,32 @@ namespace F4E_design.Pages
             }
         }
 
+        private Button getButtonByDateTime(DateTime dateTime)
+        {
+            int day = 7 - dateTime.Day;
+            int hour = dateTime.Hour * 2;
+            if (dateTime.Minute >= 30)
+                hour++;
+            Button button = ScheduleGrid.FindName("button_" + hour + "_" + day) as Button;
+            return button;
+        }
+        private Boolean getStatusByDateTime(DateTime dateTime)
+        {
+            int day = 7 - dateTime.Day;
+            int hour = dateTime.Hour * 2;
+            if (dateTime.Minute >= 30)
+                hour++;
+            return tableOfHours[hour, day];
+        }
+        private Boolean isBlockNow()
+        {
+            return getStatusByDateTime(DateTime.Now);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            tableOfHours = new bool[7, 48];
+            FromArrayOfBoolToButton(tableOfHours);
+        }
     }
 }
