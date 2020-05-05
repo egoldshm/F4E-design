@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Runtime.InteropServices;
 
 namespace F4E_design.Pages
 {
@@ -66,35 +65,55 @@ namespace F4E_design.Pages
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = new GridLength(1, GridUnitType.Star);
                 ScheduleGrid.RowDefinitions.Add(rowDefinition);
-                Label hourLabel = new Label();
+                Button weeklyHour = new Button();
                 string stringForLabel = i / 2 + ":" + (i % 2 == 0 ? "00" : "30");
-                hourLabel.Content = stringForLabel;
-                hourLabel.SetValue(Grid.RowProperty, i + 1);
-                hourLabel.SetValue(Grid.ColumnProperty, 0);
-                hourLabel.FontFamily = new FontFamily("Assistant");
-                hourLabel.FontSize = 8;
-                hourLabel.MouseLeftButtonUp += ChooseHour;
-                hourLabel.MouseRightButtonDown += UnselectedHour;
-                ScheduleGrid.Children.Add(hourLabel);
+                weeklyHour.Content = stringForLabel;
+                weeklyHour.BorderThickness = new Thickness(0);
+                weeklyHour.Background= new SolidColorBrush(Colors.White) { Opacity = 0};
+                weeklyHour.SetValue(Grid.RowProperty, i + 1);
+                weeklyHour.SetValue(Grid.ColumnProperty, 0);
+                weeklyHour.FontFamily = new FontFamily("Assistant");
+                weeklyHour.FontSize = 8;
+                weeklyHour.GotMouseCapture += Button_GotMouseCapture;
+                weeklyHour.MouseMove += WeeklyHour_MouseMove;
+                weeklyHour.PreviewMouseDown += WeeklyHour_PreviewMouseDown;
+                ScheduleGrid.Children.Add(weeklyHour);
                 for (int j = 0; j < 7; j++)
                 {
-                    Button newButton = new Button();
-                    newButton.SetValue(Grid.RowProperty, i + 1);
-                    newButton.SetValue(Grid.ColumnProperty, j + 1);
-                    newButton.Name = "button_" + i + "_" + j;
-                    this.RegisterName(newButton.Name, newButton);
-                    //newButton.BorderBrush = (Brush)converter.ConvertFromString("#FF0B52A7");
-                    newButton.BorderThickness = new Thickness(0, 0, 0, 0);
-                    newButton.Background = Brushes.White;
-                    newButton.PreviewMouseDown += singleHour_PreviewMouseDown;
-                    newButton.MouseMove += singleHour_MouseMove;
-                    newButton.GotMouseCapture += Button_GotMouseCapture;
-                    ScheduleGrid.Children.Add(newButton);
+                    Button singleHour = new Button();
+                    singleHour.SetValue(Grid.RowProperty, i + 1);
+                    singleHour.SetValue(Grid.ColumnProperty, j + 1);
+                    singleHour.Name = "button_" + i + "_" + j;
+                    this.RegisterName(singleHour.Name, singleHour);
+                    //singleHour.BorderBrush = (Brush)converter.ConvertFromString("#FF0B52A7");
+                    singleHour.BorderThickness = new Thickness(0, 0, 0, 0);
+                    singleHour.Background = Brushes.White;
+                    singleHour.PreviewMouseDown += singleHour_PreviewMouseDown;
+                    singleHour.MouseMove += singleHour_MouseMove;
+                    singleHour.GotMouseCapture += Button_GotMouseCapture;
+                    ScheduleGrid.Children.Add(singleHour);
                 }
 
                 
             }
 
+        }
+
+        private void WeeklyHour_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            WeeklyHour_MouseMove(sender, null);
+        }
+
+        private void WeeklyHour_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Mouse.LeftButton.Equals(MouseButtonState.Pressed))
+            {
+                ChooseWeeklyHour(sender, null);
+            }
+            if (Mouse.RightButton.Equals(MouseButtonState.Pressed))
+            {
+                UnChooseWeeklyHour(sender, null);
+            }
         }
 
         private void dayButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -125,6 +144,31 @@ namespace F4E_design.Pages
             element.ReleaseMouseCapture();
         }
 
+        private void UnChooseWeeklyHour(object sender, MouseButtonEventArgs e)
+        {
+            Button hourSender = sender as Button;
+            int hour = (int)hourSender.GetValue(Grid.RowProperty) - 1;
+            for (int i = 0; i < 7; i++)
+            {
+                Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
+                button.Background = COLOR_OF_UNSELECTED_BUTTON;
+                tableOfHours[i, hour] = false;
+            }
+        }
+
+        private void ChooseWeeklyHour(object sender, MouseButtonEventArgs e)
+        {
+            Button hourSender = sender as Button;
+            int hour = (int)hourSender.GetValue(Grid.RowProperty) - 1;
+            for (int i = 0; i < 7; i++)
+            {
+                Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
+                button.Background = COLOR_OF_SELECTED_BUTTON;
+                tableOfHours[i, hour] = true;
+
+            }
+        }
+
         private void UnChooseFullDay(object sender, MouseButtonEventArgs e)
         {
             Button buttonSender = sender as Button;
@@ -136,7 +180,6 @@ namespace F4E_design.Pages
                 tableOfHours[day, i] = false;
 
             }
-
         }
 
         private void ChooseFullDay(object sender, RoutedEventArgs e)
@@ -148,10 +191,7 @@ namespace F4E_design.Pages
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
                 button.Background = COLOR_OF_SELECTED_BUTTON;
                 tableOfHours[day, i] = true;
-
             }
-
-
         }
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
