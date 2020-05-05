@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -29,7 +30,7 @@ namespace F4E_design
         //X button - close the window
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
 
         private void ReplacePage(object sender, MouseButtonEventArgs e)
@@ -54,9 +55,11 @@ namespace F4E_design
         {
             foreach (Label child in Menu.Children.OfType<Label>())
             {
+                child.BorderThickness = new Thickness(0, 0, 0, 0);
                 child.FontFamily = new FontFamily("Assistant");
                 child.FontWeight = FontWeights.Normal;
             }
+            obj.BorderThickness = new Thickness(0, 0, 2.5, 0);
             obj.FontFamily = new FontFamily("Assistant-Bold");
             obj.FontWeight = FontWeights.UltraBold;
         }
