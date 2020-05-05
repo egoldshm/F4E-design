@@ -31,7 +31,7 @@
             <RowDefinition Height="55*"/>
             <RowDefinition Height="192*"/>
         </Grid.RowDefinitions>
-        <Image Source="f4e-design/images/StatusPage/Shield-Blue.png" Grid.Column="1" Margin="7"/>
+        <Image Source="/images/StatusPage/Shield-Blue.png" Grid.Column="1" Margin="7"/>
         <Label Content="תמונת מצב" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34" Margin="0,10.5"/>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -39,9 +39,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Margin="5,0" VerticalAlignment="Top" Source="f4e-design/images/StatusPage/Schedule_Green.png"/>
-            <Image Grid.Column="1" Margin="5,0" VerticalAlignment="Top" Source="f4e-design/images/StatusPage/Server_Blue.png"/>
-            <Image  Grid.Column="2" Source="f4e-design/images/StatusPage/status_V.png" Margin="5,0" VerticalAlignment="Top"/>
+            <Image Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/Schedule_Green.png"/>
+            <Image Grid.Column="1" Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/Server_Blue.png"/>
+            <Image  Grid.Column="2" Source="/images/StatusPage/status_V.png" Margin="5,0" VerticalAlignment="Top"/>
 
             <Label HorizontalAlignment="Right" FontFamily="Assistant SemiBold" FontSize="18" Margin="0,0,15,0">מערכת שעות</Label>
             <Label x:Name="ScheduleActive" HorizontalAlignment="Right" FontFamily="Assistant Bold" FontSize="27
@@ -57,7 +57,7 @@
 
 
         </Grid>
-        <Image Source="f4e-design/images/StatusPage/Warm_Blue.png" Grid.Row="2" Grid.Column="1" Margin="7"/>
+        <Image Source="/images/StatusPage/Warm_Blue.png" Grid.Row="2" Grid.Column="1" Margin="7"/>
 
         <Label Content="מערכת מניעת עקיפה" Grid.Row="2" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34" Margin="0,11,0,12" Width="201.647"/>
         <Grid Grid.Row="3" HorizontalAlignment="Right">

@@ -185,7 +185,7 @@ namespace F4E_design.Pages
         private void ChooseWeeklyHour(object sender, MouseButtonEventArgs e)
         {
             Button hourSender = sender as Button;
-            int hour = (int)hourSender.GetValue(Grid.RowProperty) - 1;
+            int hour = (int)hourSender.GetValue(Grid.RowProperty);
             for (int i = 0; i < 7; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
@@ -198,7 +198,7 @@ namespace F4E_design.Pages
         private void UnChooseFullDay(object sender, MouseButtonEventArgs e)
         {
             Button buttonSender = sender as Button;
-            int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
+            int day = (int)buttonSender.GetValue(Grid.ColumnProperty);
             for (int i = 0; i < 48; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
@@ -211,7 +211,7 @@ namespace F4E_design.Pages
         private void ChooseFullDay(object sender, RoutedEventArgs e)
         {
             Button buttonSender = sender as Button;
-            int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
+            int day = (int)buttonSender.GetValue(Grid.ColumnProperty);
             for (int i = 0; i < 48; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
@@ -226,14 +226,14 @@ namespace F4E_design.Pages
         private void singleHour_MouseMove(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            int day = (int)button.GetValue(Grid.ColumnProperty);
+            int day = (int)button.GetValue(Grid.ColumnProperty) - 1;
             int hour = (int)button.GetValue(Grid.RowProperty);
 
             //sign the hour button
             Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
             hourButton.Background = Brushes.Aqua;
 
-            Button dayButton = ScheduleGrid.FindName("day_button" + (day - 1)) as Button;
+            Button dayButton = ScheduleGrid.FindName("day_button" + day) as Button;
             dayButton.Background = Brushes.Aqua;
 
             if (Mouse.LeftButton.Equals(MouseButtonState.Pressed))

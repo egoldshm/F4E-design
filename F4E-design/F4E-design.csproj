@@ -131,21 +131,6 @@
     <Resource Include="Pages\Schedule_Green.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\1_cal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\2_plus_cal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\3_minus_cal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\4_calender.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\5_save_changes.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\AboutPage\contact.png" />
     <Resource Include="images\AboutPage\info.png" />
     <Resource Include="images\MainForm\9.png" />

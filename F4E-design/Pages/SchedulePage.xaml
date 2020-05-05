@@ -28,7 +28,7 @@
             <RowDefinition Height="55*"/>
             <RowDefinition Height="393*"/>
         </Grid.RowDefinitions>
-        <Image Source="1_cal.png" Grid.Column="2" Margin="7"/>
+        <Image Source="/images/ScheduelPage/1_cal.png" Grid.Column="2" Margin="7"/>
         <Label Content="מערכת שעות" Grid.Column="1" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Margin="0,10.623" Height="34" Width="130.19"/>
         <Grid x:Name="ScheduleTopGrid" Margin="15,3,3,3" Grid.Row="1" FlowDirection="RightToLeft">
             <Grid.RowDefinitions>
@@ -81,14 +81,14 @@
                 <LineBreak/> בהם תרצה שהמערכת תפעל
                 </TextBlock>
             </Label>
-            <Image Source="2_plus_cal.png" Grid.Row="1" Grid.Column="1" Margin="5"/>
+            <Image Source="/images/ScheduelPage/2_plus_cal.png" Grid.Row="1" Grid.Column="1" Margin="5"/>
             <Label Grid.Row="1" Style="{StaticResource ExplantionLabel}">
                 <TextBlock>
                    סמן בטבלה מימין את השעות
                     <LineBreak/>
                     את השעות הרצויות לחסימת הגלישה
                 </TextBlock></Label>
-            <Image Source="3_minus_cal.png" Grid.Row="2" Grid.Column="1" Margin="5"/>
+            <Image Source="/images/ScheduelPage/3_minus_cal.png" Grid.Row="2" Grid.Column="1" Margin="5"/>
             <Label Grid.Row="2" Style="{StaticResource ExplantionLabel}">
                 <TextBlock>
                    בלחיצה נוספת על כפתור שנבחר
@@ -96,7 +96,7 @@
                     ניתן לבטל את הבחירה
                 </TextBlock>
             </Label>
-            <Image Source="4_calender.png" Grid.Row="3" Grid.Column="1" Margin="8"/>
+            <Image Source="/images/ScheduelPage/4_calender.png" Grid.Row="3" Grid.Column="1" Margin="8"/>
             <Label Grid.Row="3" Style="{StaticResource ExplantionLabel}">
                 <TextBlock>
                    ניתן לסמן יום שלם בהקלקה על היום 
@@ -105,7 +105,7 @@
                 </TextBlock>
             </Label>
 
-            <Image Grid.Row="4" Grid.ColumnSpan="2" Margin="8" Source="5_save_changes.png" MouseLeftButtonUp="SaveChanges"/>
+            <Image Grid.Row="4" Grid.ColumnSpan="2" Margin="8" Source="/images/ScheduelPage/5_save_changes.png" MouseLeftButtonUp="SaveChanges"/>
 
         </Grid>
     </Grid>
