@@ -55,7 +55,7 @@ namespace F4E_design.Pages
                 newButton.FontSize = 13;
                 newButton.MouseMove += dayButton_MouseMove;
                 newButton.GotMouseCapture += Button_GotMouseCapture;
-                newButton.PreviewMouseDown+= dayButton_PreviewMouseDown;
+                newButton.PreviewMouseDown += dayButton_PreviewMouseDown;
                 newButton.Content = days[j];
                 ScheduleGrid.Children.Add(newButton);
             }
@@ -69,7 +69,7 @@ namespace F4E_design.Pages
                 string stringForLabel = i / 2 + ":" + (i % 2 == 0 ? "00" : "30");
                 weeklyHour.Content = stringForLabel;
                 weeklyHour.BorderThickness = new Thickness(0);
-                weeklyHour.Background= new SolidColorBrush(Colors.White) { Opacity = 0};
+                weeklyHour.Background = new SolidColorBrush(Colors.White) { Opacity = 0 };
                 weeklyHour.SetValue(Grid.RowProperty, i + 1);
                 weeklyHour.SetValue(Grid.ColumnProperty, 0);
                 weeklyHour.FontFamily = new FontFamily("Assistant");
@@ -94,7 +94,7 @@ namespace F4E_design.Pages
                     ScheduleGrid.Children.Add(singleHour);
                 }
 
-                
+
             }
 
         }
@@ -162,22 +162,10 @@ namespace F4E_design.Pages
             int hour = (int)hourSender.GetValue(Grid.RowProperty) - 1;
             for (int i = 0; i < 7; i++)
             {
-                Label labelSender = sender as Label;
-                int hour = (int)labelSender.GetValue(Grid.RowProperty) - 1;
-                Brush colorToBrush = COLOR_OF_SELECTED_BUTTON;
-                bool boolToInsert = true;
-                if (e.RightButton == MouseButtonState.Pressed)
-                {
-                    colorToBrush = COLOR_OF_UNSELECTED_BUTTON;
-                    boolToInsert = false;
-                }
-                for (int i = 0; i < 7; i++)
-                {
-                    Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
-                    button.Background = colorToBrush;
-                    tableOfHours[i, hour] = boolToInsert;
+                Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
+                button.Background = COLOR_OF_SELECTED_BUTTON;
+                tableOfHours[i, hour] = true;
 
-                }
             }
         }
 
@@ -205,6 +193,8 @@ namespace F4E_design.Pages
                 tableOfHours[day, i] = true;
             }
         }
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         private void singleHour_MouseMove(object sender, RoutedEventArgs e)
         {
