@@ -31,7 +31,6 @@ namespace F4E_design.Pages
         {
             InitializeComponent();
             DefineTableOfSchedule();
-            TableOfHours[0, 5] = true;
             FromArrayOfBoolToButton(TableOfHours);
         }
 
@@ -40,13 +39,15 @@ namespace F4E_design.Pages
         private void DefineTableOfSchedule()
         {
             var converter = new System.Windows.Media.BrushConverter();
+
+            //days button
+            string days = "אבגדהוז";
             for (int j = 0; j < 7; j++)
             {
-                string days = "אבגדהוז";
                 Button newButton = new Button();
                 newButton.SetValue(Grid.RowProperty, 0);
                 newButton.SetValue(Grid.ColumnProperty, j + 1);
-                newButton.Name = "day_button" + j;
+                newButton.Name = "day_button" + j; 
                 //newButton.BorderBrush = (Brush)converter.ConvertFromString("#FF0B52A7");
                 newButton.BorderThickness = new Thickness(0, 0, 0, 0);
                 newButton.Background = (Brush)converter.ConvertFromString("#FFCBD8E6");
@@ -57,17 +58,21 @@ namespace F4E_design.Pages
                 newButton.GotMouseCapture += Button_GotMouseCapture;
                 newButton.PreviewMouseDown += dayButton_PreviewMouseDown;
                 newButton.Content = days[j];
+                newButton.ToolTip = "יום " + days[j];
                 ScheduleGrid.Children.Add(newButton);
             }
 
+            //define all hours
             for (int i = 0; i < 48; i++)
             {
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = new GridLength(1, GridUnitType.Star);
                 ScheduleGrid.RowDefinitions.Add(rowDefinition);
+
+                //added weekly hour button
                 Button weeklyHour = new Button();
-                string stringForLabel = i / 2 + ":" + (i % 2 == 0 ? "00" : "30");
-                weeklyHour.Content = stringForLabel;
+                string hourString = i / 2 + ":" + (i % 2 == 0 ? "00" : "30");
+                weeklyHour.Content = hourString;
                 weeklyHour.BorderThickness = new Thickness(0);
                 weeklyHour.Background = new SolidColorBrush(Colors.White) { Opacity = 0 };
                 weeklyHour.SetValue(Grid.RowProperty, i + 1);
@@ -78,6 +83,8 @@ namespace F4E_design.Pages
                 weeklyHour.MouseMove += WeeklyHour_MouseMove;
                 weeklyHour.PreviewMouseDown += WeeklyHour_PreviewMouseDown;
                 ScheduleGrid.Children.Add(weeklyHour);
+
+                //add all the button for single hour
                 for (int j = 0; j < 7; j++)
                 {
                     Button singleHour = new Button();
@@ -91,6 +98,9 @@ namespace F4E_design.Pages
                     singleHour.PreviewMouseDown += singleHour_PreviewMouseDown;
                     singleHour.MouseMove += singleHour_MouseMove;
                     singleHour.GotMouseCapture += Button_GotMouseCapture;
+
+                    singleHour.ToolTip = "יום " + days[j] + ", " + hourString;
+
                     ScheduleGrid.Children.Add(singleHour);
                 }
 
