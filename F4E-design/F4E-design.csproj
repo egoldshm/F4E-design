@@ -131,15 +131,6 @@
     <Resource Include="Pages\Schedule_Green.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\images\5_1.png" />
-    <Resource Include="Pages\images\9.png" />
-    <Resource Include="Pages\images\Schedule_Green.png" />
-    <Resource Include="Pages\images\Server_Blue.png" />
-    <Resource Include="Pages\images\Shield-Blue.png" />
-    <Resource Include="Pages\images\status_V.png" />
-    <Resource Include="Pages\images\Warm_Blue.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Pages\1_cal.png" />
   </ItemGroup>
   <ItemGroup>
@@ -155,16 +146,22 @@
     <Resource Include="Pages\5_save_changes.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\images\info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\images\contact.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\images\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\images\close_button.png" />
+    <Resource Include="images\AboutPage\contact.png" />
+    <Resource Include="images\AboutPage\info.png" />
+    <Resource Include="images\MainForm\9.png" />
+    <Resource Include="images\MainForm\close_button.png" />
+    <Resource Include="images\MainForm\logo.png" />
+    <Resource Include="images\ScheduelPage\1_cal.png" />
+    <Resource Include="images\ScheduelPage\2_plus_cal.png" />
+    <Resource Include="images\ScheduelPage\3_minus_cal.png" />
+    <Resource Include="images\ScheduelPage\4_calender.png" />
+    <Resource Include="images\ScheduelPage\5_save_changes.png" />
+    <Resource Include="images\StatusPage\5_1.png" />
+    <Resource Include="images\StatusPage\Schedule_Green.png" />
+    <Resource Include="images\StatusPage\Server_Blue.png" />
+    <Resource Include="images\StatusPage\Shield-Blue.png" />
+    <Resource Include="images\StatusPage\status_V.png" />
+    <Resource Include="images\StatusPage\Warm_Blue.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

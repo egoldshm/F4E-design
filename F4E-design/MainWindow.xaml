@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:F4E_design"
         mc:Ignorable="d" WindowStyle="None"
         Height="500" Width="750.13" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
-        Icon="pages/images/logo.png"
+        Icon="images/MainForm/logo.png"
         Title="לוקחים אחריות"
         WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray">
     <Window.Resources>
@@ -49,7 +49,7 @@
             </Grid.ColumnDefinitions>
             <Rectangle HorizontalAlignment="Left" Height="50" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="43" MouseLeftButtonUp="Image_MouseLeftButtonUp" Fill="White" Margin="0,0,0,-0.4"/>
             <Label FontFamily="Assistant-Bold" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,9,9.8,8.6" FlowDirection="RightToLeft" VerticalAlignment="Center" Content="שלום לך, ניב!" Grid.Column="1"/>
-            <Image HorizontalAlignment="Left" MouseLeftButtonUp="Image_MouseLeftButtonUp" Source="pages/images/close_button.png" Width="21" Margin="12,8,0,11.6" RenderTransformOrigin="0.943,0.509" VerticalAlignment="Center" Height="30">
+            <Image HorizontalAlignment="Left" MouseLeftButtonUp="Image_MouseLeftButtonUp" Source="images/MainForm/close_button.png" Width="21" Margin="12,8,0,11.6" RenderTransformOrigin="0.943,0.509" VerticalAlignment="Center" Height="30">
 
             </Image>
         </Grid>
