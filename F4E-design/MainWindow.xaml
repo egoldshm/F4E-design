@@ -8,7 +8,7 @@
         Height="500" Width="750.13" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
         Icon="pages/images/logo.png"
         Title="לוקחים אחריות"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray">
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#FFFFFFFE"/>
@@ -17,8 +17,21 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="FontFamily" Value="Assistant"/>
         </Style>
+        <Storyboard x:Key="filtering_settings_menu_open">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="scheduel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="92"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="general_settings">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="92"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="about">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="92"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
-    
     <Grid Background="#FFF6F6F6">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.96*"/>
@@ -30,10 +43,17 @@
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="White">
-            <Label FontFamily="Assistant-Bold" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,0,10,0" FlowDirection="RightToLeft" VerticalAlignment="Center"> שלום לך, ניב! </Label>
-            <Image Margin="15" HorizontalAlignment="Left" MouseLeftButtonUp="Image_MouseLeftButtonUp" Source="close_button.png"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="563*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle HorizontalAlignment="Left" Height="50" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="43" MouseLeftButtonUp="Image_MouseLeftButtonUp" Fill="White" Margin="0,0,0,-0.4"/>
+            <Label FontFamily="Assistant-Bold" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,9,9.8,8.6" FlowDirection="RightToLeft" VerticalAlignment="Center" Content="שלום לך, ניב!" Grid.Column="1"/>
+            <Image HorizontalAlignment="Left" MouseLeftButtonUp="Image_MouseLeftButtonUp" Source="pages/images/close_button.png" Width="21" Margin="12,8,0,11.6" RenderTransformOrigin="0.943,0.509" VerticalAlignment="Center" Height="30">
+
+            </Image>
         </Grid>
-        
+
         <!--Frame to page the replace-->
         <Frame x:Name="FrameWindow"  Grid.Row="1" Source="/F4E-design;component/pages/StatusPage.xaml" NavigationUIVisibility="Hidden" Margin="5,0,8,0"/>
 
@@ -41,7 +61,7 @@
         <Grid Grid.RowSpan="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120*"/>
-                <ColumnDefinition Width="19*"/>
+                <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="35*"/>
@@ -63,11 +83,38 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="current_status" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold"/>
-                <Label x:Name="filtering_settings" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage"/>
-                <Label x:Name="scheduel" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="2"  MouseLeftButtonUp="ReplacePage"/>
-                <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage"/>
-                <Label x:Name="about" Content="אודות" Style="{StaticResource MenuLabel}" Grid.Row="4" MouseLeftButtonUp="ReplacePage"/>
+                <Label x:Name="current_status" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold" BorderThickness="0,0,2.5,0" BorderBrush="White" Margin="10,0,0,0" Padding="5,5,15,5"/>
+                <Label x:Name="filtering_settings" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5"/>
+                <Label x:Name="scheduel" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="2"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+                <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+                <Label x:Name="about" Content="אודות" Style="{StaticResource MenuLabel}" Grid.Row="4" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
             </Grid>
         </Grid>
         <!--

@@ -133,7 +133,6 @@
   <ItemGroup>
     <Resource Include="Pages\images\5_1.png" />
     <Resource Include="Pages\images\9.png" />
-    <Resource Include="Pages\images\close_button.png" />
     <Resource Include="Pages\images\Schedule_Green.png" />
     <Resource Include="Pages\images\Server_Blue.png" />
     <Resource Include="Pages\images\Shield-Blue.png" />
@@ -163,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pages\images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pages\images\close_button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
