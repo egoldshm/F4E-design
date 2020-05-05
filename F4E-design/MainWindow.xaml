@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:F4E_design"
         mc:Ignorable="d" WindowStyle="None"
-        Height="500" Width="761.73" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
+        Height="541.6" Width="864.93" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
         Icon="images/MainForm/logo.png"
         Title="לוקחים אחריות"
         WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray">
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#FFFFFFFE"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="17"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="FontFamily" Value="Assistant"/>
@@ -38,8 +38,8 @@
             <RowDefinition Height="17.6*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="304*"/>
-            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="676*"/>
+            <ColumnDefinition Width="185*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="White">
@@ -60,15 +60,15 @@
         <!-- תפריט צד-->
         <Grid Grid.RowSpan="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="133*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="34*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="66*"/>
-                <RowDefinition Height="186*"/>
-                <RowDefinition Height="155*"/>
-                <RowDefinition Height="77*"/>
-                <RowDefinition Height="12*"/>
+                <RowDefinition Height="71*"/>
+                <RowDefinition Height="238*"/>
+                <RowDefinition Height="108*"/>
+                <RowDefinition Height="107*"/>
+                <RowDefinition Height="13*"/>
             </Grid.RowDefinitions>
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.044,0.983" StartPoint="0.956,0.017">
@@ -76,6 +76,7 @@
                     <GradientStop Color="#FF325FB5" Offset="0.95"/>
                 </LinearGradientBrush>
             </Grid.Background>
+            <Image Source="/images/MainForm/app_banner.png" Margin="42.884,5,27.885,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="56.079" Width="99.217"/>
             <Grid Grid.Row="1" x:Name="Menu">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -84,11 +85,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+
                 </Grid.RowDefinitions>
-                <Label x:Name="current_status" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="14" MouseLeftButtonUp="ReplacePage" FontWeight="Bold" BorderThickness="0,0,2.5,0" BorderBrush="White" Margin="0,0.385" Padding="5,5,15,5" Width="133.381" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave"/>
-                <Label x:Name="filtering_settings" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" Width="133.381" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave"/>
-                <Label x:Name="scheduel" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="4"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Margin="0,-0.001" Width="133.381" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave">
+                <Label x:Name="current_status" Content="תמונת מצב" Style="{StaticResource MenuLabel}" FontFamily="Assistant-Bold" Grid.Row="0" FontSize="17" MouseLeftButtonUp="ReplacePage" FontWeight="Bold" BorderThickness="0,0,2.5,0" BorderBrush="White" Margin="0,0.385,0,0.384" Padding="5,5,20,5" Width="178.283" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave"/>
+                <Label x:Name="filtering_settings" Content="הגדרות סינון" Style="{StaticResource MenuLabel}" Grid.Row="1"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave"/>
+                <Label x:Name="scheduel" Content="מערכת שעות" Style="{StaticResource MenuLabel}" Grid.Row="3"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" RenderTransformOrigin="0.5,0.5" Margin="0,31.014,0,31.013" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Grid.RowSpan="3">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -98,7 +99,7 @@
                         </TransformGroup>
                     </Label.RenderTransform>
                 </Label>
-                <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="5" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="133.381" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave">
+                <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="5" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Margin="0,-0.001">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -109,7 +110,7 @@
                     </Label.RenderTransform>
                 </Label>
 
-                <Label x:Name="categorize" Content="חסימת קטגוריות" Style="{StaticResource MenuLabel}" Grid.Row="2" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Margin="0,-0.001" Width="133.381" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave">
+                <Label x:Name="categorize" Content="חסימת קטגוריות" Style="{StaticResource MenuLabel}" Grid.Row="1" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" RenderTransformOrigin="0.5,0.5" Margin="0,31.014" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Grid.RowSpan="3">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -119,7 +120,7 @@
                         </TransformGroup>
                     </Label.RenderTransform>
                 </Label>
-                <Label x:Name="custom_list" Content="רשימה אישית" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="133.381" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave">
+                <Label x:Name="custom_list" Content="רשימה אישית" Style="{StaticResource MenuLabel}" Grid.Row="3" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -131,13 +132,17 @@
                 </Label>
 
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid x:Name="BottomMenu" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="145*"/>
+                    <ColumnDefinition Width="33*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="help" Content="עזרה" Style="{StaticResource MenuLabel}" Grid.Row="0"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="144.514" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="25.5" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,0,0.167">
+                <Label x:Name="help" Content="עזרה" Style="{StaticResource MenuLabel}" Grid.Row="0" Grid.Column="0"  MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="35.56" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,0,0.147" Grid.ColumnSpan="2">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -147,7 +152,7 @@
                         </TransformGroup>
                     </Label.RenderTransform>
                 </Label>
-                <Label x:Name="about" Content="אודות" Style="{StaticResource MenuLabel}" Grid.Row="1" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="144.514" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="26" VerticalContentAlignment="Center" >
+                <Label x:Name="about" Content="אודות" Style="{StaticResource MenuLabel}" Grid.Row="1" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="35.706" VerticalContentAlignment="Center" Grid.ColumnSpan="2" >
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -157,7 +162,7 @@
                         </TransformGroup>
                     </Label.RenderTransform>
                 </Label>
-                <Label x:Name="exit" Content="יציאה" Style="{StaticResource MenuLabel}" Grid.Row="2" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="144.514" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="25.5" VerticalContentAlignment="Center" Margin="0,0.167,0,0">
+                <Label x:Name="exit" Content="התנתקות" Style="{StaticResource MenuLabel}" Grid.Row="2" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="35.707" VerticalContentAlignment="Center" Grid.ColumnSpan="2">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

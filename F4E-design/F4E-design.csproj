@@ -139,14 +139,22 @@
     <Resource Include="images\ScheduelPage\4_calender.png" />
     <Resource Include="images\ScheduelPage\5_save_changes.png" />
     <Resource Include="images\StatusPage\5_1.png" />
-    <Resource Include="images\StatusPage\Schedule_Green.png" />
-    <Resource Include="images\StatusPage\Server_Blue.png" />
     <Resource Include="images\StatusPage\Shield-Blue.png" />
-    <Resource Include="images\StatusPage\status_V.png" />
     <Resource Include="images\StatusPage\Warm_Blue.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pages\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\MainForm\app_banner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\StatusPage\safeserver_off.png" />
+    <Resource Include="images\StatusPage\safeserver_on.png" />
+    <Resource Include="images\StatusPage\scheduel_off.png" />
+    <Resource Include="images\StatusPage\scheduel_on.png" />
+    <Resource Include="images\StatusPage\status_off.png" />
+    <Resource Include="images\StatusPage\status_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

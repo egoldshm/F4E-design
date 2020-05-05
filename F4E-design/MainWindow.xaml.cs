@@ -59,6 +59,12 @@ namespace F4E_design
                 child.FontFamily = new FontFamily("Assistant");
                 child.FontWeight = FontWeights.Normal;
             }
+            foreach (Label child in BottomMenu.Children.OfType<Label>())
+            {
+                child.BorderThickness = new Thickness(0, 0, 0, 0);
+                child.FontFamily = new FontFamily("Assistant");
+                child.FontWeight = FontWeights.Normal;
+            }
             obj.BorderThickness = new Thickness(0, 0, 2.5, 0);
             obj.FontFamily = new FontFamily("Assistant-Bold");
             obj.FontWeight = FontWeights.UltraBold;

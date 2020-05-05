@@ -40,7 +40,8 @@ namespace F4E_design.Pages
             InitializeComponent();
             DefineTableOfSchedule();
             FromArrayOfBoolToButton(TableOfHours);
-            ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
+            getButtonByDateTime(DateTime.Now).Background = COLOR_OF_SELECTED_BUTTON;
+            //ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
         }
 
         public bool[,] TableOfHours { get => tableOfHours; set => tableOfHours = value; }
@@ -48,7 +49,7 @@ namespace F4E_design.Pages
         private void DefineTableOfSchedule()
         {
             //days button
-            string days = "אבגדהוז";
+            string days = "אבגדהוש";
             for (int j = 0; j < 7; j++)
             {
                 Button newButton = new Button();
@@ -212,7 +213,6 @@ namespace F4E_design.Pages
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
                 button.Background = COLOR_OF_UNSELECTED_BUTTON;
                 tableOfHours[day, i] = false;
-
             }
         }
 
@@ -285,5 +285,26 @@ namespace F4E_design.Pages
             }
         }
 
+        private Button getButtonByDateTime(DateTime dateTime)
+        {
+            int day = 7 - dateTime.Day;
+            int hour = dateTime.Hour * 2;
+            if (dateTime.Minute >= 30)
+                hour++;
+            Button button = ScheduleGrid.FindName("button_" + hour + "_" + day) as Button;
+            return button;
+        }
+        private Boolean getStatusByDateTime(DateTime dateTime)
+        {
+            int day = 7 - dateTime.Day;
+            int hour = dateTime.Hour * 2;
+            if (dateTime.Minute >= 30)
+                hour++;
+            return tableOfHours[hour, day];
+        }
+        private Boolean isBlockNow()
+        {
+            return getStatusByDateTime(DateTime.Now);
+        }
     }
 }
