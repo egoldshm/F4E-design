@@ -128,9 +128,6 @@
     <Resource Include="close_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\Schedule_Green.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\AboutPage\contact.png" />
     <Resource Include="images\AboutPage\info.png" />
     <Resource Include="images\MainForm\9.png" />

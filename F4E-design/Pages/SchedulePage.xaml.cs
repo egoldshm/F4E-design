@@ -118,7 +118,7 @@ namespace F4E_design.Pages
             int hour = (int)button.GetValue(Grid.RowProperty);
 
             Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
-            hourButton.Background = Brushes.White;
+            hourButton.Background = new SolidColorBrush(Colors.White) { Opacity = 0 }; ;
 
             Button dayButton = ScheduleGrid.FindName("day_button" + (day - 1)) as Button;
             dayButton.Background = COLOR_OF_DAY_BUTTON;
