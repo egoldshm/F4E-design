@@ -24,6 +24,7 @@ namespace F4E_design.Pages
 
         public static readonly Brush COLOR_OF_SELECTED_BUTTON = new SolidColorBrush(Color.FromRgb(232, 167, 149));
         public static readonly Brush COLOR_OF_UNSELECTED_BUTTON = Brushes.LightGray;
+        public static readonly Brush COLOR_OF_DAY_BUTTON = (Brush)new BrushConverter().ConvertFromString("#FFCBD8E6");
 
         static private bool[,] tableOfHours = new bool[7, 48];
 
@@ -32,14 +33,13 @@ namespace F4E_design.Pages
             InitializeComponent();
             DefineTableOfSchedule();
             FromArrayOfBoolToButton(TableOfHours);
+            ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
         }
 
         public bool[,] TableOfHours { get => tableOfHours; set => tableOfHours = value; }
 
         private void DefineTableOfSchedule()
         {
-            var converter = new System.Windows.Media.BrushConverter();
-
             //days button
             string days = "אבגדהוז";
             for (int j = 0; j < 7; j++)
@@ -47,10 +47,11 @@ namespace F4E_design.Pages
                 Button newButton = new Button();
                 newButton.SetValue(Grid.RowProperty, 0);
                 newButton.SetValue(Grid.ColumnProperty, j + 1);
-                newButton.Name = "day_button" + j; 
+                newButton.Name = "day_button" + j;
+                ScheduleGrid.RegisterName(newButton.Name, newButton);
                 //newButton.BorderBrush = (Brush)converter.ConvertFromString("#FF0B52A7");
                 newButton.BorderThickness = new Thickness(0, 0, 0, 0);
-                newButton.Background = (Brush)converter.ConvertFromString("#FFCBD8E6");
+                newButton.Background = COLOR_OF_DAY_BUTTON;
                 newButton.FontFamily = new FontFamily("Assistant Bold");
                 newButton.FontWeight = FontWeights.Bold;
                 newButton.FontSize = 13;
@@ -59,7 +60,7 @@ namespace F4E_design.Pages
                 newButton.PreviewMouseDown += dayButton_PreviewMouseDown;
                 newButton.Content = days[j];
                 newButton.ToolTip = "יום " + days[j];
-                ScheduleGrid.Children.Add(newButton);
+                ScheduleTopGrid.Children.Add(newButton);
             }
 
             //define all hours
@@ -73,9 +74,11 @@ namespace F4E_design.Pages
                 Button weeklyHour = new Button();
                 string hourString = i / 2 + ":" + (i % 2 == 0 ? "00" : "30");
                 weeklyHour.Content = hourString;
+                weeklyHour.Name = "WeeklyHour" + i;
+                ScheduleGrid.RegisterName(weeklyHour.Name, weeklyHour);
                 weeklyHour.BorderThickness = new Thickness(0);
                 weeklyHour.Background = new SolidColorBrush(Colors.White) { Opacity = 0 };
-                weeklyHour.SetValue(Grid.RowProperty, i + 1);
+                weeklyHour.SetValue(Grid.RowProperty, i);
                 weeklyHour.SetValue(Grid.ColumnProperty, 0);
                 weeklyHour.FontFamily = new FontFamily("Assistant");
                 weeklyHour.FontSize = 8;
@@ -83,12 +86,11 @@ namespace F4E_design.Pages
                 weeklyHour.MouseMove += WeeklyHour_MouseMove;
                 weeklyHour.PreviewMouseDown += WeeklyHour_PreviewMouseDown;
                 ScheduleGrid.Children.Add(weeklyHour);
-
                 //add all the button for single hour
                 for (int j = 0; j < 7; j++)
                 {
                     Button singleHour = new Button();
-                    singleHour.SetValue(Grid.RowProperty, i + 1);
+                    singleHour.SetValue(Grid.RowProperty, i);
                     singleHour.SetValue(Grid.ColumnProperty, j + 1);
                     singleHour.Name = "button_" + i + "_" + j;
                     this.RegisterName(singleHour.Name, singleHour);
@@ -98,7 +100,7 @@ namespace F4E_design.Pages
                     singleHour.PreviewMouseDown += singleHour_PreviewMouseDown;
                     singleHour.MouseMove += singleHour_MouseMove;
                     singleHour.GotMouseCapture += Button_GotMouseCapture;
-
+                    singleHour.MouseLeave += SingleHour_MouseLeave;
                     singleHour.ToolTip = "יום " + days[j] + ", " + hourString;
 
                     ScheduleGrid.Children.Add(singleHour);
@@ -106,6 +108,20 @@ namespace F4E_design.Pages
 
 
             }
+
+        }
+
+        private void SingleHour_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button button = sender as Button;
+            int day = (int)button.GetValue(Grid.ColumnProperty);
+            int hour = (int)button.GetValue(Grid.RowProperty);
+
+            Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
+            hourButton.Background = Brushes.White;
+
+            Button dayButton = ScheduleGrid.FindName("day_button" + (day - 1)) as Button;
+            dayButton.Background = COLOR_OF_DAY_BUTTON;
 
         }
 
@@ -206,22 +222,28 @@ namespace F4E_design.Pages
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
+
         private void singleHour_MouseMove(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            int day = (int)button.GetValue(Grid.ColumnProperty);
+            int hour = (int)button.GetValue(Grid.RowProperty);
+
+            //sign the hour button
+            Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
+            hourButton.Background = Brushes.Aqua;
+
+            Button dayButton = ScheduleGrid.FindName("day_button" + (day - 1)) as Button;
+            dayButton.Background = Brushes.Aqua;
+
             if (Mouse.LeftButton.Equals(MouseButtonState.Pressed))
             {
-                Button button = sender as Button;
-                int day = 7 - (int)button.GetValue(Grid.ColumnProperty);
-                int hour = (int)button.GetValue(Grid.RowProperty) - 1;
                 button.Background = COLOR_OF_SELECTED_BUTTON;
                 tableOfHours[day, hour] = true;
             }
 
             if (Mouse.RightButton.Equals(MouseButtonState.Pressed))
             {
-                Button button = sender as Button;
-                int day = 7 - (int)button.GetValue(Grid.ColumnProperty);
-                int hour = (int)button.GetValue(Grid.RowProperty) - 1;
                 button.Background = COLOR_OF_UNSELECTED_BUTTON;
                 tableOfHours[day, hour] = false;
             }

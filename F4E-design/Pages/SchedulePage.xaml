@@ -30,26 +30,39 @@
         </Grid.RowDefinitions>
         <Image Source="1_cal.png" Grid.Column="2" Margin="7"/>
         <Label Content="מערכת שעות" Grid.Column="1" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Margin="0,10.623" Height="34" Width="130.19"/>
-        <ScrollViewer Margin="15,3,3,3" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible" FlowDirection="RightToLeft">
+        <Grid x:Name="ScheduleTopGrid" Margin="15,3,3,3" Grid.Row="1" FlowDirection="RightToLeft">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="48*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.8*"/>
 
-            <Grid x:Name="ScheduleGrid" Height="1200">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer x:Name="ScrollArea" Grid.Row="2" Grid.ColumnSpan="10" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Visible" FlowDirection="RightToLeft">
 
-            </Grid>
-        </ScrollViewer>
+                <Grid x:Name="ScheduleGrid" Height="1200" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
         <!--הוראות-->
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>
