@@ -63,5 +63,17 @@ namespace F4E_design
             obj.FontFamily = new FontFamily("Assistant-Bold");
             obj.FontWeight = FontWeights.UltraBold;
         }
+
+        private void current_status_MouseMove(object sender, MouseEventArgs e)
+        {
+            Label label = sender as Label;
+            label.Foreground = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void current_status_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Label label = sender as Label;
+            label.Foreground = new SolidColorBrush(Colors.White);
+        }
     }
 }

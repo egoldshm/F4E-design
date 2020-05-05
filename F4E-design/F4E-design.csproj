@@ -145,5 +145,8 @@
     <Resource Include="images\StatusPage\status_V.png" />
     <Resource Include="images\StatusPage\Warm_Blue.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pages\2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

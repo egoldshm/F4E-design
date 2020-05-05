@@ -25,7 +25,7 @@ namespace F4E_design.Pages
         public static readonly Brush COLOR_OF_SELECTED_BUTTON = new SolidColorBrush(Color.FromRgb(232, 167, 149));
         public static readonly Brush COLOR_OF_UNSELECTED_BUTTON = Brushes.LightGray;
         public static readonly Brush COLOR_OF_DAY_BUTTON = (Brush)new BrushConverter().ConvertFromString("#FFCBD8E6");
-        public static readonly Brush COLOR_OF_SIGN_DAY_AND_HOUR = (Brush)new BrushConverter().ConvertFromString("#FF0066AC");
+        public static readonly Brush COLOR_OF_SIGN_DAY_AND_HOUR = (Brush)new BrushConverter().ConvertFromString("#82B1CB");
 
 
         static private bool[,] tableOfHours = new bool[7, 48];
@@ -87,8 +87,9 @@ namespace F4E_design.Pages
                 weeklyHour.Background = new SolidColorBrush(Colors.White) { Opacity = 0 };
                 weeklyHour.SetValue(Grid.RowProperty, i);
                 weeklyHour.SetValue(Grid.ColumnProperty, 0);
-                weeklyHour.FontFamily = new FontFamily("Assistant");
-                weeklyHour.FontSize = 8;
+                weeklyHour.FontFamily = new FontFamily("Assistant Bold");
+                weeklyHour.FontSize = 10;
+                //weeklyHour.FontWeight = FontWeights.Bold;
                 weeklyHour.GotMouseCapture += Button_GotMouseCapture;
                 weeklyHour.MouseMove += WeeklyHour_MouseMove;
                 weeklyHour.PreviewMouseDown += WeeklyHour_PreviewMouseDown;
@@ -227,12 +228,11 @@ namespace F4E_design.Pages
             }
         }
 
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-
         private void singleHour_MouseMove(object sender, RoutedEventArgs e)
         {
+            FrameworkElement element = (FrameworkElement)sender;
+            element.CaptureMouse();
+
             Button button = sender as Button;
             int day = (int)button.GetValue(Grid.ColumnProperty) - 1;
             int hour = (int)button.GetValue(Grid.RowProperty);
