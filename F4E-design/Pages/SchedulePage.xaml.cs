@@ -28,6 +28,11 @@ namespace F4E_design.Pages
 
         static private bool[,] tableOfHours = new bool[7, 48];
 
+        /* Notice:
+         * Row of Button = Hour
+         * Column of Button = Day + 1
+         * */
+
         public SchedulePage()
         {
             InitializeComponent();
@@ -173,7 +178,7 @@ namespace F4E_design.Pages
         private void UnChooseWeeklyHour(object sender, MouseButtonEventArgs e)
         {
             Button hourSender = sender as Button;
-            int hour = (int)hourSender.GetValue(Grid.RowProperty) - 1;
+            int hour = (int)hourSender.GetValue(Grid.RowProperty);
             for (int i = 0; i < 7; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
@@ -198,7 +203,7 @@ namespace F4E_design.Pages
         private void UnChooseFullDay(object sender, MouseButtonEventArgs e)
         {
             Button buttonSender = sender as Button;
-            int day = (int)buttonSender.GetValue(Grid.ColumnProperty);
+            int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
             for (int i = 0; i < 48; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
@@ -211,7 +216,7 @@ namespace F4E_design.Pages
         private void ChooseFullDay(object sender, RoutedEventArgs e)
         {
             Button buttonSender = sender as Button;
-            int day = (int)buttonSender.GetValue(Grid.ColumnProperty);
+            int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
             for (int i = 0; i < 48; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
@@ -219,6 +224,7 @@ namespace F4E_design.Pages
                 tableOfHours[day, i] = true;
             }
         }
+
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
