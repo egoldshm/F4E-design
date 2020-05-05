@@ -25,6 +25,8 @@ namespace F4E_design.Pages
         public static readonly Brush COLOR_OF_SELECTED_BUTTON = new SolidColorBrush(Color.FromRgb(232, 167, 149));
         public static readonly Brush COLOR_OF_UNSELECTED_BUTTON = Brushes.LightGray;
         public static readonly Brush COLOR_OF_DAY_BUTTON = (Brush)new BrushConverter().ConvertFromString("#FFCBD8E6");
+        public static readonly Brush COLOR_OF_SIGN_DAY_AND_HOUR = (Brush)new BrushConverter().ConvertFromString("#FF0066AC");
+
 
         static private bool[,] tableOfHours = new bool[7, 48];
 
@@ -237,10 +239,10 @@ namespace F4E_design.Pages
 
             //sign the hour button
             Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
-            hourButton.Background = Brushes.Aqua;
+            hourButton.Background = COLOR_OF_SIGN_DAY_AND_HOUR;
 
             Button dayButton = ScheduleGrid.FindName("day_button" + day) as Button;
-            dayButton.Background = Brushes.Aqua;
+            dayButton.Background = COLOR_OF_SIGN_DAY_AND_HOUR;
 
             if (Mouse.LeftButton.Equals(MouseButtonState.Pressed))
             {
