@@ -46,7 +46,7 @@ namespace F4E_design
                     FrameWindow.Content = new FilterSettingsPage();
                     break;
                 case "categorize":
-                    FrameWindow.Content = new FilterSettingsPage();
+                    FrameWindow.Content = new CategorizePage();
                     break;
                 case "about":
                     FrameWindow.Content = new AboutPage();

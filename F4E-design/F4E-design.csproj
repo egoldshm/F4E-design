@@ -168,17 +168,25 @@
     <Resource Include="images\FilterSettingsPage\filter.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\CategorizePage\4.png" />
-    <Resource Include="images\CategorizePage\3.png" />
-    <Resource Include="images\CategorizePage\2.png" />
-    <Resource Include="images\CategorizePage\6.png" />
-    <Resource Include="images\CategorizePage\5.png" />
+    <Resource Include="images\CategorizePage\newsIcon.png" />
+    <Resource Include="images\CategorizePage\gamblingIcon.png" />
+    <Resource Include="images\CategorizePage\socialIcon.png" />
+    <Resource Include="images\CategorizePage\playersIcon.png" />
+    <Resource Include="images\CategorizePage\sportIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\CategorizePage\1.png" />
+    <Resource Include="images\CategorizePage\pageicon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\GeneralSettingsPage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\StatusPage\safeserver_off.png" />
+    <Resource Include="images\StatusPage\safeserver_on.png" />
+    <Resource Include="images\StatusPage\scheduel_off.png" />
+    <Resource Include="images\StatusPage\scheduel_on.png" />
+    <Resource Include="images\StatusPage\status_off.png" />
+    <Resource Include="images\StatusPage\status_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
