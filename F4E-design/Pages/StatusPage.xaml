@@ -54,7 +54,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/scheduel_on.png" d:IsEffectDisabled="True">
+            <Image x:Name="scheduelToggle" Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/scheduel_on.png" d:IsEffectDisabled="True" MouseLeftButtonUp="sceduelToggle_MouseLeftButtonUp">
                 <Image.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="10" Color="#FFA5A5A5" Opacity="0"/>
                 </Image.Effect>
@@ -64,7 +64,7 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="10" Color="#FFA5A5A5" Opacity="0"/>
                 </Image.Effect>
             </Image>
-            <Image  Grid.Column="2" Source="/images/StatusPage/status_on.png" Margin="5,0" VerticalAlignment="Top">
+            <Image x:Name="systemStatusToggle" Grid.Column="2" Source="/images/StatusPage/status_on.png" Margin="5,0" VerticalAlignment="Top" MouseLeftButtonUp="systemStatusToggle_MouseLeftButtonUp">
                 <Image.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="10" Color="#FFA5A5A5" Opacity="0"/>
                 </Image.Effect>
