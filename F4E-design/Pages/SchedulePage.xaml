@@ -47,7 +47,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.65*"/> <!-- the space between the days buttons to the end-->
 
             </Grid.ColumnDefinitions>
             <ScrollViewer x:Name="ScrollArea" Grid.Row="2" Grid.ColumnSpan="10" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Visible" FlowDirection="RightToLeft">

@@ -75,11 +75,11 @@
             <Label Content="חדשות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="2" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
             <Label Content="ספורט" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="3" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
             <Label Content="נגנים ותמונות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="4" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
-            <Image Source="/images/categorizepage/on.png" Grid.Column="0" Grid.Row="0" Margin="14"/>
-            <Image Source="/images/categorizepage/on.png" Grid.Column="0" Grid.Row="1" Margin="14"/>
-            <Image Source="/images/categorizepage/on.png" Grid.Column="0" Grid.Row="2" Margin="14"/>
-            <Image Source="/images/categorizepage/on.png" Grid.Column="0" Grid.Row="3" Margin="14"/>
-            <Image Source="/images/categorizepage/on.png" Grid.Column="0" Grid.Row="4" Margin="14"/>
+            <Image Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="0" Margin="14"/>
+            <Image Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="1" Margin="14"/>
+            <Image Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="2" Margin="14"/>
+            <Image Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="3" Margin="14"/>
+            <Image Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="4" Margin="14"/>
             <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
             <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
             <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
