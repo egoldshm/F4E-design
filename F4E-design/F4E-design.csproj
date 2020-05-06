@@ -62,8 +62,14 @@
     <Compile Include="Pages\CategorizePage.xaml.cs">
       <DependentUpon>CategorizePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CustomListPage.xaml.cs">
+      <DependentUpon>CustomListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FilterSettingsPage.xaml.cs">
       <DependentUpon>FilterSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GeneralSettingsPage.xaml.cs">
+      <DependentUpon>GeneralSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SchedulePage.xaml.cs">
       <DependentUpon>SchedulePage.xaml</DependentUpon>
@@ -91,7 +97,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CustomListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\FilterSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GeneralSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,6 +201,10 @@
     <Resource Include="images\StatusPage\scheduel_on.png" />
     <Resource Include="images\StatusPage\status_off.png" />
     <Resource Include="images\StatusPage\status_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\CustomListPage\pageicon.png" />
+    <Resource Include="images\CustomListPage\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

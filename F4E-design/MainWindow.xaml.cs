@@ -48,6 +48,12 @@ namespace F4E_design
                 case "categorize":
                     FrameWindow.Content = new CategorizePage();
                     break;
+                case "custom_list":
+                    FrameWindow.Content = new CustomListPage();
+                    break;
+                case "general_settings":
+                    FrameWindow.Content = new GeneralSettingsPage();
+                    break;
                 case "about":
                     FrameWindow.Content = new AboutPage();
                     break;
