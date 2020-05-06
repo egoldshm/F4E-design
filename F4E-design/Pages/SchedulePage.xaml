@@ -47,7 +47,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="0.65*"/> <!-- the space between the days buttons to the end-->
+                <ColumnDefinition Width="0.65*"/> <!-- the space between the days buttons to -->
 
             </Grid.ColumnDefinitions>
             <ScrollViewer x:Name="ScrollArea" Grid.Row="2" Grid.ColumnSpan="10" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Visible" FlowDirection="RightToLeft">
@@ -81,11 +81,11 @@
             </Grid.RowDefinitions>
             <Image Source="/images/ScheduelPage/2_plus_cal.png" Grid.Row="1" Grid.Column="1" Margin="5,5.8,5.4,5.6"/>
             <Label Grid.Row="1" Style="{StaticResource ExplantionLabel}" Height="42"  Width="188" Margin="0,13.077,1,7.884" FontWeight="Bold">
-                <TextBlock Width="181" FontWeight="SemiBold"><Run FlowDirection="RightToLeft" Text="לסימון, התשמש במקש העכבר הימני."/><LineBreak/><Run FlowDirection="RightToLeft" Text="ניתן לסמן"/><Run FlowDirection="RightToLeft" Text=" מספר שעות במלחיצה ארוכה"/><Run FlowDirection="RightToLeft" Text="."/></TextBlock>
+                <TextBlock Width="181" FontWeight="SemiBold"><Run FlowDirection="RightToLeft" Text="לסימון, ה"/><Run FlowDirection="RightToLeft" Text="שתמש"/><Run FlowDirection="RightToLeft" Text=" במקש העכבר "/><Run FlowDirection="RightToLeft" Text="השמאלי"/><Run FlowDirection="RightToLeft" Text="."/><LineBreak/><Run FlowDirection="RightToLeft" Text="ניתן לסמן"/><Run FlowDirection="RightToLeft" Text=" מספר שעות בלחיצה ארוכה"/><Run FlowDirection="RightToLeft" Text="."/></TextBlock>
             </Label>
             <Image Source="/images/ScheduelPage/3_minus_cal.png" Grid.Row="2" Grid.Column="1" Grid.RowSpan="1" Margin="5,4.4,5.4,5.4"/>
             <Label Grid.Row="2" Style="{StaticResource ExplantionLabel}" Height="41" Width="152" Margin="0,10.97,0,10.99" >
-                <TextBlock FontWeight="SemiBold"><Run Text="לביטול סימון, השתמש במקש"/><LineBreak/><Run Text=" העכבר השמאלי."/></TextBlock>
+                <TextBlock FontWeight="SemiBold"><Run Text="לביטול סימון, השתמש במקש"/><LineBreak/><Run Text=" העכבר "/><Run Text="הימני"/><Run Text="."/></TextBlock>
             </Label>
             <Image Source="/images/ScheduelPage/4_calender.png" Grid.Row="3" Grid.Column="1" Margin="5,4.6,5.4,4.8"/>
             <Label Grid.Row="3" Style="{StaticResource ExplantionLabel}" Height="41" Width="184" Margin="0,10.883,1,11.078">
