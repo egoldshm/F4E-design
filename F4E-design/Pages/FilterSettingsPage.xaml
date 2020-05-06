@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:F4E_design.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="415.75" d:DesignWidth="563.15"
+      d:DesignHeight="450" d:DesignWidth="598"
       Title="FilterSettingsPage" Background="#FFF6F6F6">
     <Page.Resources>
         <Style x:Key="ShadowRectStyle" TargetType="Rectangle">
@@ -38,102 +38,61 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid >
+    <Grid Margin="0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="481*"/>
+            <ColumnDefinition Width="42*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="42.34"/>
+            <RowDefinition Height="66*"/>
+            <RowDefinition Height="267*"/>
+            <RowDefinition Height="116*"/>
         </Grid.RowDefinitions>
-
-        <Image Source="../images/FilterSettingsPage/filter.png" Grid.Column="2" Margin="12.1,27.97,18.15,7" VerticalAlignment="Top" Height="26.83" Width="26.83"/>
-
-        <Label Grid.Column="0" Grid.ColumnSpan="2" Content="הגדרות סינון" FontFamily="{StaticResource Bold}" FontSize="14.5" HorizontalAlignment="Right" 
-               VerticalAlignment="Top" Margin="0,27.97,0,30"/>
-        <Rectangle Height="2" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-        <Image Source="../images/FilterSettingsPage/2.png" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="49.5" Width="49.5" Margin="18.15,18.15,2.65,18.15"/>
-
-
-
-        <Grid Grid.Row="1" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center" >
+        <Image Source="/F4E-design;component/images/CategorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7.4,7,7,7.4"/>
+        <Label Content="הגדרות סינון" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Width="126.004" Grid.Column="1" Grid.Row="0"/>
+        <Grid Grid.ColumnSpan="2" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="184*"/>
+                <ColumnDefinition Width="315*"/>
+                <ColumnDefinition Width="56*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" VerticalAlignment="Top" Content="חסום תוכן לא ראוי" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
-               HorizontalAlignment="Right" FontWeight="Bold"/>
-            <Label Grid.Row="1" VerticalAlignment="Bottom"  FlowDirection="RightToLeft" Content="תכנים פורנוגרפיים יוסתרו במנועי החיפוש.
-                   &#x0a;והגלישה אליהם תחסם" FontFamily="{StaticResource Regular}" FontSize="10" HorizontalAlignment="Right"  Margin="0,-7,0,0"/>
+            <Image Source="/F4E-design;component/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="0" Margin="6.8,8,8.4,8.4"/>
+            <Image Source="/F4E-design;component/images/CategorizePage/gamblingIcon.png" Grid.Column="2" Grid.Row="1" Margin="6.8,7.6,8.4,7.8"/>
+            <Image Source="/F4E-design;component/images/CategorizePage/newsIcon.png" Grid.Column="2" Grid.Row="2" Margin="6.8,8.2,8.4,8.2"/>
+            <Label Content="חסום תוכן לא ראוי" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="0" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1"/>
+            <Label Content="סינון Youtube קפדני" FontFamily="/F4E-design;component/Fonts/#Assistant"  FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Row="1" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1" FlowDirection="RightToLeft"/>
+            <Image Source="/F4E-design;component/images/CategorizePage/on.png" Grid.Column="0" Grid.Row="0" Margin="30" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
+            <Image Source="/F4E-design;component/images/CategorizePage/on.png" Grid.Column="0" Grid.Row="1" Margin="30" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
+            <Image Source="/F4E-design;component/images/CategorizePage/on.png" Grid.Column="0" Grid.Row="2" Margin="30" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
+            <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+            <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+            <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+            <Rectangle Height="2" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+            <Label Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,35.05,0.2,7">
+                <TextBlock Width="290.6" HorizontalAlignment="Center" TextAlignment="Right" Height="37.148"><Run FlowDirection="RightToLeft" Text="שימוש באופציה זו תגדיר את הגלישה דרך שרת בטוח."/><LineBreak/><Run FlowDirection="RightToLeft" Text="תכנים פורנוגרפיים יוסתרו והגישה אליהם תיחסם."/></TextBlock>
+            </Label>
+            <Label Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Right" Margin="0,35.05,0.2,7">
+                <TextBlock Width="290.6" HorizontalAlignment="Center" Height="37.148" FlowDirection="RightToLeft"><Span FlowDirection="RightToLeft"><Run Text="סינון התוכן ב"/><Run Text="Y"/></Span><Run Text="outube"/><Run FlowDirection="RightToLeft" Text=" יהיה קפדני יותר אך תוצאות נוספות"/><LineBreak/><Run FlowDirection="RightToLeft" Text="עלולות להיחסם שלא לצורך."/></TextBlock>
+            </Label>
+            <Label Content="חסום פרסומות" FontFamily="/F4E-design;component/Fonts/#Assistant"  FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Row="2" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1" FlowDirection="RightToLeft"/>
+            <Label Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Right" Margin="0,35.05,0.2,7">
+                <TextBlock Width="290.6" HorizontalAlignment="Center" Height="37.148" FlowDirection="RightToLeft"><Run FlowDirection="RightToLeft" Text="אופציה זו תפחית באופן משמעותי את כמות הפרסומות"/><LineBreak/><Run FlowDirection="RightToLeft" Text="המוצגות במהלך הגלישה ברשת."/></TextBlock>
+            </Label>
         </Grid>
-
-        <ToggleButton Style="{DynamicResource ToggleButtonStyle}" Grid.Column="0" Grid.Row="1" Margin="97.5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Left" Height="25" Width="73.087"/>
-
-
-        <Rectangle Height="2" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-        <Image Source="../images/FilterSettingsPage/3.png" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Height="49.5" Width="49.5" Margin="18.15,18.15,2.65,18.15"/>
-
-
-        <Grid Grid.Row="2" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" VerticalAlignment="Top" FlowDirection="RightToLeft" Content="סינון Youtube קפדני" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
-               HorizontalAlignment="Right" FontWeight="Bold"/>
-            <Label Grid.Row="1" 
-                   VerticalAlignment="Bottom" 
-                   FlowDirection="RightToLeft" 
-                   Content="סינון התוכן ב- Youtube יהיה קפדני יותר,&#x0a;אך תוצאות נוספות עלולות להיחסם שלא לצורך" 
-                   FontFamily="{StaticResource Regular}" 
-                   FontSize="10" HorizontalAlignment="Right"  Margin="0,-7,0,0"/>
-        </Grid>
-        <ToggleButton Style="{DynamicResource ToggleButtonStyle}" 
-                      Grid.Column="0" 
-                      Grid.Row="2" 
-                      Margin="97.5,0,0,0" 
-                      HorizontalAlignment="Left" 
-                      VerticalAlignment="Center" 
-                      HorizontalContentAlignment="Left" 
-                      Height="25" 
-                      Width="73.087"/>
-
-
-
-        <Rectangle Height="2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-        <Image Source="../images/FilterSettingsPage/4.png" Grid.Row="3" Grid.Column="1"  VerticalAlignment="Center" Height="49.5" Width="49.5" Margin="18.15,18.15,2.65,18.15"/>
-
-        <Grid Grid.Row="3" Margin="10" HorizontalAlignment="Right"  VerticalAlignment="Center" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" VerticalAlignment="Top" Content="חסום פרסומות" FontFamily="{StaticResource Semi-bold}" FontSize="10" 
-               HorizontalAlignment="Right" FontWeight="Bold"/>
-            <Label Grid.Row="1" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Content="אופציה זו, מפחיתה באופן משמעותי&#x0a;את כמות הפרסומות המוצגות במהלך הגלישה ברשת" FontFamily="{StaticResource Regular}" FontSize="10"
-                   HorizontalAlignment="Right"  Margin="0,-7,0,0"/>
-        </Grid>
-        <ToggleButton Style="{DynamicResource ToggleButtonStyle}"
-                      Grid.Column="0"
-                      Grid.Row="3"
-                      Margin="97.5,0,0,0" 
-                      HorizontalAlignment="Left" 
-                      VerticalAlignment="Center" 
-                      HorizontalContentAlignment="Left" 
-                      Height="25" 
-                      Width="73.087"/>
-
-        <Rectangle Height="2" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" StrokeThickness="3" Width="598" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+        <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" Height="45" Grid.Row="2" VerticalAlignment="Top" Width="346" CornerRadius="4" Margin="63.5,21.4,71.6,0" Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0076AB" Offset="0"/>
+                    <GradientStop Color="#FF1D60AE" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White"/>
+        </Border>
     </Grid>
 </Page>
