@@ -53,7 +53,7 @@
 
 
         <Label FlowDirection="RightToLeft" FontSize="14" Content="קולהע צופעט  איף, ברומץ  מיחוצים.&#x0a;קלאצי סחטיר בלובק. למרקל אס לכימפו,&#x0a;דול, צוט ומעיוט -  ולתיעם גדדיש. קוויז&#x0a;דומור ליאמום בלינך רוגצה. לפמעט" FontFamily="Assistant-Bold" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Right" Margin="0,61.25,0,0" Padding="5,5,8,5" Height="77.2" Width="253.69"/>
-        <TextBox Name="url_text_box" TextAlignment="Center" BorderBrush="#FF0C6CAC" FontSize="15" VerticalContentAlignment="Center" Grid.Column="1" Margin="10,0,10,131" Grid.Row="1" Text="www.google.com" Height="27.5" VerticalAlignment="Bottom"/>
+        <TextBox Name="url_text_box"  TextAlignment="Center" BorderBrush="#FF0C6CAC" FontSize="15" VerticalContentAlignment="Center" Grid.Column="1" Margin="10,0,10,131" Grid.Row="1" Text="www.google.com" Height="27.5" VerticalAlignment="Bottom" IsKeyboardFocusedChanged="Url_text_box_IsKeyboardFocusedChanged"/>
         <Button Grid.Row="1"  Click="SaveButtonClick" Grid.Column="1" BorderThickness="0" Content="אישור" FontFamily="Assistant Bold" Foreground="White" Margin="10,0,10,92.148" Height="30.094" VerticalAlignment="Bottom">
             <Button.Background>
                 <RadialGradientBrush>
@@ -63,22 +63,24 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
+        <Label x:Name="ErrorMessageLabel" FontFamily="/F4E-design;component/Fonts/#Assistant" Grid.Row="1" Grid.Column="1" Margin="0,280,0,30" FlowDirection="RightToLeft" HorizontalAlignment="Center" Foreground="#FFFF0606" FontSize="16"  ></Label>
 
-        <ListView x:Name="myListView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="38,0,27,10" HorizontalAlignment="Stretch" BorderBrush="#00ABADB3" Background="#FFF6F6F6" Height="278" VerticalAlignment="Bottom">
+        <ListView FlowDirection="RightToLeft" x:Name="myListView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="15,2,2,2" HorizontalAlignment="Left" BorderBrush="#00ABADB3" Background="#FFF6F6F6" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" FlowDirection="LeftToRight" HorizontalAlignment="Left" >
+
                         <Rectangle Height="2" Width="200" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
 
                         <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource TransparentStyle}" Tag="{Binding ID}" Click="deleteClick" BorderThickness="0" Background="#00DDDDDD">
-                            <StackPanel>
-                                <Image Source="{Binding imagePath}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="20" Height="20"/>
-                            </StackPanel>
+                            <Button Style="{StaticResource TransparentStyle}" Tag="{Binding url}" Click="deleteClick" BorderThickness="0" Background="#00DDDDDD">
+                                <StackPanel>
+                                    <Image Source="{Binding imagePath}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="20" Height="20"/>
+                                </StackPanel>
 
-                        </Button>
+                            </Button>
                             <TextBlock Text="{Binding url}" FontSize="18"/>
-                    </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -99,7 +101,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Rectangle Grid.Row="1" Stroke="#00000000" Margin="38,0,27,0" Height="66" VerticalAlignment="Bottom">
+        <Rectangle Grid.Row="1" Stroke="#00000000" Margin="24,0,41,20.4" Height="66" VerticalAlignment="Bottom" Grid.RowSpan="2">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop/>

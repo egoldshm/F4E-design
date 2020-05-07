@@ -24,7 +24,6 @@ namespace F4E_design.Pages
 
         public class UrlRow
         {
-            public int ID { get; set; }
             public string url { get; set; }
             public string imagePath { get; set; }
         }
@@ -39,30 +38,26 @@ namespace F4E_design.Pages
         private void SaveButtonClick(object sender, RoutedEventArgs e)
         {
             string newUrl = url_text_box.Text;
-
-            foreach (UrlRow url in urls)
+            if (urls.Exists((url) => url.url == newUrl))
             {
-                if (url.url == newUrl)
-                {
-                    MessageBox.Show("כתובת אתר זו כבר קיימת ברשימה", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ErrorMessageLabel.Content = "כתובת אתר זו כבר קיימת ברשימה";
                     return;
-                }
             }
+
             if (newUrl != "")
             {
                 AddNewUrl(newUrl);
             }
             else
             {
-                MessageBox.Show("אנא קודם הכנס כתובת של אתר", "error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+                ErrorMessageLabel.Content = "אנא קודם הכנס כתובת של אתר";
+           }
         }
 
         private void AddNewUrl(string newUrl)
         {
             urls.Add(new UrlRow()
             {
-                ID = urls.Count,
                 url = newUrl,
                 imagePath = "../images/CustomListPage/delete.png"
             });
@@ -72,16 +67,23 @@ namespace F4E_design.Pages
 
         private void deleteClick(object sender, RoutedEventArgs e)
         {
-            int content = Int32.Parse((sender as Button).Tag.ToString());
-            MessageBoxResult result = MessageBox.Show("האם אתה בתוך שברצונך למחוק את האתר "+ urls[content].url + " מהרשימה?", "Worning", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            string content = (sender as Button).Tag.ToString();
+            MessageBoxResult result = MessageBox.Show("האם אתה בתוך שברצונך למחוק את האתר "+ content + " מהרשימה?", "Worning", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            UrlRow urlRow = urls.FindAll(url => url.url == content).FirstOrDefault();
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    myListView.Items.RemoveAt(content);
+                    myListView.Items.Remove(urlRow);
+                    urls.RemoveAll(item => item.url == content);
                     break;
                 case MessageBoxResult.No:
                     break;
             }
+        }
+
+        private void Url_text_box_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ErrorMessageLabel.Content = "";
         }
     }
 
