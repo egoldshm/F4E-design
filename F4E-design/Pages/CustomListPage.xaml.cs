@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace F4E_design.Pages
 {
+
     /// <summary>
     /// Interaction logic for CustomListPage.xaml
     /// </summary>
@@ -27,21 +28,26 @@ namespace F4E_design.Pages
             public string url { get; set; }
             public string imagePath { get; set; }
         }
-            
+
+
+
         List<UrlRow> urls = new List<UrlRow>();
 
         public CustomListPage()
         {
             InitializeComponent();
         }
-
+        private void showErrorMessage(string message)
+        {
+            ErrorMessageLabel.Content = message;
+        }
         private void SaveButtonClick(object sender, RoutedEventArgs e)
         {
             string newUrl = url_text_box.Text;
             if (urls.Exists((url) => url.url == newUrl))
             {
-                    ErrorMessageLabel.Content = "כתובת אתר זו כבר קיימת ברשימה";
-                    return;
+                showErrorMessage("כתובת אתר זו כבר קיימת ברשימה");
+                return;
             }
 
             if (newUrl != "")
@@ -50,19 +56,26 @@ namespace F4E_design.Pages
             }
             else
             {
-                ErrorMessageLabel.Content = "אנא קודם הכנס כתובת של אתר";
+                showErrorMessage("אנא קודם הכנס כתובת של אתר");
            }
         }
 
         private void AddNewUrl(string newUrl)
         {
-            urls.Add(new UrlRow()
+            if (newUrl.CheckURLValid())
             {
-                url = newUrl,
-                imagePath = "../images/CustomListPage/delete.png"
-            });
+                urls.Add(new UrlRow()
+                {
+                    url = newUrl,
+                    imagePath = "../images/CustomListPage/delete.png"
+                });
 
-            myListView.Items.Add(urls[urls.Count-1]);
+                myListView.Items.Add(urls[urls.Count - 1]);
+            }
+            else
+            {
+                showErrorMessage("הכתובת אינה כתובת אינטרנט תקינה");
+            }
         }
 
         private void deleteClick(object sender, RoutedEventArgs e)
@@ -83,7 +96,7 @@ namespace F4E_design.Pages
 
         private void Url_text_box_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ErrorMessageLabel.Content = "";
+            showErrorMessage("");
         }
     }
 
