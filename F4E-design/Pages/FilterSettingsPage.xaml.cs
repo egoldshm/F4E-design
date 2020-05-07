@@ -60,8 +60,10 @@ namespace F4E_design.Pages
 
         private void Handle(object sender)
         {
-         ComboBox comboBox =  sender as ComboBox;
-         comboBox.BorderBrush = ((ComboBoxItem)comboBox.SelectedItem).Background;
+            ComboBox comboBox = sender as ComboBox;
+            var selected = comboBox.SelectedItem as ComboBoxItem;
+            if (selected != null)
+                comboBox.Background = selected.Background;
 
 
         }

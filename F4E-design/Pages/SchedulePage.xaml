@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="0.65*"/> <!-- the space between the days buttons to -->
 
             </Grid.ColumnDefinitions>
-            <ScrollViewer x:Name="ScrollArea" Grid.Row="2" Grid.ColumnSpan="10" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Visible" FlowDirection="RightToLeft">
+            <ScrollViewer x:Name="ScrollArea" Foreground="Black" Grid.Row="2" Grid.ColumnSpan="10" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Visible" FlowDirection="RightToLeft">
 
                 <Grid x:Name="ScheduleGrid" Height="1200" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,10,0">
                     <Grid.ColumnDefinitions>
