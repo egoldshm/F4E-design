@@ -26,9 +26,10 @@ namespace F4E_design.Pages
         public static readonly Brush COLOR_OF_UNSELECTED_BUTTON = Brushes.LightGray;
         public static readonly Brush COLOR_OF_DAY_BUTTON = (Brush)new BrushConverter().ConvertFromString("#FFCBD8E6");
         public static readonly Brush COLOR_OF_SIGN_DAY_AND_HOUR = (Brush)new BrushConverter().ConvertFromString("#82B1CB");
+        const int NUM_OF_DAYS = 7;
+        const int NUM_OF_HOURS = 48;
 
-
-        static private bool[,] tableOfHours = new bool[7, 48];
+        static private bool[,] tableOfHours = new bool[NUM_OF_DAYS, NUM_OF_HOURS];
 
         /* Notice:
          * Row of Button = Hour
@@ -50,7 +51,7 @@ namespace F4E_design.Pages
         {
             //days button
             string days = "אבגדהוש";
-            for (int j = 0; j < 7; j++)
+            for (int j = 0; j < NUM_OF_DAYS; j++)
             {
                 Button newButton = new Button();
                 newButton.SetValue(Grid.RowProperty, 0);
@@ -72,7 +73,7 @@ namespace F4E_design.Pages
             }
 
             //define all hours
-            for (int i = 0; i < 48; i++)
+            for (int i = 0; i < NUM_OF_HOURS; i++)
             {
                 RowDefinition rowDefinition = new RowDefinition();
                 rowDefinition.Height = new GridLength(1, GridUnitType.Star);
@@ -94,9 +95,10 @@ namespace F4E_design.Pages
                 weeklyHour.GotMouseCapture += Button_GotMouseCapture;
                 weeklyHour.MouseMove += WeeklyHour_MouseMove;
                 weeklyHour.PreviewMouseDown += WeeklyHour_PreviewMouseDown;
+                weeklyHour.Margin = new Thickness(0);
                 ScheduleGrid.Children.Add(weeklyHour);
                 //add all the button for single hour
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < NUM_OF_DAYS; j++)
                 {
                     Button singleHour = new Button();
                     singleHour.SetValue(Grid.RowProperty, i);
@@ -109,7 +111,6 @@ namespace F4E_design.Pages
                     singleHour.PreviewMouseDown += singleHour_PreviewMouseDown;
                     singleHour.MouseMove += singleHour_MouseMove;
                     singleHour.GotMouseCapture += Button_GotMouseCapture;
-                    singleHour.MouseLeave += SingleHour_MouseLeave;
                     singleHour.ToolTip = "יום " + days[j] + ", " + hourString;
 
                     ScheduleGrid.Children.Add(singleHour);
@@ -120,19 +121,6 @@ namespace F4E_design.Pages
 
         }
 
-        private void SingleHour_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Button button = sender as Button;
-            int day = (int)button.GetValue(Grid.ColumnProperty);
-            int hour = (int)button.GetValue(Grid.RowProperty);
-
-            Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
-            hourButton.Background = new SolidColorBrush(Colors.White) { Opacity = 0 }; ;
-
-            Button dayButton = ScheduleGrid.FindName("day_button" + (day - 1)) as Button;
-            dayButton.Background = COLOR_OF_DAY_BUTTON;
-
-        }
 
         private void WeeklyHour_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -183,7 +171,7 @@ namespace F4E_design.Pages
         {
             Button hourSender = sender as Button;
             int hour = (int)hourSender.GetValue(Grid.RowProperty);
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < NUM_OF_DAYS; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
                 button.Background = COLOR_OF_UNSELECTED_BUTTON;
@@ -195,7 +183,7 @@ namespace F4E_design.Pages
         {
             Button hourSender = sender as Button;
             int hour = (int)hourSender.GetValue(Grid.RowProperty);
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < NUM_OF_DAYS; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + hour + "_" + i) as Button;
                 button.Background = COLOR_OF_SELECTED_BUTTON;
@@ -208,7 +196,7 @@ namespace F4E_design.Pages
         {
             Button buttonSender = sender as Button;
             int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
-            for (int i = 0; i < 48; i++)
+            for (int i = 0; i < NUM_OF_HOURS; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
                 button.Background = COLOR_OF_UNSELECTED_BUTTON;
@@ -220,7 +208,7 @@ namespace F4E_design.Pages
         {
             Button buttonSender = sender as Button;
             int day = (int)buttonSender.GetValue(Grid.ColumnProperty) - 1;
-            for (int i = 0; i < 48; i++)
+            for (int i = 0; i < NUM_OF_HOURS; i++)
             {
                 Button button = ScheduleGrid.FindName("button_" + i + "_" + day) as Button;
                 button.Background = COLOR_OF_SELECTED_BUTTON;
@@ -236,7 +224,17 @@ namespace F4E_design.Pages
             Button button = sender as Button;
             int day = (int)button.GetValue(Grid.ColumnProperty) - 1;
             int hour = (int)button.GetValue(Grid.RowProperty);
+            for (int i = 0; i < NUM_OF_DAYS; i++)
+            {
+                Button tempDayButton = ScheduleGrid.FindName("day_button" + i) as Button;
+                tempDayButton.Background = COLOR_OF_DAY_BUTTON;
+            }
+            for (int i = 0; i < NUM_OF_HOURS; i++)
+            {
+                Button tempHourButton = ScheduleGrid.FindName("WeeklyHour" + i) as Button;
+                tempHourButton.Background = new SolidColorBrush(Colors.White) { Opacity = 0 }; ;
 
+            }
             //sign the hour button
             Button hourButton = ScheduleGrid.FindName("WeeklyHour" + hour) as Button;
             hourButton.Background = COLOR_OF_SIGN_DAY_AND_HOUR;
@@ -264,9 +262,9 @@ namespace F4E_design.Pages
 
         private void FromArrayOfBoolToButton(bool[,] arr)
         {
-            for (int j = 0; j < 7; j++)
+            for (int j = 0; j < NUM_OF_DAYS; j++)
             {
-                for (int i = 0; i < 48; i++)
+                for (int i = 0; i < NUM_OF_HOURS; i++)
                 {
                     object buttonObj = ScheduleGrid.FindName("button_" + i + "_" + j);
                     if (buttonObj is Button)
@@ -287,7 +285,7 @@ namespace F4E_design.Pages
 
         private Button getButtonByDateTime(DateTime dateTime)
         {
-            int day = 7 - dateTime.Day;
+            int day = NUM_OF_DAYS - dateTime.Day;
             int hour = dateTime.Hour * 2;
             if (dateTime.Minute >= 30)
                 hour++;
@@ -296,7 +294,7 @@ namespace F4E_design.Pages
         }
         private Boolean getStatusByDateTime(DateTime dateTime)
         {
-            int day = 7 - dateTime.Day;
+            int day = NUM_OF_DAYS - dateTime.Day;
             int hour = dateTime.Hour * 2;
             if (dateTime.Minute >= 30)
                 hour++;
@@ -309,7 +307,7 @@ namespace F4E_design.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            tableOfHours = new bool[7, 48];
+            tableOfHours = new bool[NUM_OF_DAYS, NUM_OF_HOURS];
             FromArrayOfBoolToButton(tableOfHours);
         }
     }

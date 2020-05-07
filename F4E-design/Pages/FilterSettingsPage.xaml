@@ -69,12 +69,6 @@
             <Label Content="סינון Youtube קפדני" FontFamily="/F4E-design;component/Fonts/#Assistant"  FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Row="1" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1" FlowDirection="RightToLeft"/>
             <Image Source="/F4E-design;component/images/CategorizePage/on.png" Grid.Column="0" Grid.Row="0" Margin="30" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
             <ComboBox Grid.Column="0" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="ComboBox_DropDownClosed" Grid.Row="1" Margin="30" FontFamily="/F4E-design;component/Fonts/#Assistant" FlowDirection="RightToLeft" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                <ComboBox.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                        <GradientStop Color="#FF006CE2" Offset="1"/>
-                    </LinearGradientBrush>
-                </ComboBox.Background>
                 <ComboBoxItem Content="ללא סינון"/>
                 <ComboBoxItem Content="סינון רגיל" Background="#FF8FDB6B"/>
                 <ComboBoxItem Content="סינון קפדני" Background="#FFDE6D5B"/>
