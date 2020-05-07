@@ -42,5 +42,28 @@ namespace F4E_design.Pages
                 image.Name = image.Name != null ? image.Name + "Active" : "Active";
             }
         }
+
+       
+        private bool handle = true;
+        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if (handle) Handle(sender);
+            handle = true;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cmb = sender as ComboBox;
+            handle = !cmb.IsDropDownOpen;
+            Handle(sender);
+        }
+
+        private void Handle(object sender)
+        {
+         ComboBox comboBox =  sender as ComboBox;
+         comboBox.BorderBrush = ((ComboBoxItem)comboBox.SelectedItem).Background;
+
+
+        }
     }
 }
