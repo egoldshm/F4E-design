@@ -53,7 +53,7 @@
 
 
         <Label FlowDirection="RightToLeft" FontSize="14" Content="קולהע צופעט  איף, ברומץ  מיחוצים.&#x0a;קלאצי סחטיר בלובק. למרקל אס לכימפו,&#x0a;דול, צוט ומעיוט -  ולתיעם גדדיש. קוויז&#x0a;דומור ליאמום בלינך רוגצה. לפמעט" FontFamily="Assistant-Bold" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Right" Margin="0,61.25,0,0" Padding="5,5,8,5" Height="77.2" Width="253.69"/>
-        <TextBox Name="url_text_box" TextAlignment="Center" BorderBrush="#FF0C6CAC" FontSize="15" VerticalContentAlignment="Center" Grid.Column="1" Margin="10,0,10,131" Grid.Row="1" TextWrapping="Wrap" Text="www.google.com" Height="27.5" VerticalAlignment="Bottom"/>
+        <TextBox Name="url_text_box" TextAlignment="Center" BorderBrush="#FF0C6CAC" FontSize="15" VerticalContentAlignment="Center" Grid.Column="1" Margin="10,0,10,131" Grid.Row="1" Text="www.google.com" Height="27.5" VerticalAlignment="Bottom"/>
         <Button Grid.Row="1"  Click="SaveButtonClick" Grid.Column="1" BorderThickness="0" Content="אישור" FontFamily="Assistant Bold" Foreground="White" Margin="10,0,10,92.148" Height="30.094" VerticalAlignment="Bottom">
             <Button.Background>
                 <RadialGradientBrush>
@@ -72,14 +72,14 @@
                             <StackPanel>
                                 <Image Source="{Binding imagePath}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="20" Height="20"/>
                             </StackPanel>
-                            
+
                         </Button>
                         <TextBlock Text="{Binding name}" FontSize="18"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
-                
+
                 <Style TargetType="ListViewItem">
                     <Setter Property="Focusable" Value="false"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -103,6 +103,18 @@
                     <GradientStop Color="#F3F3F3F3" Offset="0.341"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="23.833" Margin="11.003,0,0,133" Grid.Row="1" Stroke="#00000000" VerticalAlignment="Bottom" Width="24.167" RenderTransformOrigin="0.635,1.783">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop/>
+                    <GradientStop Color="White" Offset="0.605"/>
+                    <GradientStop Color="#A9FFFFFF" Offset="0.333"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+            <Rectangle.LayoutTransform>
+                <RotateTransform CenterX="0.5" CenterY="0.5" Angle="90"/>
+            </Rectangle.LayoutTransform>
         </Rectangle>
 
     </Grid>
