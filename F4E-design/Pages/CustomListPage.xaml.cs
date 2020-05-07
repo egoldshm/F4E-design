@@ -25,7 +25,7 @@ namespace F4E_design.Pages
         public class UrlRow
         {
             public int ID { get; set; }
-            public string name { get; set; }
+            public string url { get; set; }
             public string imagePath { get; set; }
         }
             
@@ -42,13 +42,12 @@ namespace F4E_design.Pages
 
             foreach (UrlRow url in urls)
             {
-                if (url.name == newUrl)
+                if (url.url == newUrl)
                 {
                     MessageBox.Show("כתובת אתר זו כבר קיימת ברשימה", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
-
             if (newUrl != "")
             {
                 AddNewUrl(newUrl);
@@ -64,7 +63,7 @@ namespace F4E_design.Pages
             urls.Add(new UrlRow()
             {
                 ID = urls.Count,
-                name = newUrl,
+                url = newUrl,
                 imagePath = "../images/CustomListPage/delete.png"
             });
 
@@ -73,12 +72,12 @@ namespace F4E_design.Pages
 
         private void deleteClick(object sender, RoutedEventArgs e)
         {
-            string content = (sender as Button).Tag.ToString();
-            MessageBoxResult result = MessageBox.Show("האם אתה בתוך שברצונך למחוק את האתר"+ content + " מהרשימה?", "Worning", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            int content = Int32.Parse((sender as Button).Tag.ToString());
+            MessageBoxResult result = MessageBox.Show("האם אתה בתוך שברצונך למחוק את האתר "+ urls[content].url + " מהרשימה?", "Worning", MessageBoxButton.YesNo, MessageBoxImage.Question);
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    myListView.Items.RemoveAt(Int32.Parse(content));
+                    myListView.Items.RemoveAt(content);
                     break;
                 case MessageBoxResult.No:
                     break;
