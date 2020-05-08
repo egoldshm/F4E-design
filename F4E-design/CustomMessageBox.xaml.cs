@@ -20,7 +20,7 @@ namespace F4E_design
         LinearGradientBrush yellowGradientBrush = new LinearGradientBrush(Color.FromRgb(252,193,49), Color.FromRgb(243,154,53), new Point(-0.042, 0.539), new Point(1.19, 0.481));
         LinearGradientBrush blueGradientBrush = new LinearGradientBrush(Color.FromRgb(90,194,249), Color.FromRgb(86,83,224), new Point(-0.042, 0.539), new Point(1.19, 0.481));
 
-        public CustomMessageBox(Window windowSender ,string text, string title, CustomMessageBoxTypes type)
+        public CustomMessageBox(Window windowSender ,string text, string title, CustomMessageBoxTypes type,string yesText,string noText)
         {
             InitializeComponent();
             this.Title = title;
@@ -29,12 +29,15 @@ namespace F4E_design
             textLabel.Text = text;
             LinearGradientBrush typeColor=null;
             string iconUri = "";
+            NoButton.Content = noText;
+            YesButton.Content = yesText;
+            if (noText == "")
+                setJustOkButton();
             switch (type)
             {
                 case CustomMessageBoxTypes.Error:
                     typeColor = redGradientBrush;
                     iconUri = "/images/CustomMessageBox/errorIcon.png";
-                    setJustOkButton();
                     break;
                 case CustomMessageBoxTypes.Stop:
                     typeColor = redGradientBrush;
@@ -51,7 +54,6 @@ namespace F4E_design
                 case CustomMessageBoxTypes.Success:
                     typeColor = greenGradientBrush;
                     iconUri = "/images/CustomMessageBox/successIcon.png";
-                    setJustOkButton();
                     break;
             }
             TopBar.Background = typeColor;
@@ -60,9 +62,15 @@ namespace F4E_design
             iconImage.Source = new BitmapImage(new Uri(iconUri, UriKind.Relative));
         }
 
-        public static Boolean ShowDialog(Window windowSender, string text, string title, CustomMessageBoxTypes type)
+        public static Boolean ShowDialog(Window windowSender, string text, string title, CustomMessageBoxTypes type,string yesText)
         {
-            CustomMessageBox customMessage = new CustomMessageBox(windowSender, text, title, type);
+            CustomMessageBox customMessage = new CustomMessageBox(windowSender, text, title, type,yesText,"");
+            return (Boolean)customMessage.ShowDialog();
+        }
+
+        public static Boolean ShowDialog(Window windowSender, string text, string title, CustomMessageBoxTypes type,string yseText,string noText)
+        {
+            CustomMessageBox customMessage = new CustomMessageBox(windowSender, text, title, type, yseText,noText);
             return (Boolean)customMessage.ShowDialog();
         }
 

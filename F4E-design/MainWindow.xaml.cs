@@ -99,7 +99,7 @@ namespace F4E_design
 
         private void BottomMenu_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Boolean clickedYes = CustomMessageBox.ShowDialog(this, "שלום!", "אני עובד!", CustomMessageBox.CustomMessageBoxTypes.Question);
+            Boolean clickedYes = CustomMessageBox.ShowDialog(this, "שלום!", "אני עובד!", CustomMessageBox.CustomMessageBoxTypes.Question,"אכן כן");
             string resultString = clickedYes ? "כן" : "לא";
             MessageBox.Show("המשתמש לחץ על " + resultString);
         }

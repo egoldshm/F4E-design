@@ -25,17 +25,21 @@ namespace F4E_design
             this.Owner = OwnerWindow;
             passwordTB.Focus();
         }
-
+        int attemps = 3;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (passwordTB.Password == "1234")
             {
-                CustomMessageBox.ShowDialog(this, "ברוך הבא, ניב!", "סיסמה נכונה!", CustomMessageBox.CustomMessageBoxTypes.Success);
+                CustomMessageBox.ShowDialog(this, "ברוך הבא, ניב!", "סיסמה נכונה!", CustomMessageBox.CustomMessageBoxTypes.Success,"המשך");
                 this.Close();
             }
             else
             {
-                CustomMessageBox.ShowDialog(this, "לצערנו, הקלדת את הסיסמה הלא נכונה", "סיסמה שגויה", CustomMessageBox.CustomMessageBoxTypes.Error);
+                attemps--;
+                if(attemps>0)
+                    CustomMessageBox.ShowDialog(this, "לצערנו, הקלדת את הסיסמה הלא נכונה. נותרו לך עוד "+attemps+" ניסיונות. לאחר מכן הגלישה ברשת תיחסם, ותאופשר בהכנסת סיסמה בלבד", "סיסמה שגויה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                else
+                    CustomMessageBox.ShowDialog(this, "האינטרנט במחשב זה נחסם עקב שימוש בסיסמה שגויה", "האינטרנט נחסם", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
 
             }
         }
