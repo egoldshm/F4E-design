@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:F4E_design"
         mc:Ignorable="d"
-        Title="CustomMessageBox" Height="541.6" Width="864.93" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+        Title="CustomMessageBox" Height="541.6" Width="864.93" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterOwner" Icon="/images/mainform/logo.png">
     <Window.Resources>
         <Storyboard x:Key="popup">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="border">
@@ -94,7 +94,7 @@
                         </LinearGradientBrush>
                     </Rectangle.Stroke>
                 </Rectangle>
-                <Label Width="297.6" HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" Margin="0,57.344,0,0" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19">
+                <Label Width="265" HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" Margin="3.726,57.344,3.655,0" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19">
                     <AccessText x:Name="textLabel" TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Margin="5,0" Text="כאן שמים את המלל הרלוונטי להודעה שרוצים שתקפוץ ויש מקום סך הכל לבערך שלוש שורות."/>
                 </Label>
                 <Grid Grid.Row="2">

@@ -99,9 +99,16 @@ namespace F4E_design
 
         private void BottomMenu_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Boolean clickedYes = CustomMessageBox.ShowDialog("שלום!", "אני עובד!", CustomMessageBox.CustomMessageBoxTypes.Question);
+            Boolean clickedYes = CustomMessageBox.ShowDialog(this, "שלום!", "אני עובד!", CustomMessageBox.CustomMessageBoxTypes.Question);
             string resultString = clickedYes ? "כן" : "לא";
             MessageBox.Show("המשתמש לחץ על " + resultString);
+        }
+    
+
+        private void lockWindow(object sender, RoutedEventArgs e)
+        {
+            EnterAdminPasswordWindow enterAdminPassword = new EnterAdminPasswordWindow(this);
+            enterAdminPassword.ShowDialog();
         }
     }
 }

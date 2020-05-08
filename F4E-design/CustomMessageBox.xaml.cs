@@ -20,9 +20,11 @@ namespace F4E_design
         LinearGradientBrush yellowGradientBrush = new LinearGradientBrush(Color.FromRgb(252,193,49), Color.FromRgb(243,154,53), new Point(-0.042, 0.539), new Point(1.19, 0.481));
         LinearGradientBrush blueGradientBrush = new LinearGradientBrush(Color.FromRgb(90,194,249), Color.FromRgb(86,83,224), new Point(-0.042, 0.539), new Point(1.19, 0.481));
 
-        public CustomMessageBox(string text, string title, CustomMessageBoxTypes type)
+        public CustomMessageBox(Window windowSender ,string text, string title, CustomMessageBoxTypes type)
         {
             InitializeComponent();
+            this.Title = title;
+            this.Owner = windowSender;
             titleLabel.Content= title;
             textLabel.Text = text;
             LinearGradientBrush typeColor=null;
@@ -58,9 +60,9 @@ namespace F4E_design
             iconImage.Source = new BitmapImage(new Uri(iconUri, UriKind.Relative));
         }
 
-        public static Boolean ShowDialog(string text, string title, CustomMessageBoxTypes type)
+        public static Boolean ShowDialog(Window windowSender, string text, string title, CustomMessageBoxTypes type)
         {
-            CustomMessageBox customMessage = new CustomMessageBox(text, title, type);
+            CustomMessageBox customMessage = new CustomMessageBox(windowSender, text, title, type);
             return (Boolean)customMessage.ShowDialog();
         }
 
