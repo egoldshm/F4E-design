@@ -41,7 +41,7 @@ namespace F4E_design.Pages
             InitializeComponent();
             DefineTableOfSchedule();
             FromArrayOfBoolToButton(TableOfHours);
-            getButtonByDateTime(DateTime.Now).Background = COLOR_OF_SELECTED_BUTTON;
+            //getButtonByDateTime(DateTime.Now).Background = COLOR_OF_SELECTED_BUTTON;
             //ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
         }
 
