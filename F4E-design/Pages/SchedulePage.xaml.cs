@@ -68,6 +68,7 @@ namespace F4E_design.Pages
                 newButton.GotMouseCapture += Button_GotMouseCapture;
                 newButton.PreviewMouseDown += dayButton_PreviewMouseDown;
                 newButton.Content = days[j];
+                newButton.Style = null;
                 newButton.ToolTip = "יום " + days[j];
                 ScheduleTopGrid.Children.Add(newButton);
             }
@@ -91,6 +92,7 @@ namespace F4E_design.Pages
                 weeklyHour.SetValue(Grid.ColumnProperty, 0);
                 weeklyHour.FontFamily = new FontFamily("Assistant Bold");
                 weeklyHour.FontSize = 10;
+                weeklyHour.Style = null;
                 //weeklyHour.FontWeight = FontWeights.Bold;
                 weeklyHour.GotMouseCapture += Button_GotMouseCapture;
                 weeklyHour.MouseMove += WeeklyHour_MouseMove;
@@ -101,6 +103,7 @@ namespace F4E_design.Pages
                 for (int j = 0; j < NUM_OF_DAYS; j++)
                 {
                     Button singleHour = new Button();
+                    singleHour.Style = null;
                     singleHour.SetValue(Grid.RowProperty, i);
                     singleHour.SetValue(Grid.ColumnProperty, j + 1);
                     singleHour.Name = "button_" + i + "_" + j;
