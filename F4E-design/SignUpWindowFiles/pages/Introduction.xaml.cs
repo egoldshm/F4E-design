@@ -46,12 +46,8 @@ namespace F4E_design.SignUpWindowFiles.pages
         {
             if ((bool)e.NewValue)
             {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.UriSource = new Uri(@"/signupwindowfiles/images/screen0.gif", UriKind.RelativeOrAbsolute);
-                image.EndInit();
                 ImageBehavior.SetAutoStart(gifViewer, false);
-                ImageBehavior.SetAnimatedSource(gifViewer, image);
+                ImageBehavior.SetAnimatedSource(gifViewer, new BitmapImage(new Uri(@"/signupwindowfiles/images/screen0.gif", UriKind.RelativeOrAbsolute)));
                 ImageBehavior.SetRepeatBehavior(gifViewer, new RepeatBehavior(1));
             }
         }
