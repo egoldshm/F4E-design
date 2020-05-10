@@ -110,5 +110,10 @@ namespace F4E_design
             EnterAdminPasswordWindow enterAdminPassword = new EnterAdminPasswordWindow(this);
             enterAdminPassword.ShowDialog();
         }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            
+        }
     }
 }

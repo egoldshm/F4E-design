@@ -42,6 +42,7 @@ namespace F4E_design
                     CustomMessageBox.ShowDialog(this, "האינטרנט במחשב זה נחסם עקב שימוש בסיסמה שגויה", "האינטרנט נחסם", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
 
             }
+            passwordTB.Password = "";
         }
     }
 }

@@ -8,7 +8,11 @@
         Height="541.6" Width="864.93" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
         Icon="images/MainForm/logo.png"
         Title="לוקחים אחריות"
+<<<<<<< Updated upstream
         WindowStartupLocation="Manual" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow">
+=======
+        WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow" SizeChanged="Window_SizeChanged">
+>>>>>>> Stashed changes
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#FFFFFFFE"/>
