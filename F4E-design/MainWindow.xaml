@@ -8,7 +8,7 @@
         Height="541.6" Width="864.93" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
         Icon="images/MainForm/logo.png"
         Title="לוקחים אחריות"
-        WindowStartupLocation="Manual" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow" LostFocus="lockWindow">
+        WindowStartupLocation="Manual" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow">
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#FFFFFFFE"/>
