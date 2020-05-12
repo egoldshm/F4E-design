@@ -20,9 +20,23 @@ namespace F4E_design.Pages
     /// </summary>
     public partial class AboutPage : Page
     {
-        public AboutPage()
+        private AboutPage()
         {
             InitializeComponent();
         }
+
+        //singelton
+        private static AboutPage instance = null;
+        public static AboutPage Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new AboutPage();
+                return instance;
+            }
+        }
+
+
     }
 }

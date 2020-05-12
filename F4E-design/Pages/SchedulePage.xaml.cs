@@ -36,7 +36,7 @@ namespace F4E_design.Pages
          * Column of Button = Day + 1
          * */
 
-        public SchedulePage()
+        private SchedulePage()
         {
             InitializeComponent();
             DefineTableOfSchedule();
@@ -44,6 +44,19 @@ namespace F4E_design.Pages
             //getButtonByDateTime(DateTime.Now).Background = COLOR_OF_SELECTED_BUTTON;
             //ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
         }
+
+        //singelton
+        private static SchedulePage instance = null;
+        public static SchedulePage Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new SchedulePage();
+                return instance;
+            }
+        }
+
 
         public bool[,] TableOfHours { get => tableOfHours; set => tableOfHours = value; }
 

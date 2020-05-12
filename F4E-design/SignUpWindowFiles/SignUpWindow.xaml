@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:F4E_design"
         mc:Ignorable="d"
-        WindowStyle="None"
-        Icon="/signupwindowfiles/images/logo.png"
-        WindowState="Maximized"
+        WindowStyle="None" WindowState="Maximized"
+        Icon="/signupwindowfiles/images/logo.png" 
         Title="לוקחים אחריות" Height="719.1" Width="1080">
     <Grid>
         <Grid.RowDefinitions>

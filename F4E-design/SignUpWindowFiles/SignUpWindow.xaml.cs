@@ -48,10 +48,12 @@ namespace F4E_design.SignUpWindowFiles
             switch (part)
             {
                 case 0:
-                    pagesFrame.Content = new Introduction(this);
+                    Introduction.Instance.Window = this;
+                    pagesFrame.Content = Introduction.Instance;
                     break;
                 case 1:
-                    pagesFrame.Content = new SelectPassword(this);
+                    SelectPassword.Instance.Window = this;
+                    pagesFrame.Content = SelectPassword.Instance;
                     break;
                 case 2:
                     //pagesFrame.Content = new Introduction();

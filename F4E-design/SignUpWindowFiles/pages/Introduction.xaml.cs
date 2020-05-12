@@ -25,12 +25,21 @@ namespace F4E_design.SignUpWindowFiles.pages
     public partial class Introduction : Page
     {
         System.Windows.Threading.DispatcherTimer gifStarter = new System.Windows.Threading.DispatcherTimer();
-        SignUpWindow _window;
-        public Introduction(SignUpWindow window)
+        private Introduction()
         {
             InitializeComponent();
-            _window = window;
         }
+
+        //singelton
+        public SignUpWindow Window { get; set; }
+        private static Introduction instance = null;
+        public static Introduction Instance { get
+            {
+                if (instance == null)
+                    instance = new Introduction();
+                return instance;
+            } }
+
 
         private void GifStarter_Tick(object sender, EventArgs e)
         {
@@ -62,7 +71,7 @@ namespace F4E_design.SignUpWindowFiles.pages
 
         private void NameTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _window.SetNextEnabled(NameTB.Text.Length > 0 ? true:false);
+            Window.SetNextEnabled(NameTB.Text.Length > 0 ? true:false);
         }
     }
 }

@@ -40,28 +40,28 @@ namespace F4E_design
             switch (obj.Name)
             {
                 case "current_status":
-                    FrameWindow.Content = new StatusPage();
+                    FrameWindow.Content = StatusPage.Instance;
                     break;
                 case "filtering_settings":
-                    FrameWindow.Content = new FilterSettingsPage();
+                    FrameWindow.Content = FilterSettingsPage.Instance;
                     break;
                 case "categorize":
-                    FrameWindow.Content = new CategorizePage();
+                    FrameWindow.Content = CategorizePage.Instance;
                     break;
                 case "custom_list":
-                    FrameWindow.Content = new CustomListPage();
+                    FrameWindow.Content = CustomListPage.Instance;
                     break;
                 case "general_settings":
-                    FrameWindow.Content = new GeneralSettingsPage();
+                    FrameWindow.Content = GeneralSettingsPage.Instance;
                     break;
                 case "about":
-                    FrameWindow.Content = new AboutPage();
+                    FrameWindow.Content = AboutPage.Instance;
                     break;
                 //case "general_settings":
                 //    FrameWindow.Content = new GeneralSettingsPage();
                 //    break;
                 case "scheduel":
-                    FrameWindow.Content = new SchedulePage();
+                    FrameWindow.Content = SchedulePage.Instance;
                     break;
             }
         }

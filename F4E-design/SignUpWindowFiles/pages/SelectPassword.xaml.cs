@@ -23,12 +23,22 @@ namespace F4E_design.SignUpWindowFiles.pages
     public partial class SelectPassword : Page
     {
         System.Windows.Threading.DispatcherTimer gifStarter = new System.Windows.Threading.DispatcherTimer();
-        SignUpWindow _window;
 
-        public SelectPassword(SignUpWindow window)
+        private SelectPassword()
         {
             InitializeComponent();
-            _window = window;
+        }
+        //singelton
+        public SignUpWindow Window { get; set; }
+        private static SelectPassword instance = null;
+        public static SelectPassword Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new SelectPassword();
+                return instance;
+            }
         }
 
         private void GifStarter_Tick(object sender, EventArgs e)

@@ -31,10 +31,23 @@ namespace F4E_design.Pages
 
         List<UrlRow> urls = new List<UrlRow>();
 
-        public GeneralSettingsPage()
+        private GeneralSettingsPage()
         {
             InitializeComponent();
         }
+
+        //singelton
+        private static GeneralSettingsPage instance = null;
+        public static GeneralSettingsPage Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new GeneralSettingsPage();
+                return instance;
+            }
+        }
+
 
         private void SaveButtonClick(object sender, RoutedEventArgs e)
         {

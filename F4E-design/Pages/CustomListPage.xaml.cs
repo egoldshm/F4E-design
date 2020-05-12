@@ -33,10 +33,24 @@ namespace F4E_design.Pages
 
         List<UrlRow> urls = new List<UrlRow>();
 
-        public CustomListPage()
+        private CustomListPage()
         {
             InitializeComponent();
         }
+
+        //singelton
+        private static CustomListPage instance = null;
+        public static CustomListPage Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new CustomListPage();
+                return instance;
+            }
+        }
+
+
         private void showErrorMessage(string message)
         {
             ErrorMessageLabel.Content = message;

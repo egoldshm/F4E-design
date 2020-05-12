@@ -25,10 +25,24 @@ namespace F4E_design.Pages
         private const string URI_ON_IMAGE = "/images/categorizepage/on.png";
         private const string URI_OFF_IMAGE = "/images/categorizepage/off.png";
 
-        public CategorizePage()
+        private CategorizePage()
         {
             InitializeComponent();
         }
+
+        //singelton
+        private static CategorizePage instance = null;
+        public static CategorizePage Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new CategorizePage();
+                return instance;
+            }
+        }
+
+
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

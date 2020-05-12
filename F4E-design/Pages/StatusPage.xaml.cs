@@ -21,10 +21,23 @@ namespace F4E_design
     /// </summary>
     public partial class StatusPage : Page
     {
-        public StatusPage()
+        private StatusPage()
         {
             InitializeComponent();
         }
+        //singelton
+        private static StatusPage instance = null;
+        public static StatusPage Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new StatusPage();
+                return instance;
+            }
+        }
+
+
 
         private void Image_MouseMove(object sender, MouseEventArgs e)
         {

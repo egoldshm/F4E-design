@@ -23,10 +23,24 @@ namespace F4E_design.Pages
         private const string URI_ON_IMAGE = "/images/categorizepage/on.png";
         private const string URI_OFF_IMAGE = "/images/categorizepage/off.png";
 
-        public FilterSettingsPage()
+        private FilterSettingsPage()
         {
             InitializeComponent();
         }
+
+        //singelton
+        private static FilterSettingsPage instance = null;
+        public static FilterSettingsPage Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new FilterSettingsPage();
+                return instance;
+            }
+        }
+
+
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
