@@ -57,7 +57,7 @@ namespace F4E_design.SignUpWindowFiles.pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            gifStarter.Interval = new TimeSpan(0, 0, 2);
+            gifStarter.Interval = new TimeSpan(0, 0, 10);
             gifStarter.Tick += GifStarter_Tick;
             gifStarter.Start();
         }
