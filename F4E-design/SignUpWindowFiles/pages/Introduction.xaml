@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:F4E_design.SignUpWindowFiles.pages"
-      mc:Ignorable="d" d:DesignWidth="359.2" Loaded="Page_Loaded" Width="398" Height="665">
+      mc:Ignorable="d" d:DesignWidth="359.2" Loaded="Page_Loaded" Width="398" Height="665" KeepAlive="False">
     <Page.Resources>
         <Storyboard x:Key="fadeIn" RepeatBehavior="1x">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label">

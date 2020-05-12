@@ -26,11 +26,13 @@ namespace F4E_design
             passwordTB.Focus();
         }
         int attemps = 3;
+        Boolean cureectPassword = false;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (passwordTB.Password == "1234")
             {
                 CustomMessageBox.ShowDialog(this, "ברוך הבא, ניב!", "סיסמה נכונה!", CustomMessageBox.CustomMessageBoxTypes.Success,"המשך");
+                cureectPassword = true;
                 this.Close();
             }
             else
@@ -43,6 +45,12 @@ namespace F4E_design
 
             }
             passwordTB.Password = "";
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(!cureectPassword)
+                 e.Cancel = true;
         }
     }
 }

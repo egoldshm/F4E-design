@@ -1,7 +1,9 @@
-﻿using F4E_design.SignUpWindowFiles.pages;
+﻿using ControlzEx;
+using F4E_design.SignUpWindowFiles.pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace F4E_design.SignUpWindowFiles
@@ -20,6 +23,7 @@ namespace F4E_design.SignUpWindowFiles
     /// </summary>
     public partial class SignUpWindow : Window
     {
+
         public SignUpWindow()
         {
             InitializeComponent();
@@ -41,7 +45,7 @@ namespace F4E_design.SignUpWindowFiles
 
         private void setPage(int part)
         {
-            switch(part)
+            switch (part)
             {
                 case 0:
                     pagesFrame.Content = new Introduction(this);
@@ -74,6 +78,11 @@ namespace F4E_design.SignUpWindowFiles
         public void SetNextEnabled(Boolean isEnabled)
         {
             nextButton.IsEnabled = isEnabled;
+        }
+
+        private void pagesFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            pagesFrame.NavigationService.RemoveBackEntry();
         }
     }
 }
