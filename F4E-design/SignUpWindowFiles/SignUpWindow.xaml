@@ -20,16 +20,16 @@
             <ColumnDefinition Width="290*"/>
             <ColumnDefinition Width="250*"/>
         </Grid.ColumnDefinitions>
-        <Border Background="White" Grid.Column="1" Grid.Row="1">
+        <Border x:Name="border" Background="White" Grid.Column="1" Grid.Row="1">
             <Border.Effect>
                 <DropShadowEffect Direction="-86" Opacity="0.6" BlurRadius="90" ShadowDepth="30"/>
             </Border.Effect>
-            <Grid>
+            <Grid x:Name="grid1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="6*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Frame x:Name="pagesFrame" Grid.RowSpan="1" Width="398"></Frame>
+                <Frame x:Name="pagesFrame" Grid.RowSpan="1" Width="398" NavigationUIVisibility="Hidden" Navigated="pagesFrame_Navigated"></Frame>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80*"/>
