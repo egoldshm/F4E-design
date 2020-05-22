@@ -68,7 +68,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource TransparentStyle}" Tag="{Binding ID}" Click="deleteClick" BorderThickness="0" Background="#00DDDDDD">
+                        <Button Style="{StaticResource TransparentStyle}" Tag="{Binding ID}" Foreground="{Binding Color}" Click="deleteClick" BorderThickness="0" Background="#00DDDDDD">
                             <StackPanel>
                                 <Image Source="{Binding imagePath}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="20" Height="20"/>
                             </StackPanel>

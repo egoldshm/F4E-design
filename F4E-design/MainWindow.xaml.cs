@@ -25,14 +25,48 @@ namespace F4E_design
         public MainWindow()
         {
             InitializeComponent();
-        }
-      
-        //X button - close the window
-        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Application.Current.Shutdown();
+            ReplacePage(current_status, null);
+            SetWelcomeLabel();
         }
 
+        private void SetWelcomeLabel()
+        {
+            int hour = DateTime.Now.Hour;
+            string welcomeText = "";
+            if (hour >= 0 && hour <= 4)
+            {
+                welcomeText = "לילה טוב לך, ";
+            }
+            if (hour >= 5 && hour <=11)
+            {
+                welcomeText = "בוקר טוב לך, ";
+            }
+            if (hour >= 12 && hour <= 15)
+            {
+                welcomeText = "צהריים טובים לך, ";
+            }
+            if (hour >= 16 && hour <= 19)
+            {
+                welcomeText = "אחר הצהריים טובים, ";
+            }
+            if (hour >= 20 && hour <= 23)
+            {
+                welcomeText = "לילה טוב לך, ";
+            }
+            welcomeLabel.Content = welcomeText + FilteringSystem.GetAdminName();
+        }
+
+        private static MainWindow instance = null;
+        public static MainWindow Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new MainWindow();
+                return instance;
+            }
+        }
+        
         private void ReplacePage(object sender, MouseButtonEventArgs e)
         {
             Label obj = sender as Label;
@@ -43,12 +77,17 @@ namespace F4E_design
                     FrameWindow.Content = StatusPage.Instance;
                     break;
                 case "filtering_settings":
+                    FilterSettingsPage.Instance.ResetGUI();
+                    FilterSettingsPage.Instance.Window = this;
                     FrameWindow.Content = FilterSettingsPage.Instance;
                     break;
                 case "categorize":
+                    CategorizePage.Instance.ResetToggles();
+                    CategorizePage.Instance.Window = this;
                     FrameWindow.Content = CategorizePage.Instance;
                     break;
                 case "custom_list":
+                    CustomListPage.Instance.Window = this;
                     FrameWindow.Content = CustomListPage.Instance;
                     break;
                 case "general_settings":
@@ -57,10 +96,8 @@ namespace F4E_design
                 case "about":
                     FrameWindow.Content = AboutPage.Instance;
                     break;
-                //case "general_settings":
-                //    FrameWindow.Content = new GeneralSettingsPage();
-                //    break;
                 case "scheduel":
+                    SchedulePage.Instance.Window = this;
                     FrameWindow.Content = SchedulePage.Instance;
                     break;
             }
@@ -104,16 +141,23 @@ namespace F4E_design
             MessageBox.Show("המשתמש לחץ על " + resultString);
         }
     
-
-        private void lockWindow(object sender, RoutedEventArgs e)
+        public void lockWindow(object sender, RoutedEventArgs e)
         {
             EnterAdminPasswordWindow enterAdminPassword = new EnterAdminPasswordWindow(this);
             enterAdminPassword.ShowDialog();
         }
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void exit_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            
+            if (!CustomMessageBox.ShowDialog(this, "התנתקות תוביל לסגירה מוחלטת של מערכת הסינון ותוביל לכך שהמחשב יהיה לא מסונן. האם אתה בטוח שברצונך לצאת?", "שים לב!", CustomMessageBox.CustomMessageBoxTypes.Stop, "בטל", "התנתק"))
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void CloseButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
         }
     }
 }

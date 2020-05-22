@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStyle="None" WindowState="Maximized"
         Icon="/signupwindowfiles/images/logo.png" 
-        Title="לוקחים אחריות" Height="719.1" Width="1080">
+        Title="לוקחים אחריות" Height="719.1" Width="1080" Closed="Window_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
@@ -28,14 +28,14 @@
                     <RowDefinition Height="6*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Frame x:Name="pagesFrame" Grid.RowSpan="1" Width="398" NavigationUIVisibility="Hidden" Navigated="pagesFrame_Navigated"></Frame>
+                <Frame x:Name="pagesFrame" Grid.RowSpan="1" Width="398" NavigationUIVisibility="Hidden" Navigated="PagesFrame_Navigated"></Frame>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80*"/>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="80*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="previousButton" IsEnabled="False" Grid.Column="2" Height="Auto" Margin="10,15,20,15" Content="הקודם" FontFamily="AssistantBold" FontSize="18" Foreground="White" Click="previousButton_Click">
+                    <Button x:Name="previousButton" IsEnabled="False" Grid.Column="2" Height="Auto" Margin="10,15,20,15" Content="הקודם" FontFamily="AssistantBold" FontSize="18" Foreground="White" Click="PreviousButton_Click">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FF0479ED" Offset="0"/>
@@ -43,7 +43,7 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="nextButton" IsEnabled="False" Height="Auto" Margin="20,15,10,15" Content="הבא" FontFamily="AssistantBold" FontSize="18" Foreground="White" Click="nextButton_Click">
+                    <Button x:Name="nextButton" IsEnabled="False" IsDefault="True" Height="Auto" Margin="20,15,10,15" Content="הבא" FontFamily="AssistantBold" FontSize="18" Foreground="White" Click="NextButton_Click">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FF0479ED" Offset="0"/>

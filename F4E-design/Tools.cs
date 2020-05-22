@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -17,6 +19,13 @@ namespace F4E_design
             return Regex.IsMatch(source, @"(http|https)://(([www\.])?|([\da-z-\.]+))\.([a-z\.]{2,3})$") || Regex.IsMatch(source, @"(([www\.])?|([\da-z-\.]+))\.([a-z\.]{2,3})$");
         }
 
+        public static bool IsValidEmail(string email)
+        {
+            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            return regex.IsMatch(email);
+        }
+
         public static BitmapImage LoadBitmapFromResource(string pathInApplication, Assembly assembly = null)
         {
             if (assembly == null)
@@ -29,6 +38,32 @@ namespace F4E_design
                 pathInApplication = pathInApplication.Substring(1);
             }
             return new BitmapImage(new Uri(@"pack://application:,,,/" + assembly.GetName().Name + ";component/" + pathInApplication, UriKind.Absolute));
+        }
+
+        public static string FormatToShortDomainUri(string url)
+        {
+            url = url.ToLower().Replace("http://", "").Replace("https://", "");
+            if (url.ToLower().IndexOf("www.") == 0)
+                url = url.Substring(4);
+            if (url[url.Length - 1] == '/')
+                url = url.Substring(0, url.Length - 1);
+            return url;
+        }
+
+        public static BitmapImage BitmapToImageSource(Bitmap bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
+            }
         }
     }
 }

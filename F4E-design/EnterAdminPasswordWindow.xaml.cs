@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -24,14 +25,15 @@ namespace F4E_design
             InitializeComponent();
             this.Owner = OwnerWindow;
             passwordTB.Focus();
+            welcomeLabel.Text = "ברוך הבא, " + FilteringSystem.GetAdminName() + "!";
         }
         int attemps = 3;
         Boolean cureectPassword = false;
+        Boolean closeButtonWasClicked = false;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (passwordTB.Password == "1234")
+            if (FilteringSystem.LoginWithAdminPassword(passwordTB.Password))
             {
-                CustomMessageBox.ShowDialog(this, "ברוך הבא, ניב!", "סיסמה נכונה!", CustomMessageBox.CustomMessageBoxTypes.Success,"המשך");
                 cureectPassword = true;
                 this.Close();
             }
@@ -49,8 +51,23 @@ namespace F4E_design
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(!cureectPassword)
-                 e.Cancel = true;
+            if (!cureectPassword && !closeButtonWasClicked)
+            {
+                e.Cancel = true;
+            }
+            closeButtonWasClicked = false;
+        }
+
+        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            closeButtonWasClicked = true;
+            this.Close();
+            this.Owner.Close();
+        }
+
+        private void passwordTB_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            submitButton.IsEnabled = passwordTB.Password.Length > 0 ? true : false;
         }
     }
 }

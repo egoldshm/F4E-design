@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,11 +42,10 @@ namespace F4E_design.Pages
         {
             InitializeComponent();
             DefineTableOfSchedule();
+            LoadSavedTable();
             FromArrayOfBoolToButton(TableOfHours);
-            //getButtonByDateTime(DateTime.Now).Background = COLOR_OF_SELECTED_BUTTON;
-            //ScrollArea.ScrollToEnd(); //לדעתי יותר שימושי שהחלון יתחיל מלמטה - כי שעות הערב הרבה יותר שימושיות
         }
-
+        public MainWindow Window { get; set; }
         //singelton
         private static SchedulePage instance = null;
         public static SchedulePage Instance
@@ -271,9 +272,35 @@ namespace F4E_design.Pages
             }
         }
 
-        private void SaveChanges(object sender, MouseButtonEventArgs e)
+        private void LoadSavedTable()
         {
-            //ToDo: to keep the Schedule in keepable place
+            Stream stream = null;
+            try
+            {
+                stream = File.Open("SavedScheduel", FileMode.Open);
+                tableOfHours = (bool[,])new BinaryFormatter().Deserialize(stream);
+            }
+            catch
+            { }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+        }
+
+        private void SaveChanges()
+        {
+            Stream stream = null;
+            try
+            {
+                stream = File.Open("SavedScheduel", FileMode.Create);
+                new BinaryFormatter().Serialize(stream, tableOfHours);
+            }
+            finally
+            {
+                stream.Close();
+            }
         }
 
         private void FromArrayOfBoolToButton(bool[,] arr)
@@ -310,21 +337,38 @@ namespace F4E_design.Pages
         }
         private Boolean getStatusByDateTime(DateTime dateTime)
         {
-            int day = NUM_OF_DAYS - dateTime.Day;
+            //int day = NUM_OF_DAYS - (int)dateTime.DayOfWeek-1;
+            int day= (int)dateTime.DayOfWeek;
             int hour = dateTime.Hour * 2;
             if (dateTime.Minute >= 30)
                 hour++;
-            return tableOfHours[hour, day];
+            return tableOfHours[day,hour];
         }
-        private Boolean isBlockNow()
+        public Boolean isBlockNow()
         {
             return getStatusByDateTime(DateTime.Now);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             tableOfHours = new bool[NUM_OF_DAYS, NUM_OF_HOURS];
             FromArrayOfBoolToButton(tableOfHours);
+        }
+
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveChanges();
+            if (isBlockNow())
+            {
+                InternetBlocker.Block(true);
+                ServiceAdapter.StartInternetBlocking();
+            }
+            else
+            {
+                InternetBlocker.Block(false);
+                ServiceAdapter.StopInterntBlocking();
+            }
+            CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "מערכת שעות", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
         }
     }
 }

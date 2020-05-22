@@ -27,49 +27,80 @@ namespace F4E_design.SignUpWindowFiles
         public SignUpWindow()
         {
             InitializeComponent();
-            setPage(0);
+            SetPage(0);
         }
         int part = 0;
-        private void nextButton_Click(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (part < 4)
-            {
-                part++;
-                setPage(part);
-                if (part == 3)
-                    nextButton.IsEnabled = false;
-                if (part > 0)
-                    previousButton.IsEnabled = true;
-            }
+            part++;
+            SetPage(part);
         }
 
-        private void setPage(int part)
+        public void SetNextButtonText(string text)
+        {
+            nextButton.Content = text;
+        }
+
+        private void SetPage(int part)
         {
             switch (part)
             {
                 case 0:
-                    Introduction.Instance.Window = this;
-                    pagesFrame.Content = Introduction.Instance;
+                    IntroductionPage.Instance.Window = this;
+                    pagesFrame.Content = IntroductionPage.Instance;
+                    SetPreviousEnabled(false);
                     break;
                 case 1:
-                    SelectPassword.Instance.Window = this;
-                    pagesFrame.Content = SelectPassword.Instance;
+                    SetNextEnabled(false);
+                    SelectPasswordPage.Instance.Window = this;
+                    pagesFrame.Content = SelectPasswordPage.Instance;
+                    SetPreviousEnabled(true);
                     break;
                 case 2:
-                    //pagesFrame.Content = new Introduction();
+                    DotsPasswordPage.Instance.Window = this;
+                    pagesFrame.Content = DotsPasswordPage.Instance;
+                    SetNextButtonText("דלג");
+                    SetNextEnabled(true);
+                    SetPreviousEnabled(true);
                     break;
                 case 3:
-                    //pagesFrame.Content = new Introduction();
+                    SetMailPage.Instance.Window = this;
+                    pagesFrame.Content = SetMailPage.Instance;
+                    SetNextButtonText("המשך");
+                    SetNextEnabled(false);
+                    SetPreviousEnabled(true);
+                    break;
+                case 4:
+                    EndPage.Instance.Window = this;
+                    pagesFrame.Content = EndPage.Instance;
+                    SetNextButtonText("סיום");
+                    SetNextEnabled(true);
+                    SetPreviousEnabled(true);
+                    break;
+                case 5:
+                    SystemSetup();
+                    this.Close();
                     break;
             }
         }
 
-        private void previousButton_Click(object sender, RoutedEventArgs e)
+        private void SystemSetup()
+        {
+            FilteringSystem.FirstSetup();
+            FilteringSystem.SetAdminName(IntroductionPage.Instance.enteredName);
+            FilteringSystem.SetAdminPassword(SelectPasswordPage.Instance.enteredPassword);
+            FilteringSystem.SetAdminMail(SetMailPage.Instance.enteredMail);
+            FilteringSystem.SaveChanges();
+            FilteringSystem.Load();
+            FilteringSystem.SetSystemStatus(true);
+        }
+
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
         {
             if (part > 0)
             {
                 part--;
-                setPage(part);
+                SetPage(part);
                 if (part == 0)
                     previousButton.IsEnabled = false;
                 if (part < 4)
@@ -82,9 +113,18 @@ namespace F4E_design.SignUpWindowFiles
             nextButton.IsEnabled = isEnabled;
         }
 
-        private void pagesFrame_Navigated(object sender, NavigationEventArgs e)
+        public void SetPreviousEnabled(Boolean isEnabled)
+        {
+            previousButton.IsEnabled = isEnabled;
+        }
+        private void PagesFrame_Navigated(object sender, NavigationEventArgs e)
         {
             pagesFrame.NavigationService.RemoveBackEntry();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            MainWindow.Instance.Show();
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,11 +24,16 @@ namespace F4E_design.Pages
         private const string URI_ON_IMAGE = "/images/categorizepage/on.png";
         private const string URI_OFF_IMAGE = "/images/categorizepage/off.png";
 
+        private Boolean SafeServer;
+        private Boolean AdBlock;
+
         private FilterSettingsPage()
         {
             InitializeComponent();
+            ResetGUI();
         }
 
+        public MainWindow Window { get; set; }
         //singelton
         private static FilterSettingsPage instance = null;
         public static FilterSettingsPage Instance
@@ -39,24 +45,14 @@ namespace F4E_design.Pages
                 return instance;
             }
         }
-
-
-
-        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        
+        public void ResetGUI()
         {
-            Image image = sender as Image;
-            if (image.Name.EndsWith("Active"))
-            {
-                image.Source = new BitmapImage(new Uri(URI_ON_IMAGE, UriKind.Relative));
-                image.Name = image.Name.Replace("Active", "");
-            }
-            else
-            {
-                image.Source = new BitmapImage(new Uri(URI_OFF_IMAGE, UriKind.Relative));
-                image.Name = image.Name != null ? image.Name + "Active" : "Active";
-            }
+            SafeServer = FilteringSystem.GetCurrentFilteringSettings().isSafeServerOn;
+            AdBlock = FilteringSystem.GetCurrentFilteringSettings().isAdBlockOn;
+            filteringLevelComboBox.SelectedIndex =(int)FilteringSystem.GetCurrentFilteringSettings()._youtubeFilteringLevel;
+            UpdatePageGUI();
         }
-
        
         private bool handle = true;
         private void ComboBox_DropDownClosed(object sender, EventArgs e)
@@ -70,6 +66,8 @@ namespace F4E_design.Pages
             ComboBox cmb = sender as ComboBox;
             handle = !cmb.IsDropDownOpen;
             Handle(sender);
+            if(this.IsLoaded)
+                SaveChangesReminderAnimation();
         }
 
         private void Handle(object sender)
@@ -81,5 +79,41 @@ namespace F4E_design.Pages
 
 
         }
+
+        private void SafeServerToggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            SafeServer = !SafeServer;
+            SaveChangesReminderAnimation();
+            UpdatePageGUI();
+        }
+        private void AdBlockToggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            AdBlock = !AdBlock;
+            SaveChangesReminderAnimation();
+            UpdatePageGUI();
+        }
+
+        private void UpdatePageGUI()
+        {
+            safeServerToggle.Source = new BitmapImage(new Uri(SafeServer ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+            adBlockToggle.Source = new BitmapImage(new Uri(AdBlock ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+        }
+
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            FilteringSystem.GetCurrentFilteringSettings().isSafeServerOn = SafeServer;
+            FilteringSystem.GetCurrentFilteringSettings().isAdBlockOn = AdBlock;
+            FilteringSystem.GetCurrentFilteringSettings()._youtubeFilteringLevel =(FilteringSettings.YoutubeFilteringLevels) filteringLevelComboBox.SelectedIndex;
+            FilteringSystem.SaveChanges();
+            CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "הגדרות סינון", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+        }
+
+        private void SaveChangesReminderAnimation()
+        {
+            Storyboard sb = this.FindResource("SaveChangesReminder") as Storyboard;
+            sb.RepeatBehavior = new RepeatBehavior(1);
+            sb.Begin();
+        }
+       
     }
 }

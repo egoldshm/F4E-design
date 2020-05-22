@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:F4E_design"
         mc:Ignorable="d" WindowStyle="None"
         Height="541.6" Width="864.93" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
-        Icon="images/MainForm/logo.png"
+        Icon="logo.png"
         Title="לוקחים אחריות"
-        WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow" SizeChanged="Window_SizeChanged">
+        WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow">
    
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
@@ -34,15 +34,15 @@
                 <ColumnDefinition Width="46*"/>
                 <ColumnDefinition Width="563*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle HorizontalAlignment="Left" Height="50" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="43" MouseLeftButtonUp="Image_MouseLeftButtonUp" Fill="White" Margin="0,0,0,-0.4"/>
-            <Label FontFamily="Assistant-Bold" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,9,9.8,8.6" FlowDirection="RightToLeft" VerticalAlignment="Center" Content="שלום לך, ניב!" Grid.Column="1"/>
-            <Image HorizontalAlignment="Left" MouseLeftButtonUp="Image_MouseLeftButtonUp" Source="images/MainForm/close_button.png" Width="21" Margin="12,8,0,11.6" RenderTransformOrigin="0.943,0.509" VerticalAlignment="Center" Height="30">
+            <Rectangle x:Name="CloseButtonBorder" HorizontalAlignment="Left" Height="50" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="43" MouseLeftButtonUp="CloseButton_MouseLeftButtonUp" Fill="White" Margin="0,0,0,-0.4"/>
+            <Label x:Name="welcomeLabel" FontFamily="Assistant-Bold" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,9,9.8,8.6" FlowDirection="RightToLeft" VerticalAlignment="Center" Content="שלום לך, ניב!" Grid.Column="1"/>
+            <Image x:Name="CloseButtonImage" HorizontalAlignment="Left" MouseLeftButtonUp="CloseButton_MouseLeftButtonUp" Source="images/MainForm/close_button.png" Width="21" Margin="12,8,0,11.6" RenderTransformOrigin="0.943,0.509" VerticalAlignment="Center" Height="30">
 
             </Image>
         </Grid>
 
         <!--Frame to page the replace-->
-        <Frame x:Name="FrameWindow"  Grid.Row="1" Source="/F4E-design;component/pages/StatusPage.xaml" NavigationUIVisibility="Hidden" />
+        <Frame x:Name="FrameWindow"  Grid.Row="1" NavigationUIVisibility="Hidden" />
 
         <!-- תפריט צד-->
         <Grid Grid.RowSpan="2" Grid.Column="1">
@@ -146,7 +146,7 @@
                         </TransformGroup>
                     </Label.RenderTransform>
                 </Label>
-                <Label x:Name="exit" Content="התנתקות" Style="{StaticResource MenuLabel}" Grid.Row="2" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="35.707" VerticalContentAlignment="Center" Grid.ColumnSpan="2">
+                <Label x:Name="exit" Content="התנתקות" Style="{StaticResource MenuLabel}" Grid.Row="2" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="35.707" VerticalContentAlignment="Center" Grid.ColumnSpan="2" MouseLeftButtonUp="exit_MouseLeftButtonUp">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

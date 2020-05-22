@@ -54,12 +54,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="scheduelToggle" Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/scheduel_on.png" d:IsEffectDisabled="True" MouseLeftButtonUp="sceduelToggle_MouseLeftButtonUp">
+            <Image x:Name="scheduelToggle" Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/scheduel_on.png" d:IsEffectDisabled="True" MouseLeftButtonUp="sceduelToggle_MouseLeftButtonUp" OpacityMask="{x:Null}">
                 <Image.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="10" Color="#FFA5A5A5" Opacity="0"/>
                 </Image.Effect>
             </Image>
-            <Image Grid.Column="1" Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/safeserver_on.png">
+            <Image x:Name="safeServerToggle" Grid.Column="1" Margin="5,0" VerticalAlignment="Top" Source="/images/StatusPage/safeserver_on.png" MouseLeftButtonUp="safeServerToggle_MouseLeftButtonUp">
                 <Image.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="10" Color="#FFA5A5A5" Opacity="0"/>
                 </Image.Effect>
@@ -110,8 +110,8 @@
 
             <Label Content="מניעת סגירה" Grid.Row="1" FontFamily="Assistant" FontSize="18" HorizontalAlignment="Right" Margin="0,0,0,2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="SemiBold"/>
             <Label Content="במידה והגלישה חסומה שלא לצורך, ואינה מתחדשת באופן אוטומטי, לחץ כאן" Grid.Row="2" FontFamily="Assistant SemiBold" FontSize="16" HorizontalAlignment="Right" Margin="0,5,0,7"/>
-            <Label Content="פעיל" FontFamily="Assistant" FontSize="18" HorizontalAlignment="Right" Margin="0,2,407.2,3" VerticalContentAlignment="Center" FontWeight="Bold" Foreground="#FF11A74A"/>
-            <Label Content="פעיל" Grid.Row="1" FontFamily="Assistant" FontSize="18" HorizontalAlignment="Right" Margin="0,1.5,407.2,3.5" VerticalContentAlignment="Center" FontWeight="Bold" Foreground="#FF11A74A" RenderTransformOrigin="1.108,0.487"/>
+            <Label x:Name="hostCatchStatusLabel" Content="פעיל" FontFamily="Assistant" FontSize="18" HorizontalAlignment="Right" Margin="0,2,378.645,3.4" VerticalContentAlignment="Center" FontWeight="Bold" Foreground="#FF11A74A" Width="96" HorizontalContentAlignment="Center"/>
+            <Label x:Name="preventClosingStatusLabel"  Content="פעיל" Grid.Row="1" FontFamily="Assistant" FontSize="18" HorizontalAlignment="Right" Margin="0,1.6,378.645,4" VerticalContentAlignment="Center" FontWeight="Bold" Foreground="#FF11A74A" RenderTransformOrigin="1.108,0.487" Width="96" HorizontalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Page>

@@ -1,7 +1,6 @@
-﻿<Page x:Class="F4E_design.SignUpWindowFiles.pages.Introduction"
+﻿<Page x:Class="F4E_design.SignUpWindowFiles.pages.IntroductionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -35,6 +34,10 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="imageViewer">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
     <!--<Page.Triggers>
@@ -44,11 +47,12 @@
     </Page.Triggers>-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="83*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="85*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="gifViewer" IsVisibleChanged="gifViewer_IsVisibleChanged" Margin="0,40,0,0"></Image>
-        <Label x:Name="label" Grid.Row="1" Content="ברוכים הבאים!" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant ExtraBold" FontSize="40" Margin="0,0,0.2,295" Opacity="0">
+        <Image x:Name="imageViewer" Source="images/[1].png" Margin="0" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" Opacity="0"/>
+        <Label x:Name="label" Grid.Row="2" Content="ברוכים הבאים!" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" FontFamily="Assistant" FontWeight="Black" FontSize="40" Margin="0,0.4,0.4,294.8" Opacity="0">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF0479ED" Offset="0"/>
@@ -56,15 +60,17 @@
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>
-        <Label x:Name="label1" Grid.Row="1" Content="שמחים שהצטרפתם למשפחה שלנו" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" FontFamily="Assistant Bold" FontSize="26" Margin="0,53,0.2,262" Opacity="0">
-            <Label.Foreground>
+        <Viewbox Grid.Row="2" Margin="35,36,30.4,322.8">
+            <TextBlock x:Name="label1" Text="שמחים שהצטרפתם למשפחה שלנו" FlowDirection="RightToLeft" TextWrapping="Wrap" FontFamily="Assistant" FontWeight="Bold"  Opacity="0">
+                <TextBlock.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF0479ED" Offset="0"/>
                     <GradientStop Color="#FF0178E7" Offset="1"/>
                 </LinearGradientBrush>
-            </Label.Foreground>
-        </Label>
-        <Label x:Name="label2"  HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19" Margin="11.678,100,13,180" Width="373.322" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5">
+            </TextBlock.Foreground>
+        </TextBlock>
+        </Viewbox>
+        <Label x:Name="label2"  HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="2" HorizontalContentAlignment="Center" FontFamily="Assistant" FontSize="19" Margin="11.8,100.4,13.2,179.8" Width="373" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -80,7 +86,7 @@
         <!--<TextBox Grid.Row="1"  FlowDirection="RightToLeft" HorizontalContentAlignment="Center" FontFamily="Assistant Bold" FontSize="26" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" TextWrapping="Wrap" AcceptsReturn="True" materialDesign:HintAssist.Hint="address" materialDesign:HintAssist.IsFloating="True" Background="White" Margin="20,200,20,185" BorderBrush="#F6000000" BorderThickness="1">
          
         </TextBox>-->
-        <TextBox TextAlignment="Center" AcceptsReturn="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}" x:Name="NameTB" FlowDirection="RightToLeft" Grid.Row="1" materialDesign:HintAssist.FloatingScale="0.7"  materialDesign:TextFieldAssist.TextBoxViewMargin="0 20 0 0"  materialDesign:HintAssist.IsFloating="True" HorizontalAlignment="Center" Width="356" FontSize="26" Background="White" Padding="6,0,0,2" Margin="25,140,17,180" BorderThickness="0" FontWeight="Black" RenderTransformOrigin="0.5,0.5" Opacity="0" TextChanged="NameTB_TextChanged">
+        <TextBox TextAlignment="Center" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" x:Name="NameTB" FlowDirection="RightToLeft" Grid.Row="2" materialDesign:HintAssist.FloatingScale="0.7"  materialDesign:TextFieldAssist.TextBoxViewMargin="0 20 0 0"  materialDesign:HintAssist.IsFloating="True" HorizontalAlignment="Center" Width="356" FontSize="26" Background="White" Padding="6,0,0,2" Margin="19,145.4,23,185" BorderThickness="0" FontWeight="Black" RenderTransformOrigin="0.5,0.5" Opacity="0" TextChanged="NameTB_TextChanged">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

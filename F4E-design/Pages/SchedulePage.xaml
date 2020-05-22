@@ -99,7 +99,7 @@
                         <GradientStop Color="#FF1D60AE" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White"/>
+                <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Click="SaveChangesButton_Click"/>
             </Border>
             <Border BorderBrush="Black" BorderThickness="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="37.8" Grid.Row="4" VerticalAlignment="Top" Width="215.4" CornerRadius="4" Margin="14.2,70,0.4,0">
                 <Border.Background>
@@ -108,7 +108,7 @@
                         <GradientStop Color="#FF1D60AE" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="נקה טבלה" FontFamily="Assistant Bold" Foreground="White" Click="Button_Click"/>
+                <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="נקה טבלה" FontFamily="Assistant Bold" Foreground="White" Click="ClearButton_Click"/>
             </Border>
         </Grid>
     </Grid>

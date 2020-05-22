@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,23 +23,43 @@ namespace F4E_design.Pages
     /// </summary>
     public partial class CustomListPage : Page
     {
-
+        private readonly SolidColorBrush BLACKLIST_COLOR = new SolidColorBrush(Colors.Red);
+        private readonly SolidColorBrush EXCEPTIONLIST_COLOR = new SolidColorBrush(Colors.Green);
 
         public class UrlRow
         {
-            public string url { get; set; }
-            public string imagePath { get; set; }
+            public string Url { get; set; }
+            public string ImagePath { get; set; }
+            public SolidColorBrush Color { get; set; }
         }
 
 
 
-        List<UrlRow> urls = new List<UrlRow>();
+        List<UrlRow> Urls = new List<UrlRow>();
 
         private CustomListPage()
         {
             InitializeComponent();
+            SetupBlacklist();
+            SetupExceptionsList();
         }
 
+        private void SetupBlacklist()
+        {
+            foreach(string url in FilteringSystem.GetCurrentFilteringSettings().GetCustomBlackList())
+            {
+                AddItemToListBox(url, false);
+            }
+        }
+        private void SetupExceptionsList()
+        {
+            foreach (string url in FilteringSystem.GetCurrentFilteringSettings().GetCustomExceptionsList())
+            {
+                AddItemToListBox(url, true);
+            }
+        }
+
+        public MainWindow Window { get; set; }
         //singelton
         private static CustomListPage instance = null;
         public static CustomListPage Instance
@@ -51,66 +73,66 @@ namespace F4E_design.Pages
         }
 
 
-        private void showErrorMessage(string message)
+        private void ShowErrorMessage(string message)
         {
-            ErrorMessageLabel.Content = message;
-        }
-        private void SaveButtonClick(object sender, RoutedEventArgs e)
-        {
-            string newUrl = url_text_box.Text;
-            if (urls.Exists((url) => url.url == newUrl))
-            {
-                showErrorMessage("כתובת אתר זו כבר קיימת ברשימה");
-                return;
-            }
-
-            if (newUrl != "")
-            {
-                AddNewUrl(newUrl);
-            }
-            else
-            {
-                showErrorMessage("אנא קודם הכנס כתובת של אתר");
-           }
+            CustomMessageBox.ShowDialog(Window, message, "הוספת האתר נכשלה", CustomMessageBox.CustomMessageBoxTypes.Error,"הבנתי");
         }
 
-        private void AddNewUrl(string newUrl)
+        private void AddItemToListBox(string AddedUrl,Boolean isException)
         {
-            if (newUrl.CheckURLValid())
+            Urls.Add(new UrlRow()
             {
-                urls.Add(new UrlRow()
-                {
-                    url = newUrl,
-                    imagePath = "../images/CustomListPage/delete.png"
-                });
+                Url = AddedUrl,
+                Color = isException ? EXCEPTIONLIST_COLOR : BLACKLIST_COLOR,
+                ImagePath = "../images/CustomListPage/delete.png"
+            });
 
-                myListView.Items.Add(urls[urls.Count - 1]);
-            }
-            else
-            {
-                showErrorMessage("הכתובת אינה כתובת אינטרנט תקינה");
-            }
+            myListView.Items.Add(Urls[Urls.Count - 1]);
         }
 
-        private void deleteClick(object sender, RoutedEventArgs e)
+        private void DeleteClick(object sender, RoutedEventArgs e)
         {
             string content = (sender as Button).Tag.ToString();
-            MessageBoxResult result = MessageBox.Show("האם אתה בתוך שברצונך למחוק את האתר "+ content + " מהרשימה?", "Worning", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            UrlRow urlRow = urls.FindAll(url => url.url == content).FirstOrDefault();
-            switch (result)
+            UrlRow urlRow = Urls.FindAll(url => url.Url == content).FirstOrDefault();
+            if (CustomMessageBox.ShowDialog(Window, "האם אתה בתוך שברצונך למחוק את האתר " + content + " מהרשימה?", "האם אתה בטוח?", CustomMessageBox.CustomMessageBoxTypes.Question, "מחק", "בטל"))
             {
-                case MessageBoxResult.Yes:
-                    myListView.Items.Remove(urlRow);
-                    urls.RemoveAll(item => item.url == content);
-                    break;
-                case MessageBoxResult.No:
-                    break;
+                myListView.Items.Remove(urlRow);
+                Urls.RemoveAll(item => item.Url == content);
+                if(urlRow.Color==BLACKLIST_COLOR)
+                {
+                    FilteringSystem.RemoveSiteFromBlackList(content);
+                }
+                else
+                {
+                    FilteringSystem.RemoveSiteFromExceptionList(content);
+                }
             }
         }
 
-        private void Url_text_box_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void AddToBlacklistButton_Click(object sender, RoutedEventArgs e)
         {
-            showErrorMessage("");
+            string url = Tools.FormatToShortDomainUri(url_text_box.Text);
+            url_text_box.Text = "";
+            string result = FilteringSystem.AddSiteToBlackList(url);
+            if (result == "")
+            {
+                AddItemToListBox(url, false);
+            }
+            else
+                ShowErrorMessage(result);
+        }
+
+        private void AddToExceptionListButton_Click(object sender, RoutedEventArgs e)
+        {
+            string url = url_text_box.Text;
+            url_text_box.Text = "";
+            string result = FilteringSystem.AddSiteToExceptionList(url);
+            if (result == "")
+            {
+                AddItemToListBox(url, true);
+            }
+            else
+                ShowErrorMessage(result);
         }
     }
 

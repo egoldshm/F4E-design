@@ -72,14 +72,16 @@
                     </Grid>
 
                 </Border>
-                <Label x:Name="titleLabel" Grid.Row="1" Content="כותרת" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="35" FontWeight="Black" Margin="0,0,0,121.897" FlowDirection="RightToLeft">
-                    <Label.Foreground>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFE06A5B" Offset="0"/>
-                            <GradientStop Color="#FFFD3E58" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Label.Foreground>
-                </Label>
+                <Viewbox Margin="0,2.178,3.655,119.909" Grid.Row="1">
+                    <TextBlock x:Name="titleLabel" Text="כותרת" Grid.Row="1"   FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="35" FontWeight="Black" FlowDirection="RightToLeft" Margin="10,0">
+                        <TextBlock.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFE06A5B" Offset="0"/>
+                                <GradientStop Color="#FFFD3E58" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </Viewbox>
                 <Rectangle x:Name="strip" HorizontalAlignment="Center" Height="2.344" Grid.Row="1" VerticalAlignment="Top" Width="92.4" Margin="100.2,50,105,0" StrokeThickness="0">
                     <Rectangle.Fill>
                         <LinearGradientBrush EndPoint="-0.006,0.473" StartPoint="0.924,0.549">
@@ -95,7 +97,7 @@
                     </Rectangle.Stroke>
                 </Rectangle>
                 <Label Width="265" HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" Margin="3.726,57.344,3.655,0" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19">
-                    <AccessText x:Name="textLabel" TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Margin="5,0" Text="כאן שמים את המלל הרלוונטי להודעה שרוצים שתקפוץ ויש מקום סך הכל לבערך שלוש שורות."/>
+                    <AccessText x:Name="textLabel"  TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Margin="5,0" Text="כאן שמים את המלל הרלוונטי להודעה שרוצים שתקפוץ ויש מקום סך הכל לבערך שלוש שורות."/>
                 </Label>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>

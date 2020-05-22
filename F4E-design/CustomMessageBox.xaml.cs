@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,7 +26,12 @@ namespace F4E_design
             InitializeComponent();
             this.Title = title;
             this.Owner = windowSender;
-            titleLabel.Content= title;
+            if (windowSender == null)
+            {
+                this.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+            titleLabel.Text= title;
             textLabel.Text = text;
             LinearGradientBrush typeColor=null;
             string iconUri = "";
