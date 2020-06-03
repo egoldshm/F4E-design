@@ -16,7 +16,7 @@ namespace F4E_design
 
         public static void SetupNotificationIcon()
         {
-            _notifyIcon.Icon = new System.Drawing.Icon(@"../../images/applogo.ico");
+            _notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
             _notifyIcon.Visible = true;
             _notifyIcon.Click += NotifyIcon_Click;
             _notifyIcon.BalloonTipClicked += NotifyIcon_Click;

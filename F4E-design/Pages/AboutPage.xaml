@@ -29,18 +29,10 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="63*"/>
-            <RowDefinition Height="275*"/>
+            <RowDefinition Height="395*"/>
             <RowDefinition Height="63*"/>
-            <RowDefinition Height="120*"/>
         </Grid.RowDefinitions>
         <Image Source="../images/AboutPage/info.png" Grid.Column="1" Grid.Row="0" Margin="7"/>
         <Label Content="אודות" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34" Width="62.057" Grid.Column="0" Grid.Row="0"/>
-        <Image Source="../images/AboutPage/contact.png" Grid.Column="1" Grid.Row="2" Margin="7"/>
-        <Label Content="צור קשר" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" FontWeight="Bold" Height="34"  Width="92.057" Grid.Column="0" Grid.Row="2" Margin="0,10.206,0,10.207"/>
-        <Rectangle Height="2" Grid.Row="2" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-        <Rectangle Height="2" Grid.Row="0" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-        <Image Source="../images/StatusPage/Shield-Blue.png" Grid.Column="0" Grid.Row="1" Margin="492.588,22.621,7,175.379"/>
-        <Label Content="liav@mmb.org.il" FontFamily="Assistant-Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Height="34" Margin="0,30.652,5,38.995" Width="265.257" Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right"/>
-        <Label Content="mmb.org.il" FontFamily="Assistant-Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Height="34" Margin="0,10,5,59.647" Width="265.257" Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right"/>
     </Grid>
 </Page>

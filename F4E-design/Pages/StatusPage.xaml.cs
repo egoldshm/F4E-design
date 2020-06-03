@@ -126,11 +126,11 @@ namespace F4E_design
         }
         private void UpdateSafeServerStatus()
         {
-            if ((DnsController.isSafe(false) == false) && (FilteringSystem.GetCurrentFilteringSettings().isSafeServerOn) && (FilteringSystem.GetSystemStatus() == true))
+            if ((DnsController.IsSafe(false) == false) && (FilteringSystem.GetCurrentFilteringSettings().isSafeServerOn) && (FilteringSystem.GetSystemStatus() == true))
             {
-                DnsController.setMode(true);
+                DnsController.SetMode(true);
             }
-            UpdateGUIStatus("/images/statusPage/safeserver_on.png", "/images/statusPage/safeserver_off.png", DnsController.isSafe(false), safeServerToggle);
+            UpdateGUIStatus("/images/statusPage/safeserver_on.png", "/images/statusPage/safeserver_off.png", DnsController.IsSafe(false), safeServerToggle);
         }
         private void UpdateScheduelingSystemStatus()
         {
@@ -153,7 +153,7 @@ namespace F4E_design
 
         private void safeServerToggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            UpdateGUIStatus("/images/statusPage/safeserver_on.png", "/images/statusPage/safeserver_off.png", DnsController.isSafe(true), safeServerToggle);
+            UpdateGUIStatus("/images/statusPage/safeserver_on.png", "/images/statusPage/safeserver_off.png", DnsController.IsSafe(true), safeServerToggle);
         }
     }
 }

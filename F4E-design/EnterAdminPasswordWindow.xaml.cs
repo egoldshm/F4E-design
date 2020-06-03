@@ -20,20 +20,40 @@ namespace F4E_design
     /// </summary>
     public partial class EnterAdminPasswordWindow : Window
     {
-        public EnterAdminPasswordWindow(Window OwnerWindow)
+        public enum askingMode
+        {
+            login,uninstall
+        }
+
+        public EnterAdminPasswordWindow(Window OwnerWindow, askingMode mode)
         {
             InitializeComponent();
             this.Owner = OwnerWindow;
             passwordTB.Focus();
-            welcomeLabel.Text = "ברוך הבא, " + FilteringSystem.GetAdminName() + "!";
+            SetGUIbyMode(mode);
         }
+
+        private void SetGUIbyMode(askingMode mode)
+        {
+            switch(mode)
+            {
+                case askingMode.login:
+                    welcomeLabel.Text = "ברוך הבא, " + FilteringSystem.GetAdminName() + "!";
+                    break;
+                case askingMode.uninstall:
+                    welcomeLabel.Text = "תהליך הסרת התקנה";
+                    break;
+            }
+        }
+
         int attemps = 3;
-        Boolean cureectPassword = false;
+        public Boolean cureectPassword = false;
         Boolean closeButtonWasClicked = false;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (FilteringSystem.LoginWithAdminPassword(passwordTB.Password))
             {
+                this.DialogResult = true;
                 cureectPassword = true;
                 this.Close();
             }

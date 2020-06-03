@@ -31,7 +31,7 @@ namespace F4E_design
             set 
             { 
                 _isSafeServerOn = value;
-                DnsController.setMode(_isSafeServerOn);
+                DnsController.SetMode(_isSafeServerOn);
             }
         }
         public Boolean isGamblingBlocked;
@@ -91,6 +91,11 @@ namespace F4E_design
         internal string GetAdminName()
         {
             return _adminName;
+        }
+
+        internal string GetAdminMail()
+        {
+            return _adminMail;
         }
 
         internal void SetAdminMail(string mail)

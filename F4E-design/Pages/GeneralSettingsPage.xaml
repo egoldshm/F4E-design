@@ -7,103 +7,83 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="598" 
       Title="GeneralSettingsPage"  Background="#FFF6F6F6" WindowHeight="-29">
-
     <Page.Resources>
         <Style x:Key="ShadowRectStyle" TargetType="Rectangle">
             <Setter Property="Fill">
                 <Setter.Value>
-                    <LinearGradientBrush StartPoint="0.913,0.53" EndPoint="0.067,0.526">
+                    <LinearGradientBrush EndPoint="0.913,0.53" StartPoint="0.067,0.526">
                         <GradientStop Color="#FFACDAEE" Offset="0.314"/>
                         <GradientStop Color="#00ACACAE"/>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Page.Resources>
-
     <Grid Margin="0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="286*"/>
-            <ColumnDefinition Width="269*"/>
-            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="509*"/>
+            <ColumnDefinition Width="42*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="66*"/>
-            <RowDefinition Height="335*"/>
-            <RowDefinition Height="49*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="144*"/>
+            <RowDefinition Height="55*"/>
         </Grid.RowDefinitions>
-        <Image Source="/F4E-design;component/images/CustomListPage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7"/>
-        <Label Content="רשימה לבנה" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,13,42,19"/>
-        <Label Content="כאן תוכל לחסום או לפתוח אתרים ספציפיים לבחירתך" FontFamily="Assistant-Bold" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="24"  Width="546" Grid.Column="0" HorizontalContentAlignment="Right" Grid.ColumnSpan="3" Margin="0,41,42,1" Padding="5,5,8,5"/>
+        <Image Source="/images/CategorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7,7,7.4,8"/>
+        <Label Content="הגדרות כלליות" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Width="144" Grid.Column="1" Grid.Row="0" Margin="0,11,0,7"/>
+        <Grid Grid.Row="1" Margin="0.8,1,0,7" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="259*"/>
+                <ColumnDefinition Width="180*"/>
+                <ColumnDefinition Width="51*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="79*"/>
+                <RowDefinition Height="123*"/>
+                <RowDefinition Height="78*"/>
+            </Grid.RowDefinitions>
+            <Image Source="/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="0" Margin="7"/>
+            <Image Source="/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="1" Margin="7"/>
+            <Image Source="/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="2" Margin="7"/>
+            <Label Grid.Row="0" Grid.Column="1" Content=":שם מנהל המערכת" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" FontSize="16" Height="29" Margin="0,17,1.2,33.2" Width="127"></Label>
+            <Label Grid.Row="0" Grid.Column="1" Content="הכנס את שמך הפרטי" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,37,1.2,18.2" Height="24" Width="101"/>
+            <Label Grid.Row="1" Grid.Column="1" Content=":סיסמת ניהול" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" FontSize="16" Height="32" Margin="0,37.8,1.2,53.4" Width="91"></Label>
+            <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,56.8,1.2,11.4" Height="55" Width="161" Grid.Column="1">
+                <AccessText TextWrapping="Wrap" Height="45" FlowDirection="RightToLeft" Width="152">סיסמה זו תשמש להתחברות לממשק הניהול.</AccessText>
+            </Label>
+            <Label Grid.Row="2" Grid.Column="1" Content=":דוא''ל לשליחת התראות" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" FontSize="16" Height="29" Margin="0,8.6,0.2,40" Width="162"></Label>
+            <Label Grid.Row="2" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,32.6,1.2,10" Height="35" Width="180" Padding="0">
+                <AccessText TextWrapping="Wrap" Height="31" FlowDirection="RightToLeft" Width="176" FontSize="10">למייל זה ישלחו התראות על פעילות חריגה ודרכו יהיה ניתן לאפס את הסיסמה במקרה של שכחה</AccessText>
+            </Label>
+            <Border BorderThickness="2" Height="32" BorderBrush="Black">
+                <TextBox x:Name="nameTB" Background="White" Text="dsf" TextAlignment="Center" TextOptions.TextHintingMode="Animated" AutomationProperties.HelpText="jhjhjhj" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="SemiBold" Foreground="Black" FontSize="20" Padding="0,-2,0,0" />
+            </Border>
+            <Border Grid.Row="1" BorderThickness="2" Height="32" BorderBrush="Black" Margin="0,21.8,0,69.4">
+                <PasswordBox x:Name="passwordTB" Background="White" Height="32" Password="123213" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Foreground="Black" FontSize="20" Padding="0,-1,0,0" BorderBrush="Black" PasswordChanged="PasswordChange"/>
+            </Border>
+            <Border Grid.Row="1" BorderThickness="2" Height="32" BorderBrush="Black" Margin="0,61.8,0,29.4">
+                <PasswordBox x:Name="confirmPasswordTB" Background="White" Height="32" Password="123213" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Foreground="Black" FontSize="20" Padding="0,-1,0,0" BorderBrush="Black" PasswordChanged="PasswordChange"/>
 
+            </Border>
+            <Border Grid.Row="2" BorderThickness="2" Height="32" BorderBrush="Black">
+                <TextBox x:Name="mailTB" Background="White" Text="dsf" TextAlignment="Center" TextOptions.TextHintingMode="Animated" AutomationProperties.HelpText="jhjhjhj" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="SemiBold" Foreground="Black" FontSize="20" Padding="0,-2,0,0" TextChanged="MailTextChanged" />
 
-        <Label Content="הוספת אתר לרשימה" FontFamily="Assistant" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Column="1" Grid.Row="1" Margin="0,30,42,0" Grid.ColumnSpan="2" Height="33.543" Width="152.327"/>
+            </Border>
+            <Rectangle Height="2" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,0"/>
+            <Rectangle Height="2" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,1.2"/>
+            <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,4.4"/>
+            <Rectangle Height="2" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,0"/>
 
-
-        <Label FlowDirection="RightToLeft" FontSize="14" Content="קולהע צופעט  איף, ברומץ  מיחוצים.&#x0a;קלאצי סחטיר בלובק. למרקל אס לכימפו,&#x0a;דול, צוט ומעיוט -  ולתיעם גדדיש. קוויז&#x0a;דומור ליאמום בלינך רוגצה. לפמעט" FontFamily="Assistant-Bold" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Right" Margin="0,61.25,0,0" Padding="5,5,8,5" Height="77.2" Width="253.69"/>
-        <TextBox Name="url_text_box" TextAlignment="Center" BorderBrush="#FF0C6CAC" FontSize="15" VerticalContentAlignment="Center" Grid.Column="1" Margin="10,0,10,131" Grid.Row="1" TextWrapping="Wrap" Text="www.google.com" Height="27.5" VerticalAlignment="Bottom"/>
-        <Button Grid.Row="1"  Click="SaveButtonClick" Grid.Column="1" BorderThickness="0" Content="אישור" FontFamily="Assistant Bold" Foreground="White" Margin="10,0,10,92.148" Height="30.094" VerticalAlignment="Bottom">
-            <Button.Background>
-                <RadialGradientBrush>
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF1C60AE" Offset="1"/>
-                    <GradientStop Color="#FF0076AB"/>
-                </RadialGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <ListView x:Name="myListView" Grid.Row="1" Margin="38,30,27,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="295" BorderBrush="#00ABADB3" Background="#FFF6F6F6">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource TransparentStyle}" Tag="{Binding ID}" Foreground="{Binding Color}" Click="deleteClick" BorderThickness="0" Background="#00DDDDDD">
-                            <StackPanel>
-                                <Image Source="{Binding imagePath}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="20" Height="20"/>
-                            </StackPanel>
-
-                        </Button>
-                        <TextBlock Text="{Binding name}" FontSize="18"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemContainerStyle>
-
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Focusable" Value="false"/>
-                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                <Border Background="{TemplateBinding Background}" BorderThickness="0">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
-        <Rectangle Grid.Row="1" Stroke="#00000000" Margin="38,269,27,0">
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop/>
-                    <GradientStop Color="#FFF6F6F6" Offset="1"/>
-                    <GradientStop Color="#F3F3F3F3" Offset="0.341"/>
+        </Grid>
+        <Border x:Name="border" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" Height="54" Grid.Row="2" VerticalAlignment="Top" Width="411" CornerRadius="4" Margin="51.8,17,46,0"  Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0076AB" Offset="0"/>
+                    <GradientStop Color="#FF1D60AE" Offset="1"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-
+            </Border.Background>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Height="Auto" Margin="0,0,0.2,0.2" Click="SaveChangesButton_Click"/>
+        </Border>
     </Grid>
 </Page>

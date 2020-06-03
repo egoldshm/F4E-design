@@ -72,7 +72,7 @@
                     </Grid>
 
                 </Border>
-                <Viewbox Margin="0,2.178,3.655,119.909" Grid.Row="1">
+                <Viewbox Margin="10,2.178,13.655,119.909" Grid.Row="1">
                     <TextBlock x:Name="titleLabel" Text="כותרת" Grid.Row="1"   FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="35" FontWeight="Black" FlowDirection="RightToLeft" Margin="10,0">
                         <TextBlock.Foreground>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -96,9 +96,11 @@
                         </LinearGradientBrush>
                     </Rectangle.Stroke>
                 </Rectangle>
-                <Label Width="265" HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" Margin="3.726,57.344,3.655,0" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19">
+                <Viewbox Grid.Row="1" Margin="0,57.2,-0.2,0">
+                <Label Width="265" HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19">
                     <AccessText x:Name="textLabel"  TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Margin="5,0" Text="כאן שמים את המלל הרלוונטי להודעה שרוצים שתקפוץ ויש מקום סך הכל לבערך שלוש שורות."/>
                 </Label>
+                </Viewbox>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition x:Name="yesButtonColumn" Width="10*"/>

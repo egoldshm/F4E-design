@@ -58,7 +58,7 @@
             <RowDefinition Height="267*"/>
             <RowDefinition Height="116*"/>
         </Grid.RowDefinitions>
-        <Image Source="/F4E-design;component/images/CategorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7.4,7,7,7.4"/>
+        <Image Source="/images/CategorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7.4,7,7,7.4"/>
         <Label Content="הגדרות סינון" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Width="126.004" Grid.Column="1" Grid.Row="0"/>
         <Grid Grid.ColumnSpan="2" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -71,18 +71,18 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Image Source="/F4E-design;component/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="0" Margin="6.8,8,8.4,8.4"/>
-            <Image Source="/F4E-design;component/images/CategorizePage/gamblingIcon.png" Grid.Column="2" Grid.Row="1" Margin="6.8,7.6,8.4,7.8"/>
-            <Image Source="/F4E-design;component/images/CategorizePage/newsIcon.png" Grid.Column="2" Grid.Row="2" Margin="6.8,8.2,8.4,8.2"/>
+            <Image Source="/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="0" Margin="6.8,8,8.4,8.4"/>
+            <Image Source="/images/CategorizePage/gamblingIcon.png" Grid.Column="2" Grid.Row="1" Margin="6.8,7.6,8.4,7.8"/>
+            <Image Source="/images/CategorizePage/newsIcon.png" Grid.Column="2" Grid.Row="2" Margin="6.8,8.2,8.4,8.2"/>
             <Label Content="שימוש בשרת מסונן" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="0" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1"/>
-            <Label Content="סינון Youtube קפדני" FontFamily="/F4E-design;component/Fonts/#Assistant"  FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Row="1" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1" FlowDirection="RightToLeft"/>
-            <Image x:Name="safeServerToggle" Source="/F4E-design;component/images/CategorizePage/on.png" Grid.Column="0" Grid.Row="0" Margin="30" MouseLeftButtonUp="SafeServerToggle_MouseLeftButtonUp"/>
-            <ComboBox x:Name="filteringLevelComboBox" Grid.Column="0" FontSize="18" FontWeight="Bold" Height="38" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="ComboBox_DropDownClosed" Grid.Row="1" FontFamily="/F4E-design;component/Fonts/#Assistant" FlowDirection="RightToLeft" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="38,25.4,26,25.4" BorderThickness="0" BorderBrush="White" Padding="20,3,0,3" Foreground="White" Background="White">
+            <Label Content="רמת סינון YouTube" FontFamily="/F4E-design;component/Fonts/#Assistant"  FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Row="1" Height="46" Margin="0,14.4,0,28.4" Width="185" VerticalContentAlignment="Center" Grid.Column="1" FlowDirection="RightToLeft"/>
+            <Image x:Name="safeServerToggle" Source="/images/filtersettingspage/on.png" Grid.Column="0" Grid.Row="0" Margin="30" MouseLeftButtonUp="SafeServerToggle_MouseLeftButtonUp"/>
+            <ComboBox x:Name="filteringLevelComboBox" Grid.Column="0" FontSize="18" FontWeight="Bold" Height="38" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="ComboBox_DropDownClosed" Grid.Row="1" FontFamily="/F4E-design;component/Fonts/#Assistant" FlowDirection="RightToLeft" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="38,25.4,26,25.4" BorderThickness="2" BorderBrush="Black" Padding="20,3,0,3" Foreground="White" Background="White">
                 <ComboBoxItem Content="ללא סינון" FontSize="18" FontWeight="Bold" Background="#FFA2DCFF" Foreground="White" Height="38"/>
                 <ComboBoxItem Content="סינון רגיל" FontSize="18" FontWeight="Bold" Background="#FF8FDB6B" Foreground="White" Height="38"/>
                 <ComboBoxItem Content="סינון קפדני" FontSize="18" FontWeight="Bold" Background="#FFDE6D5B" Foreground="White" Height="38"/>
-            </ComboBox>
-            <Image x:Name="adBlockToggle" Source="/F4E-design;component/images/CategorizePage/on.png" Grid.Column="0" Grid.Row="2" Margin="30" MouseLeftButtonUp="AdBlockToggle_MouseLeftButtonUp"/>
+               </ComboBox>
+            <Image x:Name="adBlockToggle" Source="/images/CategorizePage/on.png" Grid.Column="0" Grid.Row="2" Margin="30" MouseLeftButtonUp="AdBlockToggle_MouseLeftButtonUp"/>
             <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
             <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
             <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
@@ -90,10 +90,10 @@
             <Label Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,35.05,0.2,7">
                 <TextBlock Width="290.6" HorizontalAlignment="Center" TextAlignment="Right" Height="37.148"><Run FlowDirection="RightToLeft" Text="שימוש באופציה זו תגדיר את הגלישה דרך שרת בטוח."/><LineBreak/><Run FlowDirection="RightToLeft" Text="תכנים פורנוגרפיים יוסתרו והגישה אליהם תיחסם."/></TextBlock>
             </Label>
-            <Label Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Right" Margin="0,35.05,0.2,7">
-                <TextBlock Width="290.6" HorizontalAlignment="Center" Height="37.148" FlowDirection="RightToLeft"><Span FlowDirection="RightToLeft"><Run Text="סינון התוכן ב"/><Run Text="Y"/></Span><Run Text="outube"/><Run FlowDirection="RightToLeft" Text=" יהיה קפדני יותר אך תוצאות נוספות"/><LineBreak/><Run FlowDirection="RightToLeft" Text="עלולות להיחסם שלא לצורך."/></TextBlock>
+            <Label Grid.Row="1" HorizontalContentAlignment="Right" Margin="163,43.4,0,17.4" Grid.ColumnSpan="2">
+                <TextBlock Width="326" HorizontalAlignment="Center" Height="20" FlowDirection="RightToLeft"><Run Text="באפשרותך לבחור באחת משלוש רמות סינון"/><Run Text="."/></TextBlock>
             </Label>
-            <Label Content="חסום פרסומות" FontFamily="/F4E-design;component/Fonts/#Assistant"  FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Row="2" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1" FlowDirection="RightToLeft"/>
+            <Label Content="חוסם פרסומות" FontFamily="/F4E-design;component/Fonts/#Assistant"  FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" Grid.Row="2" Height="46" Margin="0,7,0.2,36.198" Width="185" VerticalContentAlignment="Center" Grid.Column="1" FlowDirection="RightToLeft"/>
             <Label Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Right" Margin="0,35.05,0.2,7">
                 <TextBlock Width="290.6" HorizontalAlignment="Center" Height="37.148" FlowDirection="RightToLeft"><Run FlowDirection="RightToLeft" Text="אופציה זו תפחית באופן משמעותי את כמות הפרסומות"/><LineBreak/><Run FlowDirection="RightToLeft" Text="המוצגות במהלך הגלישה ברשת."/></TextBlock>
             </Label>
@@ -105,7 +105,7 @@
                     <GradientStop Color="#FF1D60AE" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Click="SaveChangesButton_Click"/>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Click="SaveChangesButton_Click" Height="Auto" Margin="0,0,0.2,0.2"/>
         </Border>
     </Grid>
 </Page>

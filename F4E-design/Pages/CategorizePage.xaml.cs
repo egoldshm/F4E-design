@@ -1,4 +1,5 @@
-﻿using System;
+﻿using F4E_GUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -102,6 +103,7 @@ namespace F4E_design.Pages
             FilteringSystem.GetCurrentFilteringSettings().isSportBlocked = _isSportBlocked;
             FilteringSystem.GetCurrentFilteringSettings().isPlayersAndPicturesBlocked = _isPlayersAndPicturesBlocked;
             FilteringSystem.SaveChanges();
+            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
             CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "קטגוריות סינון", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
         }
         private void SaveChangesReminderAnimation()

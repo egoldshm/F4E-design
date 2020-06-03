@@ -14,18 +14,18 @@ namespace F4E_design
         private static readonly string PREFERRED_SAFE_DNS = "185.228.168.168";
         private static readonly string ALTERNATE_SAFE_DNS = "185.228.169.168";
 
-        public static void setMode(Boolean safeServer)
+        public static void SetMode(Boolean safeServer)
         {
             if (safeServer)
             {
-                setSafeDNS();
+                SetSafeDNS();
             }
             else
             {
-                setDHCP_DNS();
+                SetDHCP_DNS();
             }
         }
-        public static void setSafeDNS()
+        public static void SetSafeDNS()
         {
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface adapter in adapters)
@@ -34,7 +34,7 @@ namespace F4E_design
             }
         }
 
-        public static void setDHCP_DNS()
+        public static void SetDHCP_DNS()
         {
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface adapter in adapters)
@@ -92,7 +92,7 @@ namespace F4E_design
             }
         }
 
-        public static Boolean isSafe(Boolean showDebugMessage)
+        public static Boolean IsSafe(Boolean showDebugMessage)
         {
             NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
 

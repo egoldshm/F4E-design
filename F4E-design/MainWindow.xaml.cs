@@ -1,6 +1,7 @@
 ﻿using F4E_design.Pages;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace F4E_design
             SetWelcomeLabel();
         }
 
-        private void SetWelcomeLabel()
+        public void SetWelcomeLabel()
         {
             int hour = DateTime.Now.Hour;
             string welcomeText = "";
@@ -91,6 +92,8 @@ namespace F4E_design
                     FrameWindow.Content = CustomListPage.Instance;
                     break;
                 case "general_settings":
+                    GeneralSettingsPage.Instance.ResetGUI();
+                    GeneralSettingsPage.Instance.Window = this;
                     FrameWindow.Content = GeneralSettingsPage.Instance;
                     break;
                 case "about":
@@ -136,14 +139,12 @@ namespace F4E_design
 
         private void BottomMenu_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Boolean clickedYes = CustomMessageBox.ShowDialog(this, "שלום!", "אני עובד!", CustomMessageBox.CustomMessageBoxTypes.Question,"אכן כן");
-            string resultString = clickedYes ? "כן" : "לא";
-            MessageBox.Show("המשתמש לחץ על " + resultString);
+            Process.Start("https://mmb.org.il/f4e");
         }
     
         public void lockWindow(object sender, RoutedEventArgs e)
         {
-            EnterAdminPasswordWindow enterAdminPassword = new EnterAdminPasswordWindow(this);
+            EnterAdminPasswordWindow enterAdminPassword = new EnterAdminPasswordWindow(this,EnterAdminPasswordWindow.askingMode.login);
             enterAdminPassword.ShowDialog();
         }
 

@@ -45,7 +45,7 @@
             <RowDefinition Height="59*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Image Source="/F4E-design;component/images/CustomListPage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7"/>
+        <Image Source="/images/CustomListPage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7"/>
         <Label Content="רשימה אישית" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,13,42,19" Width="135" />
         <Label Content="כאן תוכל לחסום או לפתוח אתרים ספציפיים לבחירתך" FontFamily="Assistant-Bold" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="24"  Width="546" Grid.Column="0" HorizontalContentAlignment="Right" Grid.ColumnSpan="3" Margin="0,41,42,1" Padding="5,5,8,5"/>
 
@@ -116,10 +116,10 @@
             </materialDesign:HintAssist.Hint>
         </TextBox>
         <Label HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19" Width="250" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5" Margin="15.288,4,3.712,271" Grid.Column="1">
-            <AccessText TextWrapping="Wrap" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Height="59" Width="230.644" FontSize="19" Margin="0" Opacity="100" Text="על מנת להוסיף אתר לרשימה יש להוסיפו בפורמט"/>
+            <AccessText TextWrapping="Wrap" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Height="70" Width="230.644" FontSize="19" Margin="0" Opacity="100" Text="על מנת להוסיף אתר לרשימה יש להוסיפו בפורמט"/>
         </Label>
-        <Label HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19" Width="250" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5" Margin="15.288,49,3.712,241" Grid.Column="1">
-            <AccessText  TextWrapping="Wrap" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Height="40" Width="231" FontSize="26" Margin="0" Opacity="100" Text="sitename.com"/>
+        <Label HorizontalAlignment="Center" Target="{Binding ElementName=textBox1}" Grid.Row="1" HorizontalContentAlignment="Center" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="19" Width="250" Grid.RowSpan="1" RenderTransformOrigin="0.5,0.5" Margin="15.288,74,3.712,241" Grid.Column="1">
+            <AccessText  TextWrapping="Wrap" TextAlignment="Center" FontWeight="Medium" FlowDirection="RightToLeft" Height="55" Width="231" FontSize="26" Margin="0" Opacity="100" Text="sitename.com"/>
         </Label>
     </Grid>
 </Page>

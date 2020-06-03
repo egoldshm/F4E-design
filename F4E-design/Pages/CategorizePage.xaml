@@ -58,7 +58,7 @@
             <RowDefinition Height="267*"/>
             <RowDefinition Height="116*"/>
         </Grid.RowDefinitions>
-        <Image Source="/F4E-design;component/images/categorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7.4,7,7,7.4"/>
+        <Image Source="/images/categorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7.4,7,7,7.4"/>
         <Label Content="חסימת קטגוריות" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Width="163" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,13,42,19.4" />
         <Label Content="במסך זה תוכל לחסום גלישה לאתרים ע&quot;פ קטגוריות מוגדרות מראש" FontFamily="Assistant-Bold" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="24"  Width="546" Grid.Column="0" HorizontalContentAlignment="Right" Grid.ColumnSpan="3" Margin="0,41,42,1.4" Padding="5,5,8,5"/>
         <Grid Grid.ColumnSpan="2" Grid.Row="1">
@@ -103,7 +103,7 @@
                     <GradientStop Color="#FF1D60AE" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Click="SaveChangesButton_Click"/>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Click="SaveChangesButton_Click" Height="Auto" Margin="0,0,0.2,0.2"/>
         </Border>
     </Grid>
 </Page>

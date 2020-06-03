@@ -58,7 +58,7 @@ namespace F4E_design
            return (FilteringSystem.GetCurrentFilteringSettings()==null);
         }
 
-        private bool NoOtherProcessOpen()
+        public static bool NoOtherProcessOpen()
         {
             return (System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() == 1);
         }

@@ -1,4 +1,5 @@
 ﻿using F4E_design.Pages;
+using F4E_GUI;
 using System;
 using System.Dynamic;
 using System.IO;
@@ -25,7 +26,7 @@ namespace F4E_design
             Stream stream = null;
             try
             {
-                stream = File.Open("SavedProfile", FileMode.Open);
+                stream = File.Open("SavedFilteringSettings", FileMode.Open);
                 _filteringSettings = (FilteringSettings)new BinaryFormatter().Deserialize(stream);
             }
             catch
@@ -41,7 +42,7 @@ namespace F4E_design
             Stream stream = null;
             try
             {
-                stream = File.Open("SavedProfile", FileMode.Create);
+                stream = File.Open("SavedFilteringSettings", FileMode.Create);
                 new BinaryFormatter().Serialize(stream, _filteringSettings);
             }
             finally
@@ -54,7 +55,10 @@ namespace F4E_design
         {
             _filteringSettings.SetAdminPassword(password);
         }
-
+        public static string GetAdminMail()
+        {
+            return _filteringSettings.GetAdminMail();
+        }
         public static void SetAdminMail(string mail)
         {
             _filteringSettings.SetAdminMail(mail);
@@ -80,12 +84,20 @@ namespace F4E_design
 
         public static void Load()
         {
-            TaskingScheduel.AddAppToStartupApplications("F4E by MMB", System.AppDomain.CurrentDomain.BaseDirectory + "\\" + System.AppDomain.CurrentDomain.FriendlyName);
-            ServiceAdapter.StartService("GUIAdapter", 10000);
-            StartDefenceCheck();
-            StartScheduelBlockTimer();
-            CustomNotifyIcon.SetupNotificationIcon();
-            FilteringSystem.SetSystemStatus(true);
+            try
+            {
+                TaskingScheduel.AddAppToStartupApplications("F4E by MMB", System.AppDomain.CurrentDomain.BaseDirectory + "\\" + System.AppDomain.CurrentDomain.FriendlyName);
+                ServiceAdapter.StartService("GUIAdapter", 10000);
+                StartDefenceCheck();
+                StartScheduelBlockTimer();
+                CustomNotifyIcon.SetupNotificationIcon();
+                FilteringSystem.SetSystemStatus(true);
+            }
+            catch(Exception e)
+            {
+                CustomMessageBox.ShowDialog(null, "מסיבה לא ידועה, חלה שגיאה בהעלאת המערכת. נסה שוב מאוחר יותר או התקן מחדש את התוכנה", "שגיאה בטעינת המערכת", CustomMessageBox.CustomMessageBoxTypes.Error, "יציאה");
+                MessageBox.Show(e.ToString());
+            }
         }
 
         public static void SetSystemStatus(Boolean status)
@@ -94,13 +106,13 @@ namespace F4E_design
             {
                 if (GetCurrentFilteringSettings().isSafeServerOn)
                 {
-                    DnsController.setMode(true);
+                    DnsController.SetMode(true);
                 }
                 SetBlockScheduelingStatus(true);
             }
             else
             {
-                DnsController.setMode(false);
+                DnsController.SetMode(false);
                 SetBlockScheduelingStatus(false);
             }
 
@@ -166,16 +178,16 @@ namespace F4E_design
         private static int tick_count = 0;
         private static void DefenceChecker_Elapsed(object sender, ElapsedEventArgs e)
         {
-            tick_count++;
-            if (GetClosingPreventStatus() == false || GetHostCatchStatus() == false)
-            {
-                ServiceAdapter.StartService("GUIAdapter", 10000);
-                if (tick_count == 6)
-                {
-                    CustomNotifyIcon.ShowNotificationMessage(500, "המערכת זיהתה חריגה", "המערכת זיהתה כי אחת ממערכות ההגנה אינה פעילה. לחץ כאן לפרטים", System.Windows.Forms.ToolTipIcon.Error);
-                    tick_count = 0;
-                }
-            }
+            //tick_count++;
+            //if (GetClosingPreventStatus() == false || GetHostCatchStatus() == false)
+            //{
+            //    ServiceAdapter.StartService("GUIAdapter", 10000);
+            //    if (tick_count == 6)
+            //    {
+            //        CustomNotifyIcon.ShowNotificationMessage(500, "המערכת זיהתה חריגה", "המערכת זיהתה כי אחת ממערכות ההגנה אינה פעילה. לחץ כאן לפרטים", System.Windows.Forms.ToolTipIcon.Error);
+            //        tick_count = 0;
+            //    }
+            //}
         }
 
         public static Boolean GetHostCatchStatus()
@@ -201,6 +213,7 @@ namespace F4E_design
                     if (!GetCurrentFilteringSettings().GetCustomExceptionsList().Contains(url))
                     {
                         GetCurrentFilteringSettings().addSiteToBlacklist(url);
+                        HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
                         SaveChanges();
                         return "";
                     }
@@ -222,6 +235,7 @@ namespace F4E_design
         public static void RemoveSiteFromBlackList(string url)
         {
             GetCurrentFilteringSettings().removeSiteFromBlacklist(url);
+            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
             SaveChanges();
         }
         public static string AddSiteToExceptionList(string url)
@@ -233,6 +247,7 @@ namespace F4E_design
                     if (!GetCurrentFilteringSettings().GetCustomBlackList().Contains(url))
                     {
                         GetCurrentFilteringSettings().addSiteToExceptionsList(url);
+                        HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
                         SaveChanges();
                         return "";
                     }
@@ -254,6 +269,7 @@ namespace F4E_design
         public static void RemoveSiteFromExceptionList(string url)
         {
             GetCurrentFilteringSettings().removeSiteFromExceptionsList(url);
+            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
             SaveChanges();
         }
     }

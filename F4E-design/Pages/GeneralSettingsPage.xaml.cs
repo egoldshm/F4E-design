@@ -21,21 +21,22 @@ namespace F4E_design.Pages
     public partial class GeneralSettingsPage : Page
     {
 
-
-        public class UrlRow
-        {
-            public int ID { get; set; }
-            public string name { get; set; }
-            public string imagePath { get; set; }
-        }
-
-        List<UrlRow> urls = new List<UrlRow>();
-
         private GeneralSettingsPage()
         {
             InitializeComponent();
         }
 
+        public void ResetGUI()
+        {
+            nameTB.Text = FilteringSystem.GetAdminName();
+            passwordTB.Password = PasswordEncryption.Decrypt(FilteringSystem.GetCurrentFilteringSettings().GetAdminPassword());
+            confirmPasswordTB.Password = passwordTB.Password;
+            confirmPasswordTB.IsEnabled = false;
+            confirmPasswordTB.Foreground = new SolidColorBrush(Colors.LimeGreen);
+            mailTB.Text = FilteringSystem.GetAdminMail();
+        }
+
+        public MainWindow Window { get; set; }
         //singelton
         private static GeneralSettingsPage instance = null;
         public static GeneralSettingsPage Instance
@@ -48,53 +49,79 @@ namespace F4E_design.Pages
             }
         }
 
-
-        private void SaveButtonClick(object sender, RoutedEventArgs e)
+        private void PasswordChange(object sender, RoutedEventArgs e)
         {
-            string newUrl = url_text_box.Text;
-
-            foreach (UrlRow url in urls)
+            if (IsLoaded)
             {
-                if (url.name == newUrl)
+                if(passwordTB.Password.Length>3)
                 {
-                    MessageBox.Show("כתובת אתר זו כבר קיימת ברשימה", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    passwordTB.Foreground = new SolidColorBrush(Colors.Black);
+                }
+                else
+                {
+                    passwordTB.Foreground = new SolidColorBrush(Colors.Red);
+                }
+
+                confirmPasswordTB.IsEnabled = true;
+                if (passwordTB.Password.Equals(confirmPasswordTB.Password))
+                {
+                    confirmPasswordTB.Foreground = new SolidColorBrush(Colors.LimeGreen);
+                }
+                else
+                {
+                    confirmPasswordTB.Foreground = new SolidColorBrush(Colors.Red);
                 }
             }
+        }
 
-            if (newUrl != "")
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(passwordTB.Password.Length>3)
             {
-                AddNewUrl(newUrl);
+                if(passwordTB.Password.Equals(confirmPasswordTB.Password))
+                {
+                    if(Tools.IsValidEmail(mailTB.Text))
+                    {
+                        SaveChanges();
+                    }
+                    else
+                    {
+                        CustomMessageBox.ShowDialog(Window, "כתובת הדוא''ל שהוזנה אינה חוקית.", "כתובת דוא''ל לא חוקית", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                    }
+                }
+                else
+                {
+                    CustomMessageBox.ShowDialog(Window, "הסיסמאות שהוזנו אינן תואמות אחת לשנייה.", "הסיסמאות אינן תואמות", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                }
             }
             else
             {
-                MessageBox.Show("אנא קודם הכנס כתובת של אתר", "error", MessageBoxButton.OK, MessageBoxImage.Information);
+                CustomMessageBox.ShowDialog(Window, "אורך הסיסמה חייב להיות ארוך משלושה תווים.", "הסיסמה קצרה מידי", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
             }
         }
 
-        private void AddNewUrl(string newUrl)
+        private void SaveChanges()
         {
-            urls.Add(new UrlRow()
-            {
-                ID = urls.Count,
-                name = newUrl,
-                imagePath = "../images/CustomListPage/delete.png"
-            });
-
-            myListView.Items.Add(urls[urls.Count - 1]);
+            FilteringSystem.SetAdminPassword(passwordTB.Password);
+            FilteringSystem.SetAdminName(nameTB.Text);
+            FilteringSystem.SetAdminMail(mailTB.Text);
+            FilteringSystem.SaveChanges();
+            Window.SetWelcomeLabel();
+            CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "השינויים נשמרו", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
         }
 
-        private void deleteClick(object sender, RoutedEventArgs e)
+        private void MailTextChanged(object sender, TextChangedEventArgs e)
         {
-            string content = (sender as Button).Tag.ToString();
-            MessageBoxResult result = MessageBox.Show("האם אתה בתוך שברצונך למחוק את האתר" + content + " מהרשימה?", "Worning", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            switch (result)
+            if (IsLoaded)
             {
-                case MessageBoxResult.Yes:
-                    myListView.Items.RemoveAt(Int32.Parse(content));
-                    break;
-                case MessageBoxResult.No:
-                    break;
+                if (Tools.IsValidEmail(mailTB.Text))
+                {
+                    mailTB.Foreground = new SolidColorBrush(Colors.LimeGreen);
+                }
+                else
+                {
+                    mailTB.Foreground = new SolidColorBrush(Colors.Red);
+                }
             }
         }
     }

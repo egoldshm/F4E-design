@@ -1,4 +1,5 @@
-﻿using System;
+﻿using F4E_GUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,9 @@ namespace F4E_design.Pages
     /// </summary>
     public partial class FilterSettingsPage : Page
     {
-        private const string URI_ON_IMAGE = "/images/categorizepage/on.png";
-        private const string URI_OFF_IMAGE = "/images/categorizepage/off.png";
+        private const string URI_ON_IMAGE = "/images/filtersettingspage/on.png";
+        private const string URI_OFF_IMAGE = "/images/filtersettingspage/off.png";
+
 
         private Boolean SafeServer;
         private Boolean AdBlock;
@@ -66,8 +68,16 @@ namespace F4E_design.Pages
             ComboBox cmb = sender as ComboBox;
             handle = !cmb.IsDropDownOpen;
             Handle(sender);
-            if(this.IsLoaded)
-                SaveChangesReminderAnimation();
+            if (SafeServer&& cmb.SelectedIndex == 0)
+            {
+                CustomMessageBox.ShowDialog(Window, "לא ניתן לאפשר גלישה חופשית ביוטיוב כאשר השרת הבטוח פעיל.על מנת לאפשר אופציה זו יש לכבות את השרת הבטוח.", "שרת בטוח מופעל", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                cmb.SelectedIndex = 1;
+            }
+            else
+            {
+                if (this.IsLoaded)
+                    SaveChangesReminderAnimation();
+            }
         }
 
         private void Handle(object sender)
@@ -83,6 +93,8 @@ namespace F4E_design.Pages
         private void SafeServerToggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             SafeServer = !SafeServer;
+            if (SafeServer)
+                filteringLevelComboBox.SelectedIndex = 1;
             SaveChangesReminderAnimation();
             UpdatePageGUI();
         }
@@ -105,6 +117,7 @@ namespace F4E_design.Pages
             FilteringSystem.GetCurrentFilteringSettings().isAdBlockOn = AdBlock;
             FilteringSystem.GetCurrentFilteringSettings()._youtubeFilteringLevel =(FilteringSettings.YoutubeFilteringLevels) filteringLevelComboBox.SelectedIndex;
             FilteringSystem.SaveChanges();
+            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
             CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "הגדרות סינון", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
         }
 

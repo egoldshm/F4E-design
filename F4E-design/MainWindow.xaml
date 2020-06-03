@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:F4E_design"
-        mc:Ignorable="d" WindowStyle="None"
-        Height="541.6" Width="864.93" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Height="541.6" Width="864.93" Background="Transparent" ResizeMode="NoResize"
         Icon="logo.png"
         Title="לוקחים אחריות"
-        WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow">
-   
+        WindowStartupLocation="CenterScreen" BorderThickness="2" BorderBrush="LightGray" Loaded="lockWindow" AllowsTransparency="True" WindowStyle="None">
+
     <Window.Resources>
         <Style x:Key="MenuLabel" TargetType="Label">
             <Setter Property="Foreground" Value="#FFFFFFFE"/>
