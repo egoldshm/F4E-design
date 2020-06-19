@@ -5,6 +5,8 @@ using System.ServiceProcess;
 using System.Configuration.Install;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+using System.Windows;
 
 namespace F4E_design
 {
@@ -20,10 +22,8 @@ namespace F4E_design
             {
                 ManagedInstallerClass.InstallHelper(new string[] { exePath });
             }
-            catch
-            {
-                CustomMessageBox.ShowDialog(null, "שגיאה בהתקנת תהליך" , "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
-            }
+            catch(Exception e)
+            {}
         }
 
         public static void UninstallService(string exePath)
@@ -38,6 +38,7 @@ namespace F4E_design
             }
         }
 
+        private static int runAttemps = 0;
         public static void StartService(string serviceName, int timeoutMilliseconds)
         {
             ServiceController service = new ServiceController(serviceName);
@@ -47,8 +48,30 @@ namespace F4E_design
                 service.Start();
                 service.WaitForStatus(ServiceControllerStatus.Running, timeout);
             }
-            catch
-            { }
+            catch(Exception e)
+            {
+                string servicePath = Assembly.GetExecutingAssembly().CodeBase;
+                servicePath = servicePath.Replace("F4E by MMB.exe", "F4E-Service.exe");
+                ServiceAdapter.InstallService(servicePath);
+                if (GetServiceStatus(serviceName) != "Running")
+                {
+                    if (runAttemps < 6)
+                    {
+                        runAttemps++;
+                        StartService(serviceName, 10000);
+                        System.Threading.Thread.Sleep(400);
+                    }
+                    else
+                    {
+                        //CustomMessageBox.ShowDialog(null, e.Message, "הפעלת שירות נכשלה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                        runAttemps = 0;
+                    }
+                }
+                else
+                {
+                    runAttemps = 0;
+                }
+            }
         }
 
         public static Boolean StopService(string serviceName, int timeoutMilliseconds)

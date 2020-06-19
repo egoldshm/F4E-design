@@ -38,7 +38,12 @@ namespace F4E_design
         public Boolean isSocialNetworksBlocked;
         public Boolean isNewsBlocked;
         public Boolean isSportBlocked;
-        public Boolean isPlayersAndPicturesBlocked;
+        public Boolean isVideoPlayersBlocked;
+        public Boolean isPhotosStackBlocked;
+        public Boolean isGamesBlocked;
+        public Boolean isDatingBlocked;
+        public Boolean isViolenceBlocked;
+        public Boolean isLifeStyleBlocked;
         public Boolean isAdBlockOn;
         public YoutubeFilteringLevels _youtubeFilteringLevel;
 
@@ -52,11 +57,16 @@ namespace F4E_design
             isSocialNetworksBlocked = false;
             isNewsBlocked = false;
             isSportBlocked = false;
-            isPlayersAndPicturesBlocked = false;
+            isVideoPlayersBlocked = false;
             isAdBlockOn = false;
+            isPhotosStackBlocked = false;
+            isGamesBlocked = false;
+            isDatingBlocked = false;
+            isViolenceBlocked = false;
+            isLifeStyleBlocked = false;
             _youtubeFilteringLevel = YoutubeFilteringLevels.Moderate;
             _customBlacklist = new List<string>();
-            _customExceptionsList= new List<string>();
+            _customExceptionsList = new List<string>();
         }
 
         public void ToggleBollean(string flag)
@@ -78,8 +88,23 @@ namespace F4E_design
                 case "Sport":
                     isSportBlocked = !isSportBlocked;
                     break;
-                case "Players&Pictures":
-                    isPlayersAndPicturesBlocked = !isPlayersAndPicturesBlocked;
+                case "VideoPlayes":
+                    isVideoPlayersBlocked = !isVideoPlayersBlocked;
+                    break;
+                case "PhotosStack":
+                    isPhotosStackBlocked = !isPhotosStackBlocked;
+                    break;
+                case "Violence":
+                    isViolenceBlocked = !isViolenceBlocked;
+                    break;
+                case "Games":
+                    isGamesBlocked = !isGamesBlocked;
+                    break;
+                case "Dating":
+                    isDatingBlocked = !isDatingBlocked;
+                    break;
+                case "LifeStyle":
+                    isLifeStyleBlocked = !isLifeStyleBlocked;
                     break;
             }
         }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Cache;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows;
@@ -9,9 +11,9 @@ namespace F4E_design
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+
     public partial class App : Application
     {
-        
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
@@ -20,6 +22,7 @@ namespace F4E_design
                 if (HasAdministratorPrivilege())
                 {
                     FilteringSystem.LoadSavedFilteringSettings();
+                    NotifyForNewVersion();
                     if (IsFirstOpening())
                     {
                         new SignUpWindowFiles.SignUpWindow().Show();     
@@ -49,6 +52,17 @@ namespace F4E_design
                 if (Environment.GetCommandLineArgs().Length > 1)
                     if (Environment.GetCommandLineArgs()[0] != "runAgainAsAdmin")
                         Application.Current.Shutdown();
+            }
+        }
+
+        private void NotifyForNewVersion()
+        {
+           if(CheckForUpdates()==true)
+            {
+                if (CustomMessageBox.ShowDialog(null, "גרסה חדשה זמינה להורדה עכשיו באתר. האם ברצונך לעבור לאתר כעת?", "גרסה חדשה זמינה", CustomMessageBox.CustomMessageBoxTypes.Question, "עבור לאתר", "יותר מאוחר")==true)
+                {
+                    Process.Start("https://f4e.mmb.org.il");
+                }
             }
         }
 
@@ -89,6 +103,18 @@ namespace F4E_design
                 return false;
             }
         }
-     
+
+        public static Boolean CheckForUpdates()
+        {
+            string last_version_path = "http://f4e.mmb.org.il/data/last_version";
+            System.Net.WebClient client = new System.Net.WebClient();
+            client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.BypassCache);
+            client.Headers.Add("Cache-Control", "no-cache");
+
+            string last_version = client.DownloadString(last_version_path);
+            string current_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            return !(last_version == current_version);
+        }
     }
 }

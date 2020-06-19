@@ -61,41 +61,72 @@
         <Image Source="/images/categorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7.4,7,7,7.4"/>
         <Label Content="חסימת קטגוריות" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Width="163" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,13,42,19.4" />
         <Label Content="במסך זה תוכל לחסום גלישה לאתרים ע&quot;פ קטגוריות מוגדרות מראש" FontFamily="Assistant-Bold" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="24"  Width="546" Grid.Column="0" HorizontalContentAlignment="Right" Grid.ColumnSpan="3" Margin="0,41,42,1.4" Padding="5,5,8,5"/>
-        <Grid Grid.ColumnSpan="2" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="306*"/>
-                <ColumnDefinition Width="185*"/>
-                <ColumnDefinition Width="55*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Image Source="/images/categorizepage/socialIcon.png" Grid.Column="2" Grid.Row="0" Margin="6.8,8,8.4,8.4"/>
-            <Image Source="/images/categorizepage/gamblingIcon.png" Grid.Column="2" Grid.Row="1" Margin="6.8,7.6,8.4,7.8"/>
-            <Image Source="/images/categorizepage/newsIcon.png" Grid.Column="2" Grid.Row="2" Margin="6.8,8.2,8.4,8.2"/>
-            <Image Source="/images/categorizepage/sportIcon.png" Grid.Column="2" Grid.Row="3" Margin="6.8,7.8,8.4,7.6"/>
-            <Image Source="/images/categorizepage/playersIcon.png" Grid.Column="2" Grid.Row="4" Margin="6.8,8.4,8.4,8"/>
-            <Label Content="רשתות חברתיות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="0" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
-            <Label Content="הימורים" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="1" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
-            <Label Content="חדשות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="2" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
-            <Label Content="ספורט" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="3" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
-            <Label Content="נגנים ותמונות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="4" Height="46" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
-            <Image x:Name="social_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="0" Margin="14"/>
-            <Image x:Name="gambling_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="1" Margin="14"/>
-            <Image x:Name="news_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="2" Margin="14"/>
-            <Image x:Name="sport_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="3" Margin="14"/>
-            <Image x:Name="players_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="4" Margin="14"/>
-            <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-            <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-            <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-            <Rectangle Height="2" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-            <Rectangle Height="2" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-            <Rectangle Height="2" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
-        </Grid>
+
+        <ScrollViewer Grid.ColumnSpan="2" Grid.Row="1"  VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+            <Grid Height="576">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="306*"/>
+                    <ColumnDefinition Width="185*"/>
+                    <ColumnDefinition Width="55*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                <Image Source="/images/categorizepage/socialIcon.png" Grid.Column="2" Grid.Row="0" Margin="6.8,8,8.4,8.4"/>
+                <Image Source="/images/categorizepage/gamblingIcon.png" Grid.Column="2" Grid.Row="1" Margin="6.8,7.6,8.4,7.8"/>
+                <Image Source="/images/categorizepage/newsIcon.png" Grid.Column="2" Grid.Row="2" Margin="6.8,8.2,8.4,8.2"/>
+                <Image Source="/images/categorizepage/sportIcon.png" Grid.Column="2" Grid.Row="3" Margin="6.8,7.8,8.4,7.6"/>
+                <Image Source="/images/categorizepage/playersIcon.png" Grid.Column="2" Grid.Row="4" Margin="6.8,8.4,8.4,8"/>
+                <Image Source="/images/categorizepage/socialIcon.png" Grid.Column="2" Grid.Row="5" Margin="6.8,8,8.4,8.4"/>
+                <Image Source="/images/categorizepage/gamblingIcon.png" Grid.Column="2" Grid.Row="6" Margin="6.8,7.6,8.4,7.8"/>
+                <Image Source="/images/categorizepage/newsIcon.png" Grid.Column="2" Grid.Row="7" Margin="6.8,8.2,8.4,8.2"/>
+                <Image Source="/images/categorizepage/sportIcon.png" Grid.Column="2" Grid.Row="8" Margin="6.8,7.8,8.4,7.6"/>
+                <Image Source="/images/categorizepage/playersIcon.png" Grid.Column="2" Grid.Row="9" Margin="6.8,8.4,8.4,8"/>
+                <Label Content="רשתות חברתיות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="0" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="הימורים" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="1" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="חדשות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="2" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="ספורט" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="3" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="נגני וידאו" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="4"  Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="מאגרי תמונות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="5" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="משחקים" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="6" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="הכרויות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="7"  Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="אלימות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="8" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Label Content="דוגמנות ולייף-סטייל" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="9" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
+                <Image x:Name="social_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="0" Margin="14"/>
+                <Image x:Name="gambling_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="1" Margin="14"/>
+                <Image x:Name="news_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="2" Margin="14"/>
+                <Image x:Name="sport_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="3" Margin="14"/>
+                <Image x:Name="videoPlayers_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="4" Margin="14"/>
+                <Image x:Name="photosStack_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="5" Margin="14"/>
+                <Image x:Name="games_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="6" Margin="14"/>
+                <Image x:Name="dating_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="7" Margin="14"/>
+                <Image x:Name="violence_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="8" Margin="14"/>
+                <Image x:Name="lifeStyle_toggle" Source="/images/categorizepage/on.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" Grid.Column="0" Grid.Row="9" Margin="14"/>
+                <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="0"  Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="6" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="7" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="8" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                <Rectangle Height="2" Grid.Row="9" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
         <Border x:Name="border" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" Height="54.858" Grid.Row="2" VerticalAlignment="Top" Width="411.354" CornerRadius="4" Margin="0,20,0,0"  Grid.Column="1">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

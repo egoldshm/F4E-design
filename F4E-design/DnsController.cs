@@ -107,7 +107,7 @@ namespace F4E_design
 
                         foreach (IPAddress dnsAddress in dnsAddresses)
                         {
-                            if (dnsAddress.ToString() != PREFERRED_SAFE_DNS && dnsAddress.ToString() != ALTERNATE_SAFE_DNS)
+                            if (dnsAddress.MapToIPv4().ToString() != PREFERRED_SAFE_DNS && dnsAddress.MapToIPv4().ToString() != ALTERNATE_SAFE_DNS)
                             {
                                 if (showDebugMessage)
                                     System.Windows.Forms.MessageBox.Show(networkInterface.Name + "   " + networkInterface.NetworkInterfaceType + "     " + dnsAddress.ToString());

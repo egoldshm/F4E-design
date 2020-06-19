@@ -62,9 +62,10 @@ namespace F4E_design
         }
         private void UpdateHostCatchingStatus()
         {
+            FilteringSystem.PreventSystemFilesEdit();
             Dispatcher.Invoke(new Action(() =>
             {
-                if (FilteringSystem.GetHostCatchStatus() == true)
+                if (FilteringSystem.PreventSystemFilesEditStatus == true)
                 {
                     hostCatchStatusLabel.Content = "פעיל";
                     hostCatchStatusLabel.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 9, 163, 3));
@@ -78,9 +79,11 @@ namespace F4E_design
         }
         private void UpdateClosingPreventStatus()
         {
+            FilteringSystem.PreventClose();
+            FilteringSystem.RunInSafeMode();
             Dispatcher.Invoke(new Action(() =>
             {
-                if (FilteringSystem.GetClosingPreventStatus() == true)
+                if ((FilteringSystem.PreventCloseStatus && FilteringSystem.RunInSafeModeStatus) == true)
                 {
                     preventClosingStatusLabel.Content = "פעיל";
                     preventClosingStatusLabel.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 9, 163, 3));
@@ -94,51 +97,63 @@ namespace F4E_design
         }
         private void UpdateGUIStatus(string URI_ON_IMAGE, string URI_OFF_IMAGE, Boolean status, System.Windows.Controls.Image image)
         {
-            Dispatcher.Invoke(new Action(() =>
+            new Thread(() =>
             {
-                if (status == true)
+                Dispatcher.Invoke(new Action(() =>
                 {
-                    if (image.Name.EndsWith("Active"))
+                    if (status == true)
                     {
-                        BitmapImage bitmapImage = new BitmapImage();
-                        bitmapImage.BeginInit();
-                        bitmapImage.UriSource = new Uri(URI_ON_IMAGE, UriKind.Relative);
-                        bitmapImage.CacheOption = BitmapCacheOption.None;
-                        image.Name = image.Name.Replace("Active", "");
-                        image.Source = bitmapImage;
-                        bitmapImage.EndInit();
+                        if (image.Name.EndsWith("Active"))
+                        {
+                            BitmapImage bitmapImage = new BitmapImage();
+                            bitmapImage.BeginInit();
+                            bitmapImage.UriSource = new Uri(URI_ON_IMAGE, UriKind.Relative);
+                            bitmapImage.CacheOption = BitmapCacheOption.None;
+                            image.Name = image.Name.Replace("Active", "");
+                            image.Source = bitmapImage;
+                            bitmapImage.EndInit();
+                        }
                     }
-                }
-                else
-                {
-                    if (!image.Name.EndsWith("Active"))
+                    else
                     {
-                        BitmapImage bitmapImage = new BitmapImage();
-                        bitmapImage.BeginInit();
-                        bitmapImage.UriSource = new Uri(URI_OFF_IMAGE, UriKind.Relative);
-                        bitmapImage.CacheOption = BitmapCacheOption.None;
-                        image.Name = image.Name != null ? image.Name + "Active" : "Active";
-                        image.Source = bitmapImage;
-                        bitmapImage.EndInit();
+                        if (!image.Name.EndsWith("Active"))
+                        {
+                            BitmapImage bitmapImage = new BitmapImage();
+                            bitmapImage.BeginInit();
+                            bitmapImage.UriSource = new Uri(URI_OFF_IMAGE, UriKind.Relative);
+                            bitmapImage.CacheOption = BitmapCacheOption.None;
+                            image.Name = image.Name != null ? image.Name + "Active" : "Active";
+                            image.Source = bitmapImage;
+                            bitmapImage.EndInit();
+                        }
                     }
-                }
-            }));
+                }));
+            }).Start();
         }
         private void UpdateSafeServerStatus()
         {
-            if ((DnsController.IsSafe(false) == false) && (FilteringSystem.GetCurrentFilteringSettings().isSafeServerOn) && (FilteringSystem.GetSystemStatus() == true))
+            new Thread(() =>
             {
-                DnsController.SetMode(true);
-            }
-            UpdateGUIStatus("/images/statusPage/safeserver_on.png", "/images/statusPage/safeserver_off.png", DnsController.IsSafe(false), safeServerToggle);
+                if ((DnsController.IsSafe(false) == false) && (FilteringSystem.GetCurrentFilteringSettings().isSafeServerOn) && (FilteringSystem.GetSystemStatus() == true))
+                {
+                    DnsController.SetMode(true);
+                }
+                UpdateGUIStatus("/images/statusPage/safeserver_on.png", "/images/statusPage/safeserver_off.png", DnsController.IsSafe(false), safeServerToggle);
+            }).Start();
         }
         private void UpdateScheduelingSystemStatus()
         {
-            UpdateGUIStatus("/images/statusPage/scheduel_on.png", "/images/statusPage/scheduel_off.png", FilteringSystem.GetBlockSchedulingStatus(),scheduelToggle);
+            new Thread(() =>
+            {
+                UpdateGUIStatus("/images/statusPage/scheduel_on.png", "/images/statusPage/scheduel_off.png", FilteringSystem.GetBlockSchedulingStatus(),scheduelToggle);
+            }).Start();
         }
         private void UpdateSystemStatus()
         {
-            UpdateGUIStatus("/images/statusPage/status_on.png", "/images/statusPage/status_off.png", FilteringSystem.GetSystemStatus(), systemStatusToggle);
+            new Thread(() =>
+            {
+                UpdateGUIStatus("/images/statusPage/status_on.png", "/images/statusPage/status_off.png", FilteringSystem.GetSystemStatus(), systemStatusToggle);
+            }).Start();
         }
         
         private void sceduelToggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

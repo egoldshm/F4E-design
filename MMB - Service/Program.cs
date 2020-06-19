@@ -4,9 +4,8 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace F4E___Service
+namespace F4ESERVICE
 {
     static class Program
     {
@@ -18,7 +17,7 @@ namespace F4E___Service
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new FIlteringService()
+                new Service1()
             };
             ServiceBase.Run(ServicesToRun);
         }

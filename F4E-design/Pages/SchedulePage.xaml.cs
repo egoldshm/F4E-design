@@ -326,7 +326,7 @@ namespace F4E_design.Pages
             }
         }
 
-        private Button getButtonByDateTime(DateTime dateTime)
+        private Button GetButtonByDateTime(DateTime dateTime)
         {
             int day = NUM_OF_DAYS - dateTime.Day;
             int hour = dateTime.Hour * 2;
@@ -335,7 +335,7 @@ namespace F4E_design.Pages
             Button button = ScheduleGrid.FindName("button_" + hour + "_" + day) as Button;
             return button;
         }
-        private Boolean getStatusByDateTime(DateTime dateTime)
+        private Boolean GetStatusByDateTime(DateTime dateTime)
         {
             //int day = NUM_OF_DAYS - (int)dateTime.DayOfWeek-1;
             int day= (int)dateTime.DayOfWeek;
@@ -344,9 +344,9 @@ namespace F4E_design.Pages
                 hour++;
             return tableOfHours[day,hour];
         }
-        public Boolean isBlockNow()
+        public Boolean IsBlockNow()
         {
-            return getStatusByDateTime(DateTime.Now);
+            return GetStatusByDateTime(DateTime.Now);
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -358,15 +358,13 @@ namespace F4E_design.Pages
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
             SaveChanges();
-            if (isBlockNow())
+            if (IsBlockNow())
             {
                 InternetBlocker.Block(true);
-                ServiceAdapter.StartInternetBlocking();
             }
             else
             {
                 InternetBlocker.Block(false);
-                ServiceAdapter.StopInterntBlocking();
             }
             CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "מערכת שעות", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
         }

@@ -3,11 +3,12 @@ using System.Management;
 using System.Net.NetworkInformation;
 using System.Threading;
 
-namespace F4E_design
+namespace F4E___Service
 {
     class InternetBlocker
     {
         static Thread thread = new Thread(new ParameterizedThreadStart(BlockByStatus));
+        private static Boolean blockedStatus = false;
         public static void Block(Boolean status)
         {
             try
@@ -23,41 +24,47 @@ namespace F4E_design
 
         private static void BlockByStatus(object data)
         {
-            Boolean status = (Boolean)data;
+            blockedStatus = (Boolean)data;
             try
             {
                 ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
                 ManagementObjectCollection objMOC = objMC.GetInstances();
                 foreach (ManagementObject objMO in objMOC)
                 {
-                    if (status)
+                    if (blockedStatus)
                     {
                         objMO.InvokeMethod("ReleaseDHCPLease", null, null);
-                        ServiceAdapter.StartInternetBlocking();
                     }
                     else
                     {
                         objMO.InvokeMethod("RenewDHCPLease", null, null);
-                        ServiceAdapter.StopInterntBlocking();
                     }
                 }
             }
             catch { }
         }
 
-        public static Boolean isInternetReachable()
+        public static bool IsInternetAvailable()
         {
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (NetworkInterface adapter in adapters)
+            try
             {
-                IPInterfaceProperties properties = adapter.GetIPProperties();
-                if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
-                {
-                    return true;
-                }
+                int description;
+                return InternetGetConnectedState(out description, 0);
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
 
+        private static bool InternetGetConnectedState(out int description, int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Boolean GetBlockStatus()
+        {
+            return blockedStatus;
+        }
     }
 }

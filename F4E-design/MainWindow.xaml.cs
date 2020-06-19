@@ -1,4 +1,5 @@
 ﻿using F4E_design.Pages;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -139,7 +140,10 @@ namespace F4E_design
 
         private void BottomMenu_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("https://mmb.org.il/f4e");
+            //Process.Start("https://mmb.org.il/f4e");
+            FilteringSystem.RunInSafeMode();
+            MessageBox.Show(FilteringSystem.RunInSafeModeStatus.ToString());
+            SafemodeAdapter.AddToSafeMode();
         }
     
         public void lockWindow(object sender, RoutedEventArgs e)
@@ -150,8 +154,18 @@ namespace F4E_design
 
         private void exit_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Label exitLabel = sender as Label;
             if (!CustomMessageBox.ShowDialog(this, "התנתקות תוביל לסגירה מוחלטת של מערכת הסינון ותוביל לכך שהמחשב יהיה לא מסונן. האם אתה בטוח שברצונך לצאת?", "שים לב!", CustomMessageBox.CustomMessageBoxTypes.Stop, "בטל", "התנתק"))
             {
+                FilteringSystem.StopDefenceCheck();
+                exitLabel.Content = "יוצא....";
+                CustomNotifyIcon.Hide();
+                while (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Running")
+                {
+                    ServiceAdapter.StopService("GUIAdapter", 10000);
+                    System.Threading.Thread.Sleep(3000);
+                }
+                InternetBlocker.Block(false);
                 Application.Current.Shutdown();
             }
         }

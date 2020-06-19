@@ -31,7 +31,6 @@ namespace F4E_design.Pages
             nameTB.Text = FilteringSystem.GetAdminName();
             passwordTB.Password = PasswordEncryption.Decrypt(FilteringSystem.GetCurrentFilteringSettings().GetAdminPassword());
             confirmPasswordTB.Password = passwordTB.Password;
-            confirmPasswordTB.IsEnabled = false;
             confirmPasswordTB.Foreground = new SolidColorBrush(Colors.LimeGreen);
             mailTB.Text = FilteringSystem.GetAdminMail();
         }

@@ -31,7 +31,12 @@ namespace F4E_design.Pages
         private Boolean _isSocialNetworksBlocked;
         private Boolean _isNewsBlocked;
         private Boolean _isSportBlocked;
-        private Boolean _isPlayersAndPicturesBlocked;
+        private Boolean _isVideoPlayersBlocked;
+        private Boolean _isGamesBlocked;
+        private Boolean _isDatingBlocked;
+        private Boolean _isViolenceBlocked;
+        private Boolean _isLifeStyleBlocked;
+        private Boolean _isPhotosStackBlocked;
 
         private CategorizePage()
         {
@@ -58,7 +63,12 @@ namespace F4E_design.Pages
             _isGamblingBlocked = FilteringSystem.GetCurrentFilteringSettings().isGamblingBlocked;
             _isNewsBlocked = FilteringSystem.GetCurrentFilteringSettings().isNewsBlocked;
             _isSportBlocked = FilteringSystem.GetCurrentFilteringSettings().isSportBlocked;
-            _isPlayersAndPicturesBlocked = FilteringSystem.GetCurrentFilteringSettings().isPlayersAndPicturesBlocked;
+            _isVideoPlayersBlocked = FilteringSystem.GetCurrentFilteringSettings().isVideoPlayersBlocked;
+            _isGamesBlocked = FilteringSystem.GetCurrentFilteringSettings().isGamesBlocked;
+            _isDatingBlocked = FilteringSystem.GetCurrentFilteringSettings().isDatingBlocked;
+            _isViolenceBlocked= FilteringSystem.GetCurrentFilteringSettings().isViolenceBlocked;
+            _isLifeStyleBlocked = FilteringSystem.GetCurrentFilteringSettings().isLifeStyleBlocked;
+            _isPhotosStackBlocked= FilteringSystem.GetCurrentFilteringSettings().isPhotosStackBlocked;
             UpdateToggelsGUI();
         }
 
@@ -68,7 +78,12 @@ namespace F4E_design.Pages
             gambling_toggle.Source = new BitmapImage(new Uri(_isGamblingBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
             news_toggle.Source = new BitmapImage(new Uri(_isNewsBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
             sport_toggle.Source = new BitmapImage(new Uri(_isSportBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
-            players_toggle.Source = new BitmapImage(new Uri(_isPlayersAndPicturesBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+            videoPlayers_toggle.Source = new BitmapImage(new Uri(_isVideoPlayersBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+            violence_toggle.Source = new BitmapImage(new Uri(_isViolenceBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+            dating_toggle.Source = new BitmapImage(new Uri(_isDatingBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+            games_toggle.Source = new BitmapImage(new Uri(_isGamesBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+            lifeStyle_toggle.Source = new BitmapImage(new Uri(_isLifeStyleBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
+            photosStack_toggle.Source = new BitmapImage(new Uri(_isPhotosStackBlocked ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -88,23 +103,51 @@ namespace F4E_design.Pages
                 case "sport_toggle":
                     _isSportBlocked = !_isSportBlocked;
                     break;
-                case "players_toggle":
-                    _isPlayersAndPicturesBlocked = !_isPlayersAndPicturesBlocked;
+                case "videoPlayers_toggle":
+                    _isVideoPlayersBlocked = !_isVideoPlayersBlocked;
                     break;
+                case "violence_toggle":
+                    _isViolenceBlocked = !_isViolenceBlocked;
+                    break;
+                case "dating_toggle":
+                    _isDatingBlocked = !_isDatingBlocked;
+                    break;
+                case "games_toggle":
+                    _isGamesBlocked = !_isGamesBlocked;
+                    break;
+                case "lifeStyle_toggle":
+                    _isLifeStyleBlocked = !_isLifeStyleBlocked;
+                    break;
+                case "photosStack_toggle":
+                    _isPhotosStackBlocked = !_isPhotosStackBlocked;
+                    break;
+
             }
             UpdateToggelsGUI();
             SaveChangesReminderAnimation();
         }
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            FilteringSystem.GetCurrentFilteringSettings().isSocialNetworksBlocked = _isSocialNetworksBlocked;
-            FilteringSystem.GetCurrentFilteringSettings().isGamblingBlocked = _isGamblingBlocked;
-            FilteringSystem.GetCurrentFilteringSettings().isNewsBlocked = _isNewsBlocked;
-            FilteringSystem.GetCurrentFilteringSettings().isSportBlocked = _isSportBlocked;
-            FilteringSystem.GetCurrentFilteringSettings().isPlayersAndPicturesBlocked = _isPlayersAndPicturesBlocked;
-            FilteringSystem.SaveChanges();
-            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
-            CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "קטגוריות סינון", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+            if (InternetBlocker.isInternetReachable())
+            {
+                FilteringSystem.GetCurrentFilteringSettings().isSocialNetworksBlocked = _isSocialNetworksBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isGamblingBlocked = _isGamblingBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isNewsBlocked = _isNewsBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isSportBlocked = _isSportBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isVideoPlayersBlocked = _isVideoPlayersBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isDatingBlocked = _isDatingBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isGamesBlocked = _isGamesBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isPhotosStackBlocked = _isPhotosStackBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isLifeStyleBlocked = _isLifeStyleBlocked;
+                FilteringSystem.GetCurrentFilteringSettings().isViolenceBlocked = _isViolenceBlocked;
+                FilteringSystem.SaveChanges();
+                HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
+                CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "קטגוריות סינון", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+            }
+            else
+            {
+                CustomMessageBox.ShowDialog(Window, "יש צורך בחיבור לאינטרנט", "על מנת לעדכן את הקטגוריות יש צורך בחיבור לאינטרנט.", CustomMessageBox.CustomMessageBoxTypes.Stop, "הבנתי");
+            }
         }
         private void SaveChangesReminderAnimation()
         {

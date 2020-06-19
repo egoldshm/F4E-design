@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +20,7 @@ namespace F4E_design
 
         public static void SetupNotificationIcon()
         {
-            _notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+            _notifyIcon.Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName);
             _notifyIcon.Visible = true;
             _notifyIcon.Click += NotifyIcon_Click;
             _notifyIcon.BalloonTipClicked += NotifyIcon_Click;
@@ -50,5 +54,9 @@ namespace F4E_design
             _notifyIcon.ShowBalloonTip(timeout, title, text, icon);
         }
 
+        internal static void Hide()
+        {
+            _notifyIcon.Visible = false;
+        }
     }
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Management;
-using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
-namespace F4E___Service
+namespace F4ESERVICE
 {
-    public partial class FIlteringService : ServiceBase
+    public partial class Service1 : ServiceBase
     {
         [DllImport("wtsapi32.dll", SetLastError = true)]
         static extern bool WTSSendMessage(IntPtr hServer, [MarshalAs(UnmanagedType.I4)] int SessionId, String pTitle, [MarshalAs(UnmanagedType.U4)] int TitleLength, String pMessage, [MarshalAs(UnmanagedType.U4)] int MessageLength, [MarshalAs(UnmanagedType.U4)] int Style, [MarshalAs(UnmanagedType.U4)] int Timeout, [MarshalAs(UnmanagedType.U4)] out int pResponse, bool bWait);
@@ -26,12 +26,11 @@ namespace F4E___Service
 
         public static IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
         public static int WTS_CURRENT_SESSION = 1;
-        public static Boolean allowSafemode = false;
 
         Boolean msgShowed = false;
 
         System.Timers.Timer timer = new System.Timers.Timer();
-        public FIlteringService()
+        public Service1()
         {
             InitializeComponent();
         }
@@ -46,16 +45,16 @@ namespace F4E___Service
         private void OnElapsedTime(object sender, ElapsedEventArgs e)
         {
             PreventClosing();
-            if(InternetBlocker.GetBlockStatus()==true)
+            if (InternetBlocker.GetBlockStatus() == true)
             {
-                if(InternetBlocker.IsInternetAvailable())
+                if (InternetBlocker.IsInternetAvailable())
                 {
                     InternetBlocker.Block(true);
                 }
             }
             else
             {
-                if(!InternetBlocker.IsInternetAvailable())
+                if (!InternetBlocker.IsInternetAvailable())
                 {
                     InternetBlocker.Block(false);
                 }
@@ -63,36 +62,42 @@ namespace F4E___Service
         }
 
         int count = 0;
-
-        Boolean processAlreadyDetected = false;
-
         private void PreventClosing()
         {
             if (!IsProcessOpen())
             {
-                if (processAlreadyDetected)
-                    BootController.DoExitWin(BootController.EWX_REBOOT);
-                else
-                    RunGUIProcess();
+                //if (InternetBlocker.IsInternetAvailable())
+                //{
+                //    ShowMessage("11", "22");
+                //    InternetBlocker.Block(true);
+                //}
+
+                ShotdownPC();
 
                 if (count % 15 == 0 && count > 3)
                 {
-                    ShowMessage("F4E Filtering Sysetm", "The system recognized that the main process was unexpectedly shut down. PC REBOOT");
+                    ShowMessage("MMB Filtering Sysetm", "The system recognized that the main process was unexpectedly shut down. The Internet is disabled until the filtering system will be restart.");
                 }
                 count++;
             }
             else
             {
-                processAlreadyDetected = true;
                 count = 15;
             }
         }
 
-        private void RunGUIProcess()
+        private void ShotdownPC()
         {
-            string processePath = Assembly.GetExecutingAssembly().CodeBase;
-            processePath = processePath.Replace("F4E-Service.exe", "F4E by MMB.exe");
-            Process.Start(processePath);
+            ProcessStartInfo processInfo = new ProcessStartInfo
+            {
+                WindowStyle = ProcessWindowStyle.Normal,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                FileName = "cmd.exe",
+                Arguments = @"shutdown -s -t 0"
+            };
+            ShowMessage("!23", "!23");
+            Process.Start(processInfo);
         }
 
         private bool IsProcessOpen()
@@ -124,12 +129,6 @@ namespace F4E___Service
                     break;
                 case 129:
                     InternetBlocker.Block(false);
-                    break;
-                case 130:
-                    allowSafemode = false;
-                    break;
-                case 131:
-                    allowSafemode = true;
                     break;
             }
         }

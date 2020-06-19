@@ -27,56 +27,62 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="26*"/>
-            <RowDefinition Height="144*"/>
-            <RowDefinition Height="55*"/>
+            <RowDefinition Height="154*"/>
+            <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
-        <Image Source="/images/CategorizePage/pageicon.png" Grid.Column="2" Grid.Row="0"  Margin="7,7,7.4,8"/>
+        <Image Source="/images/GeneralSettingsPage/page_icon.png" Grid.Column="2" Grid.Row="0"  Margin="7,7,7.4,8"/>
         <Label Content="הגדרות כלליות" FontFamily="Assistant-Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="34"  Width="144" Grid.Column="1" Grid.Row="0" Margin="0,11,0,7"/>
-        <Grid Grid.Row="1" Margin="0.8,1,0,7" Grid.Column="1">
+        <Grid Margin="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="1"  Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="259*"/>
-                <ColumnDefinition Width="180*"/>
-                <ColumnDefinition Width="51*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="177*"/>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition Width="177*"/>
+                <ColumnDefinition Width="76*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="79*"/>
-                <RowDefinition Height="123*"/>
-                <RowDefinition Height="78*"/>
+                <RowDefinition Height="81*"/>
+                <RowDefinition Height="97*"/>
+                <RowDefinition Height="110*"/>
             </Grid.RowDefinitions>
-            <Image Source="/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="0" Margin="7"/>
-            <Image Source="/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="1" Margin="7"/>
-            <Image Source="/images/CategorizePage/socialIcon.png" Grid.Column="2" Grid.Row="2" Margin="7"/>
-            <Label Grid.Row="0" Grid.Column="1" Content=":שם מנהל המערכת" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" FontSize="16" Height="29" Margin="0,17,1.2,33.2" Width="127"></Label>
-            <Label Grid.Row="0" Grid.Column="1" Content="הכנס את שמך הפרטי" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,37,1.2,18.2" Height="24" Width="101"/>
-            <Label Grid.Row="1" Grid.Column="1" Content=":סיסמת ניהול" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" FontSize="16" Height="32" Margin="0,37.8,1.2,53.4" Width="91"></Label>
-            <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,56.8,1.2,11.4" Height="55" Width="161" Grid.Column="1">
-                <AccessText TextWrapping="Wrap" Height="45" FlowDirection="RightToLeft" Width="152">סיסמה זו תשמש להתחברות לממשק הניהול.</AccessText>
+            <Image Source="/images/GeneralSettingsPage/name_icon.png" Grid.Column="4" Grid.Row="0" Margin="26.945,16,26.946,0" RenderTransformOrigin="0.549,-0.048" VerticalAlignment="Top" Height="40" Width="40"/>
+            <Image Source="/images/GeneralSettingsPage/password_icon.png" Grid.Column="4" Grid.Row="1" Margin="0,8,0,0" VerticalAlignment="Top" Height="40" Width="40"/>
+            <Image Source="/images/GeneralSettingsPage/mail_icon.png" Grid.Column="4" Grid.Row="2" Margin="23.367,12,23.367,0" Height="40" VerticalAlignment="Top" Width="40"/>
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Content=":שם מנהל המערכת" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" Height="29" Margin="0,4.684,0,52.941" FontSize="14" HorizontalContentAlignment="Right"/>
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"  Content="השם המוצג במהלך השימוש במערכת" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,23.019,0,39.606" Height="24" FontSize="11" HorizontalContentAlignment="Right"/>
+            <Label Grid.Column="1" Grid.ColumnSpan="3" Content=":סיסמת ניהול" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" Margin="0,1.25,0,70.493" FontSize="14" Grid.Row="1" HorizontalContentAlignment="Right"/>
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,20.035,0,59.701" Height="24" FontSize="11" HorizontalContentAlignment="Right" >
+                <AccessText TextWrapping="Wrap" Height="20.5" FlowDirection="RightToLeft" Width="252">סיסמה זו תשמש להתחברות לממשק הניהול.</AccessText>
             </Label>
-            <Label Grid.Row="2" Grid.Column="1" Content=":דוא''ל לשליחת התראות" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" FontSize="16" Height="29" Margin="0,8.6,0.2,40" Width="162"></Label>
-            <Label Grid.Row="2" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,32.6,1.2,10" Height="35" Width="180" Padding="0">
-                <AccessText TextWrapping="Wrap" Height="31" FlowDirection="RightToLeft" Width="176" FontSize="10">למייל זה ישלחו התראות על פעילות חריגה ודרכו יהיה ניתן לאפס את הסיסמה במקרה של שכחה</AccessText>
+            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Content=":דוא''ל לשליחת התראות" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="Bold" FontSize="14" Height="29" Margin="0,4.817,0,83.822" HorizontalContentAlignment="Right"/>
+            <Label Grid.Row="2"  VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="0,26.817,0,55.822" Height="35" Padding="4" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Right">
+                <AccessText TextWrapping="Wrap" Height="31" FlowDirection="RightToLeft" Width="246" FontSize="10">למייל זה ישלחו התראות על פעילות חריגה ודרכו יהיה ניתן לאפס את הסיסמה במקרה של שכחה</AccessText>
             </Label>
-            <Border BorderThickness="2" Height="32" BorderBrush="Black">
-                <TextBox x:Name="nameTB" Background="White" Text="dsf" TextAlignment="Center" TextOptions.TextHintingMode="Animated" AutomationProperties.HelpText="jhjhjhj" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="SemiBold" Foreground="Black" FontSize="20" Padding="0,-2,0,0" />
+            <Border BorderThickness="2" BorderBrush="Black" Margin="0,46.644,0,9.981" CornerRadius="2" Background="White" Grid.Column="1" Grid.ColumnSpan="3" Height="30">
+                <TextBox x:Name="nameTB" Background="White" Text="dsf" TextAlignment="Center" TextOptions.TextHintingMode="Animated" AutomationProperties.HelpText="jhjhjhj" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="SemiBold" Foreground="Black" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" />
             </Border>
-            <Border Grid.Row="1" BorderThickness="2" Height="32" BorderBrush="Black" Margin="0,21.8,0,69.4">
-                <PasswordBox x:Name="passwordTB" Background="White" Height="32" Password="123213" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Foreground="Black" FontSize="20" Padding="0,-1,0,0" BorderBrush="Black" PasswordChanged="PasswordChange"/>
+            <Border BorderThickness="2" BorderBrush="Black" Margin="0,64.54,0,14.196" CornerRadius="2" Grid.Row="1" Background="White" Grid.Column="3">
+                <PasswordBox x:Name="passwordTB" Background="White" Password="123213" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Foreground="Black" Padding="0" BorderBrush="Black" PasswordChanged="PasswordChange" FontSize="16"/>
             </Border>
-            <Border Grid.Row="1" BorderThickness="2" Height="32" BorderBrush="Black" Margin="0,61.8,0,29.4">
-                <PasswordBox x:Name="confirmPasswordTB" Background="White" Height="32" Password="123213" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Foreground="Black" FontSize="20" Padding="0,-1,0,0" BorderBrush="Black" PasswordChanged="PasswordChange"/>
-
+            <Border BorderThickness="2" BorderBrush="Black" Margin="0,62.611,0,25.027" CornerRadius="2" Background="White" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Height="30">
+                <TextBox x:Name="mailTB" Background="White" Text="dsf" TextAlignment="Center" TextOptions.TextHintingMode="Animated" AutomationProperties.HelpText="jhjhjhj" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="SemiBold" Foreground="Black" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" />
             </Border>
-            <Border Grid.Row="2" BorderThickness="2" Height="32" BorderBrush="Black">
-                <TextBox x:Name="mailTB" Background="White" Text="dsf" TextAlignment="Center" TextOptions.TextHintingMode="Animated" AutomationProperties.HelpText="jhjhjhj" FontFamily="/F4E - GUI;component/Fonts/#Assistant" FontWeight="SemiBold" Foreground="Black" FontSize="20" Padding="0,-2,0,0" TextChanged="MailTextChanged" />
-
+            <Rectangle Height="2" Grid.Row="0" Grid.ColumnSpan="5" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.399,0"/>
+            <Rectangle Height="2" Grid.Row="0" Grid.ColumnSpan="5" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.399,1.2"/>
+            <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="5" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0"/>
+            <Rectangle Height="2" Grid.Row="2" Grid.ColumnSpan="5" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.399,0"/>
+            <Label Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="13.066,43.368,1.451,41.868" Height="18.5" FontSize="10" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.ColumnSpan="2">
+                <AccessText TextWrapping="Wrap" Height="15" FlowDirection="RightToLeft" Width="49" Text="סיסמה:"/>
+            </Label>
+            <Border BorderThickness="2" BorderBrush="Black" Margin="0,63.873,0.846,14.863" CornerRadius="2" Grid.Row="1" Grid.Column="1" Background="White">
+                <PasswordBox x:Name="confirmPasswordTB" Background="White" Password="123213" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Foreground="Black" Padding="0" BorderBrush="Black" PasswordChanged="PasswordChange" FontSize="16"/>
             </Border>
-            <Rectangle Height="2" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Top" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,0"/>
-            <Rectangle Height="2" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,1.2"/>
-            <Rectangle Height="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,4.4"/>
-            <Rectangle Height="2" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Bottom" StrokeThickness="3" Style="{StaticResource ResourceKey=ShadowRectStyle}" Margin="0,0,0.4,0"/>
+            <Label Grid.Row="1" VerticalAlignment="Center" FontFamily="/F4E - GUI;component/Fonts/#Assistant" Margin="103,46.703,1.34,41.536" Height="15.497" FontSize="10" FontWeight="SemiBold" HorizontalContentAlignment="Right" Padding="0,0,4,0" Grid.ColumnSpan="2">
+                <AccessText TextWrapping="Wrap" Height="17.003" FlowDirection="RightToLeft" Width="89.397" Text="אימות סיסמה:"/>
+            </Label>
 
         </Grid>
-        <Border x:Name="border" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" Height="54" Grid.Row="2" VerticalAlignment="Top" Width="411" CornerRadius="4" Margin="51.8,17,46,0"  Grid.Column="1">
+        <Border x:Name="border" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" Height="54" Grid.Row="2" VerticalAlignment="Top" Width="411" CornerRadius="4" Margin="51.9,17,46.1,0"  Grid.Column="1">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF0076AB" Offset="0"/>

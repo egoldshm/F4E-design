@@ -1,10 +1,13 @@
 ﻿using F4E_design.Pages;
 using F4E_GUI;
+using Microsoft.Win32;
 using System;
 using System.Dynamic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 
@@ -12,6 +15,11 @@ namespace F4E_design
 {
     internal class FilteringSystem
     {
+        public static Boolean PreventCloseStatus = false;
+        public static Boolean RunInSafeModeStatus = false;
+        public static Boolean PreventSystemFilesEditStatus = false;
+        
+
         private static FilteringSettings _filteringSettings;
         private static System.Timers.Timer defenseStatusChecker;
         private static System.Timers.Timer scheduelBlockTimer;
@@ -86,7 +94,7 @@ namespace F4E_design
         {
             try
             {
-                TaskingScheduel.AddAppToStartupApplications("F4E by MMB", System.AppDomain.CurrentDomain.BaseDirectory + "\\" + System.AppDomain.CurrentDomain.FriendlyName);
+                //TaskingScheduel.AddAppToStartupApplications("F4E by MMB", System.AppDomain.CurrentDomain.BaseDirectory + "\\" + System.AppDomain.CurrentDomain.FriendlyName);
                 ServiceAdapter.StartService("GUIAdapter", 10000);
                 StartDefenceCheck();
                 StartScheduelBlockTimer();
@@ -139,71 +147,118 @@ namespace F4E_design
         public static void StartDefenceCheck()
         {
             defenseStatusChecker = new System.Timers.Timer();
-            defenseStatusChecker.Interval = 10000;
+            defenseStatusChecker.Interval = 3000;
             defenseStatusChecker.Elapsed += DefenceChecker_Elapsed;
             defenseStatusChecker.Start();
         }
         public static void StartScheduelBlockTimer()
         {
             scheduelBlockTimer = new System.Timers.Timer();
-            scheduelBlockTimer.Interval = 10000;
+            scheduelBlockTimer.Interval = 60000;
             scheduelBlockTimer.Elapsed += ScheduelBlockTimer_Elapsed;
             scheduelBlockTimer.Start();
         }
 
+
         private static void ScheduelBlockTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Application.Current.Dispatcher.Invoke((Action)delegate
+            new Thread(() =>
+            {
+                Application.Current.Dispatcher.Invoke((Action)delegate
             {
                 if (GetBlockSchedulingStatus() == true)
                 {
-                    if (SchedulePage.Instance.isBlockNow())
+                    if (SchedulePage.Instance.IsBlockNow())
                     {
                         if (InternetBlocker.isInternetReachable() == true)
                         {
                             InternetBlocker.Block(true);
-                            ServiceAdapter.StartInternetBlocking();
-                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (InternetBlocker.isInternetReachable() == false)
+                        {
+                            InternetBlocker.Block(false);
                         }
                     }
                 }
-                if (InternetBlocker.isInternetReachable() == false)
-                {
-                    ServiceAdapter.StopInterntBlocking();
-                    InternetBlocker.Block(false);
-                }
             });
+            }).Start();
+        }
+
+        internal static void StopDefenceCheck()
+        {
+            defenseStatusChecker.Stop();
         }
 
         private static int tick_count = 0;
         private static void DefenceChecker_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //tick_count++;
-            //if (GetClosingPreventStatus() == false || GetHostCatchStatus() == false)
-            //{
-            //    ServiceAdapter.StartService("GUIAdapter", 10000);
-            //    if (tick_count == 6)
-            //    {
-            //        CustomNotifyIcon.ShowNotificationMessage(500, "המערכת זיהתה חריגה", "המערכת זיהתה כי אחת ממערכות ההגנה אינה פעילה. לחץ כאן לפרטים", System.Windows.Forms.ToolTipIcon.Error);
-            //        tick_count = 0;
-            //    }
-            //}
-        }
-
-        public static Boolean GetHostCatchStatus()
-        {
-            return false;
-        }
-
-        public static Boolean GetClosingPreventStatus()
-        {
-            if (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Running")
+            PreventClose();
+            RunInSafeMode();
+            PreventSystemFilesEdit();
+            tick_count++;
+            if (PreventCloseStatus == false /*|| RunInSafeModeStatus == false*/ || PreventSystemFilesEditStatus == false)
             {
-                return true;
+                if (tick_count == 15)
+                {
+                    CustomNotifyIcon.ShowNotificationMessage(500, "המערכת זיהתה חריגה", "המערכת זיהתה כי אחת ממערכות ההגנה אינה פעילה. לחץ כאן לפרטים", System.Windows.Forms.ToolTipIcon.Error);
+                    tick_count = 0;
+                }
             }
-            return false;
         }
 
+        public static void PreventClose()
+        {
+            new Thread(() =>
+            {
+                if (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Running")
+                {
+                    PreventCloseStatus = true;
+                }
+                else
+                {
+                    ServiceAdapter.StartService("GUIAdapter", 10000);
+                    PreventCloseStatus = false;
+                }
+            }).Start();
+        }
+
+        public static void RunInSafeMode()
+        {
+            new Thread(() =>
+            {
+                RegistryKey minimalSafeMode;
+                minimalSafeMode = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\GUIAdapter", true);
+
+                RegistryKey networkSafeMode;
+                networkSafeMode = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Network\GUIAdapter", true);
+
+                if (minimalSafeMode != null && networkSafeMode != null)
+                {
+                    if (minimalSafeMode.GetValue("").ToString() != "Service")
+                    {
+                        minimalSafeMode.SetValue("", "Service", RegistryValueKind.String);
+                    }
+                    RunInSafeModeStatus = true;
+                }
+                else
+                {
+                    SafemodeAdapter.AddToSafeMode();
+                    RunInSafeModeStatus = false;
+                }
+            }).Start();
+        }
+
+        public static void PreventSystemFilesEdit()
+        {
+            new Thread(() =>
+            {
+                PreventSystemFilesEditStatus = false;
+            }).Start();
+        }
+        
         public static string AddSiteToBlackList(string url)
         {
             if (url.CheckURLValid())
@@ -272,5 +327,6 @@ namespace F4E_design
             HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
             SaveChanges();
         }
+    
     }
 }
