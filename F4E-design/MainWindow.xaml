@@ -52,8 +52,8 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="71*"/>
-                <RowDefinition Height="260*"/>
-                <RowDefinition Height="87*"/>
+                <RowDefinition Height="234*"/>
+                <RowDefinition Height="114*"/>
                 <RowDefinition Height="107*"/>
                 <RowDefinition Height="13*"/>
             </Grid.RowDefinitions>
@@ -64,9 +64,8 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Image Source="/images/MainForm/app_banner.png" Margin="43,5,27.6,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="56" Width="99"/>
-            <Grid x:Name="Menu" Grid.ColumnSpan="2" Margin="0,71,14.8,0.2" Grid.RowSpan="2">
+            <Grid x:Name="Menu" Grid.ColumnSpan="2" Margin="0,71,14.8,2.8" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -87,17 +86,7 @@
                         </TransformGroup>
                     </Label.RenderTransform>
                 </Label>
-                <Label x:Name="security_events" Content="אירועי אבטחה" Style="{StaticResource MenuLabel}" Grid.Row="5" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Margin="0,-0.001">
-                    <Label.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Label.RenderTransform>
-                </Label>
-                <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="6" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Margin="0,-0.001">
+                <Label x:Name="general_settings" Content="הגדרות כלליות" Style="{StaticResource MenuLabel}" Grid.Row="5" MouseLeftButtonUp="ReplacePage" BorderBrush="White" Padding="5,5,20,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Right" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Margin="0,-0.001">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

@@ -589,7 +589,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:F4E by MMB"
         "ProductCode" = "8:{B63E71E5-764E-4E04-AB76-28FA7F7174CC}"
-        "PackageCode" = "8:{7CC6F3FC-AC0F-4018-B97E-1F410CC2AA0F}"
+        "PackageCode" = "8:{6C498A97-15E1-487B-9F4E-2D6641FA141F}"
         "UpgradeCode" = "8:{68A79374-766D-43DD-AE6B-6E2742158529}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -709,6 +709,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1BE2AF40A32F4D989C6CEA58AA32A14B"
+            {
+            "Name" = "8:F4E by MMB"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_4C77E7709ED441B6A55290D8A245AB93"
+            "Folder" = "8:_153ABED56F284D64A20E9ECE5E9DEC19"
+            "WorkingFolder" = "8:_41249D082A244FA9B6CD36D2994803E9"
+            "Icon" = "8:_F72302632AE44415B9D316536C47E5FE"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C3C5EAE27DDB4771BCA836F2C9AEF189"
+            {
+            "Name" = "8:F4E by MMB"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_4C77E7709ED441B6A55290D8A245AB93"
+            "Folder" = "8:_3F86677A263F4427B88ACA54569C4F17"
+            "WorkingFolder" = "8:_41249D082A244FA9B6CD36D2994803E9"
+            "Icon" = "8:_F72302632AE44415B9D316536C47E5FE"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {

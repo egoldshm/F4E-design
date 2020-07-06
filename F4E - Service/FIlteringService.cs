@@ -127,7 +127,6 @@ namespace F4E___Service
                     InternetBlocker.Block(false);
                     break;
                 case 131:
-                    ShowMessage("131","131");
                     Stop();
                     Application.Exit();
                     break;
