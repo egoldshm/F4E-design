@@ -28,11 +28,12 @@ namespace F4E_design.Pages
 
         public void ResetGUI()
         {
-            nameTB.Text = FilteringSystem.GetAdminName();
+            nameTB.Text = FilteringSystem.GetCurrentFilteringSettings().GetAdminName();
             passwordTB.Password = PasswordEncryption.Decrypt(FilteringSystem.GetCurrentFilteringSettings().GetAdminPassword());
             confirmPasswordTB.Password = passwordTB.Password;
             confirmPasswordTB.Foreground = new SolidColorBrush(Colors.LimeGreen);
-            mailTB.Text = FilteringSystem.GetAdminMail();
+            pcNameTB.Text = FilteringSystem.GetCurrentFilteringSettings().GetComputerName();
+            mailTB.Text = FilteringSystem.GetCurrentFilteringSettings().GetAdminMail();
         }
 
         public MainWindow Window { get; set; }
@@ -75,38 +76,77 @@ namespace F4E_design.Pages
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            if(passwordTB.Password.Length>3)
+            if (nameTB.Text != "")
             {
-                if(passwordTB.Password.Equals(confirmPasswordTB.Password))
+                if (pcNameTB.Text != "")
                 {
-                    if(Tools.IsValidEmail(mailTB.Text))
+                    if (passwordTB.Password.Length > 3)
                     {
-                        SaveChanges();
+                        if (passwordTB.Password.Equals(confirmPasswordTB.Password))
+                        {
+                            if (Tools.IsValidEmail(mailTB.Text))
+                            {
+                                SaveChanges();
+                            }
+                            else
+                            {
+                                CustomMessageBox.ShowDialog(Window, "כתובת הדוא''ל שהוזנה אינה חוקית.", "כתובת דוא''ל לא חוקית", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                            }
+                        }
+                        else
+                        {
+                            CustomMessageBox.ShowDialog(Window, "הסיסמאות שהוזנו אינן תואמות אחת לשנייה.", "הסיסמאות אינן תואמות", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                        }
                     }
                     else
                     {
-                        CustomMessageBox.ShowDialog(Window, "כתובת הדוא''ל שהוזנה אינה חוקית.", "כתובת דוא''ל לא חוקית", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                        CustomMessageBox.ShowDialog(Window, "אורך הסיסמה חייב להיות ארוך משלושה תווים.", "הסיסמה קצרה מידי", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
                     }
                 }
                 else
                 {
-                    CustomMessageBox.ShowDialog(Window, "הסיסמאות שהוזנו אינן תואמות אחת לשנייה.", "הסיסמאות אינן תואמות", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                    CustomMessageBox.ShowDialog(Window, "שם המחשב אינו יכול להיות ריק.", "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
                 }
             }
             else
             {
-                CustomMessageBox.ShowDialog(Window, "אורך הסיסמה חייב להיות ארוך משלושה תווים.", "הסיסמה קצרה מידי", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                CustomMessageBox.ShowDialog(Window, "שם מנהל המערכת אינו יכול להיות ריק.", "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
             }
         }
 
         private void SaveChanges()
         {
-            FilteringSystem.SetAdminPassword(passwordTB.Password);
-            FilteringSystem.SetAdminName(nameTB.Text);
-            FilteringSystem.SetAdminMail(mailTB.Text);
-            FilteringSystem.SaveChanges();
-            Window.SetWelcomeLabel();
-            CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "השינויים נשמרו", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+            Boolean savedSuccessfuly = false;
+            int attempts = 0;
+            Exception error = null;
+            while (!savedSuccessfuly)
+            {
+                if (attempts < 4)
+                {
+                    try
+                    {
+                        FilteringSystem.GetCurrentFilteringSettings().SetAdminPassword(passwordTB.Password);
+                        FilteringSystem.GetCurrentFilteringSettings().SetAdminName(nameTB.Text);
+                        FilteringSystem.GetCurrentFilteringSettings().SetAdminMail(mailTB.Text);
+                        FilteringSystem.GetCurrentFilteringSettings().SetComputerName(pcNameTB.Text);
+                        FilteringSystem.SaveChanges();
+                        Window.SetWelcomeLabel();
+                        savedSuccessfuly = true;
+                        CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "השינויים נשמרו", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+                    }
+                    catch (Exception e)
+                    {
+                        error = e;
+                        attempts++;
+                        System.Threading.Thread.Sleep(200);
+                    }
+                }
+                else
+                {
+                    CustomMessageBox.ShowDialog(null, error.Message, "שגיאה בשמירת נתונים", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                    break;
+                }
+            }
         }
 
         private void MailTextChanged(object sender, TextChangedEventArgs e)

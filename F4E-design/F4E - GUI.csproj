@@ -123,16 +123,12 @@
     <Compile Include="EnterAdminPasswordWindow.xaml.cs">
       <DependentUpon>EnterAdminPasswordWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FilesCathcer.cs" />
     <Compile Include="FilteringSettings.cs" />
     <Compile Include="FilteringSystem.cs" />
     <Compile Include="HostsFileAdapter.cs" />
-    <Compile Include="Installer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Installer.Designer.cs">
-      <DependentUpon>Installer.cs</DependentUpon>
-    </Compile>
     <Compile Include="InternetBlocker.cs" />
+    <Compile Include="MailsSender.cs" />
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -165,6 +161,9 @@
     <Compile Include="SignUpWindowFiles\pages\EndPage.xaml.cs">
       <DependentUpon>EndPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SignUpWindowFiles\pages\SetComputerName.xaml.cs">
+      <DependentUpon>SetComputerName.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SignUpWindowFiles\pages\SetDotsPasswordPage.xaml.cs">
       <DependentUpon>SetDotsPasswordPage.xaml</DependentUpon>
     </Compile>
@@ -182,12 +181,6 @@
     </Compile>
     <Compile Include="TaskingScheduel.cs" />
     <Compile Include="Tools.cs" />
-    <Compile Include="UninstallPasswordForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UninstallPasswordForm.Designer.cs">
-      <DependentUpon>UninstallPasswordForm.cs</DependentUpon>
-    </Compile>
     <Page Include="CustomMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -240,6 +233,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SignUpWindowFiles\pages\SetComputerName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SignUpWindowFiles\pages\SetDotsPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,9 +271,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UninstallPasswordForm.resx">
-      <DependentUpon>UninstallPasswordForm.cs</DependentUpon>
     </EmbeddedResource>
     <Resource Include="Fonts\Assistant-Bold.ttf" />
     <Resource Include="Fonts\Assistant-ExtraBold.ttf" />

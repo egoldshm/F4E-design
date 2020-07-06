@@ -1,6 +1,6 @@
-﻿namespace F4E_GUI
+﻿namespace F4E___Uninstaller
 {
-    partial class Installer
+    partial class Installer1
     {
         /// <summary>
         /// Required designer variable.

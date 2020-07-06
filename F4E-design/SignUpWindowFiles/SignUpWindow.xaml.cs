@@ -56,11 +56,18 @@ namespace F4E_design.SignUpWindowFiles
                     pagesFrame.Content = SelectPasswordPage.Instance;
                     SetPreviousEnabled(true);
                     break;
+                //case 2:
+                //    DotsPasswordPage.Instance.Window = this;
+                //    pagesFrame.Content = DotsPasswordPage.Instance;
+                //    SetNextButtonText("דלג");
+                //    SetNextEnabled(true);
+                //    SetPreviousEnabled(true);
+                //    break;
                 case 2:
-                    DotsPasswordPage.Instance.Window = this;
-                    pagesFrame.Content = DotsPasswordPage.Instance;
-                    SetNextButtonText("דלג");
-                    SetNextEnabled(true);
+                    SetComputerName.Instance.Window = this;
+                    pagesFrame.Content = SetComputerName.Instance;
+                    SetNextButtonText("הבא");
+                    SetNextEnabled(false);
                     SetPreviousEnabled(true);
                     break;
                 case 3:
@@ -86,13 +93,21 @@ namespace F4E_design.SignUpWindowFiles
 
         private void SystemSetup()
         {
-            FilteringSystem.FirstSetup();
-            FilteringSystem.SetAdminName(IntroductionPage.Instance.enteredName);
-            FilteringSystem.SetAdminPassword(SelectPasswordPage.Instance.enteredPassword);
-            FilteringSystem.SetAdminMail(SetMailPage.Instance.enteredMail);
-            FilteringSystem.SaveChanges();
-            FilteringSystem.Load();
-            FilteringSystem.SetSystemStatus(true);
+            try
+            {
+                FilteringSystem.FirstSetup();
+                FilteringSystem.GetCurrentFilteringSettings().SetAdminName(IntroductionPage.Instance.enteredName);
+                FilteringSystem.GetCurrentFilteringSettings().SetAdminPassword(SelectPasswordPage.Instance.enteredPassword);
+                FilteringSystem.GetCurrentFilteringSettings().SetAdminMail(SetMailPage.Instance.enteredMail);
+                FilteringSystem.GetCurrentFilteringSettings().SetComputerName(SetComputerName.Instance.PCName);
+                FilteringSystem.SaveChanges();
+                FilteringSystem.Load();
+                FilteringSystem.SetSystemStatus(true);
+            }
+            catch(Exception e)
+            {
+                CustomMessageBox.ShowDialog(null, e.Message, "שגיאה בשמירת שינויים", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+            }
         }
 
         private void PreviousButton_Click(object sender, RoutedEventArgs e)

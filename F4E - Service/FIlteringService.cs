@@ -109,6 +109,7 @@ namespace F4E___Service
 
         protected override void OnStop()
         {
+            base.OnStop();
             timer.Stop();
             timer.Enabled = false;
             InternetBlocker.Block(false);
@@ -125,11 +126,10 @@ namespace F4E___Service
                 case 129:
                     InternetBlocker.Block(false);
                     break;
-                case 130:
-                    allowSafemode = false;
-                    break;
                 case 131:
-                    allowSafemode = true;
+                    ShowMessage("131","131");
+                    Stop();
+                    Application.Exit();
                     break;
             }
         }

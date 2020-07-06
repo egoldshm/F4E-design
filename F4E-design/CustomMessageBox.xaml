@@ -107,8 +107,8 @@
                         <ColumnDefinition x:Name="spaceBetweenButtonsColumn" Width="1*"/>
                         <ColumnDefinition x:Name="noButtonColumn" Width="10*"/>
                     </Grid.ColumnDefinitions>
-                    <Button  x:Name="NoButton" IsCancel="True" Grid.Column="2" BorderBrush="{x:Null}" Content="לא" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="20" FontWeight="SemiBold" Foreground="White" Margin="0,5,22.8,20" Background="LightGray" Click="NoButton_Click"/>
-                    <Button x:Name="YesButton" IsDefault="True" IsCancel="False" BorderBrush="{x:Null}" Content="כן" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="20" FontWeight="SemiBold" Foreground="White" Margin="22.8,5,0,20" Click="YesButton_Click">
+                    <Button  x:Name="NoButton" IsCancel="True" Grid.Column="2" BorderBrush="{x:Null}" Content="לא" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="14" FontWeight="SemiBold" Foreground="White" Margin="0,5,22.8,20" Background="LightGray" Click="NoButton_Click"/>
+                    <Button x:Name="YesButton" IsDefault="True" IsCancel="False" BorderBrush="{x:Null}" Content="כן" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="14" FontWeight="SemiBold" Foreground="White" Margin="22.8,5,0,20" Click="YesButton_Click">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.796,1.48" StartPoint="0.51,-0.476">
                                 <GradientStop Color="#FF7DA4FF"/>

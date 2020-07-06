@@ -14,7 +14,7 @@ namespace F4E_design
     {
         private static readonly string SERVICE_NAME = "GUIAdapter";
 
-        public enum CustomCommends { startScheduelBlocking = 128, releaseScheduelBlocking = 129 }
+        public enum CustomCommends { startScheduelBlocking = 128, releaseScheduelBlocking = 129 , kill = 131 }
 
         public static void InstallService(string exePath)
         {
@@ -22,15 +22,19 @@ namespace F4E_design
             {
                 ManagedInstallerClass.InstallHelper(new string[] { exePath });
             }
-            catch(Exception e)
-            {}
+            catch (Exception e)
+            { }
         }
 
-        public static void UninstallService(string exePath)
+        public static void UninstallService()
         {
             try
             {
-                ManagedInstallerClass.InstallHelper(new string[] { "/u", exePath });
+                string servicePath = Assembly.GetExecutingAssembly().CodeBase;
+                servicePath = servicePath.Replace("F4E by MMB.exe", "F4E-Service.exe");
+                ServiceAdapter.CustomCommend("GUIAdapter", (int)CustomCommends.kill);
+                StopService("GUIAdapter", 10000);
+                ManagedInstallerClass.InstallHelper(new string[] { "/u", servicePath});
             }
             catch
             {
@@ -48,7 +52,7 @@ namespace F4E_design
                 service.Start();
                 service.WaitForStatus(ServiceControllerStatus.Running, timeout);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 string servicePath = Assembly.GetExecutingAssembly().CodeBase;
                 servicePath = servicePath.Replace("F4E by MMB.exe", "F4E-Service.exe");

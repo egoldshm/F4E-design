@@ -101,11 +101,11 @@ namespace F4E_design.Pages
                 Urls.RemoveAll(item => item.Url == content);
                 if(urlRow.Color==BLACKLIST_COLOR)
                 {
-                    FilteringSystem.RemoveSiteFromBlackList(content);
+                    FilteringSystem.GetCurrentFilteringSettings().RemoveSiteFromBlackList(content);
                 }
                 else
                 {
-                    FilteringSystem.RemoveSiteFromExceptionList(content);
+                    FilteringSystem.GetCurrentFilteringSettings().RemoveSiteFromExceptionList(content);
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace F4E_design.Pages
         {
             string url = Tools.FormatToShortDomainUri(url_text_box.Text);
             url_text_box.Text = "";
-            string result = FilteringSystem.AddSiteToBlackList(url);
+            string result = FilteringSystem.GetCurrentFilteringSettings().AddSiteToBlackList(url);
             if (result == "")
             {
                 AddItemToListBox(url, false);
@@ -127,7 +127,7 @@ namespace F4E_design.Pages
         {
             string url = url_text_box.Text;
             url_text_box.Text = "";
-            string result = FilteringSystem.AddSiteToExceptionList(url);
+            string result = FilteringSystem.GetCurrentFilteringSettings().AddSiteToExceptionList(url);
             if (result == "")
             {
                 AddItemToListBox(url, true);

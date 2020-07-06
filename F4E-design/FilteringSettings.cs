@@ -1,5 +1,7 @@
-﻿using System;
+﻿using F4E_GUI;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Packaging;
 using System.Net;
 
@@ -19,6 +21,7 @@ namespace F4E_design
         private string _adminName;
         private string _password;
         private string _adminMail;
+        private string _computerName;
         public Boolean SystemStatus;
         public Boolean ScheduelStatus;
         private Boolean _isSafeServerOn;
@@ -113,6 +116,17 @@ namespace F4E_design
         {
             _adminName = name;
         }
+
+        internal void SetComputerName(string pcName)
+        {
+            _computerName = pcName;
+        }
+
+        internal string GetComputerName()
+        {
+            return _computerName;
+        }
+
         internal string GetAdminName()
         {
             return _adminName;
@@ -137,31 +151,115 @@ namespace F4E_design
         {
             return _customBlacklist;
         }
-        public void addSiteToBlacklist(string url)
-        {
-            _customBlacklist.Add(url);
-        }
-        public void removeSiteFromBlacklist(string toRemove)
-        {
-            _customBlacklist.Remove(toRemove);
-        }
 
         public List<string> GetCustomExceptionsList()
         {
             return _customExceptionsList;
         }
-        public void removeSiteFromExceptionsList(string toRemove)
+        public string AddSiteToBlackList(string url)
         {
-            _customExceptionsList.Remove(toRemove);
+            if (url.CheckURLValid())
+            {
+                if (!GetCustomBlackList().Contains(url))
+                {
+                    if (!GetCustomExceptionsList().Contains(url) && url.Contains("mmb.org.il") == false)
+                    {
+                        _customBlacklist.Add(url);
+                        HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
+                        FilteringSystem.SaveChanges();
+                        return "";
+                    }
+                    else
+                    {
+                        return "כתובת זה מופיעה ברשימת החריגים, על מנת לחוסמה, יש להסירה תחילה מרשימה זו";
+                    }
+                }
+                else
+                {
+                    return "הכתובת כבר קיימת ברשימת האתרים לחסימה";
+                }
+            }
+            else
+            {
+                return "הכתובת אינה כתובת אינטרנט תקינה";
+            }
         }
-        public void addSiteToExceptionsList(string url)
+        public void RemoveSiteFromBlackList(string url)
         {
-            _customExceptionsList.Add(url);
+            _customBlacklist.Remove(url);
+            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
+            FilteringSystem.SaveChanges();
         }
-
+        public string AddSiteToExceptionList(string url)
+        {
+            if (url.CheckURLValid())
+            {
+                if (!GetCustomExceptionsList().Contains(url))
+                {
+                    if (!GetCustomBlackList().Contains(url))
+                    {
+                        _customExceptionsList.Add(url);
+                        HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
+                        FilteringSystem.SaveChanges();
+                        return "";
+                    }
+                    else
+                    {
+                        return "כתובת זה מופיעה ברשימת החסומים, על מנת להחריגה, יש להסירה תחילה מרשימה זו";
+                    }
+                }
+                else
+                {
+                    return "הכתובת כבר קיימת ברשימה";
+                }
+            }
+            else
+            {
+                return "הכתובת אינה כתובת אינטרנט תקינה";
+            }
+        }
+        public void RemoveSiteFromExceptionList(string url)
+        {
+            _customExceptionsList.Remove(url);
+            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
+            FilteringSystem.SaveChanges();
+        }
         public void SetAdminPassword(string password)
         {
             _password = PasswordEncryption.Encrypt(password);
+
+            Boolean savedSuccessfuly = false;
+            int attempts = 0;
+            Exception error = null;
+            while (!savedSuccessfuly)
+            {
+                if (attempts < 4)
+                {
+                    try
+                    {
+                        FilesCathcer.StopCatchingSystemFiles();
+                        string UninstallPasswordPath = "UniPass";
+                        if (!File.Exists(UninstallPasswordPath))
+                        {
+                            File.Create(UninstallPasswordPath).Close();
+                        }
+                        File.WriteAllText(UninstallPasswordPath, _password);
+                        FilesCathcer.CatchSystemFiles();
+                        savedSuccessfuly = true;
+                    }
+                    catch (Exception e)
+                    {
+                        error = e;
+                        attempts++;
+                        System.Threading.Thread.Sleep(200);
+                    }
+                }
+                else
+                {
+                    CustomMessageBox.ShowDialog(null, error.Message, "שגיאה בשמירת נתונים", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                    break;
+                }
+            }
         }
         public string GetAdminPassword()
         {

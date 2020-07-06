@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,6 +26,15 @@ namespace F4E_design
             string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
             return regex.IsMatch(email);
+        }
+
+        public static void KillProcessByName(string name)
+        {
+            Process[] processes = Process.GetProcessesByName(name);
+            foreach(Process process in processes)
+            {
+                process.Kill();
+            }
         }
 
         public static BitmapImage LoadBitmapFromResource(string pathInApplication, Assembly assembly = null)
@@ -63,6 +74,22 @@ namespace F4E_design
                 bitmapimage.EndInit();
 
                 return bitmapimage;
+            }
+        }
+
+        public static string GetTextFromUri(string uri)
+        {
+            try
+            {
+                WebClient client = new WebClient();
+                client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.BypassCache);
+                client.Headers.Add("Cache-Control", "no-cache");
+                client.Encoding = Encoding.UTF8;
+                return client.DownloadString(uri);
+            }
+            catch
+            {
+                return null;
             }
         }
     }

@@ -130,11 +130,7 @@ namespace F4E_GUI
         {
             List<string> urlsList = new List<string>();
             string path= "http://f4e.mmb.org.il/sites/"+category.ToString().ToLower()+".html";
-            MessageBox.Show(path);
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead(path);
-            StreamReader reader = new StreamReader(stream);
-            string[] socialMediaUrlList = Regex.Split(reader.ReadToEnd(), "\r\n|\r|\n");
+            string[] socialMediaUrlList = Regex.Split(Tools.GetTextFromUri(path), "\r\n|\r|\n");
             foreach (string line in socialMediaUrlList)
             {
                 urlsList.Add(line);

@@ -137,7 +137,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="help" Content="עזרה" Style="{StaticResource MenuLabel}" Grid.Row="0" Grid.Column="0"  MouseLeftButtonUp="BottomMenu_MouseLeftButtonUp" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Left" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="35.56" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="-8.297,0,0,0.147">
+                <Label x:Name="help" Content="עזרה" Style="{StaticResource MenuLabel}" Grid.Row="0" Grid.Column="0"  MouseLeftButtonUp="HelpButton_MouseLeftButtonUp" BorderBrush="White" Padding="5,5,15,5" RenderTransformOrigin="0.5,0.5" Width="178.283" HorizontalAlignment="Left" HorizontalContentAlignment="Right" MouseMove="current_status_MouseMove" MouseLeave="current_status_MouseLeave" Height="35.56" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="-8.297,0,0,0.147">
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

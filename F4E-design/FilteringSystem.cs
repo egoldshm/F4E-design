@@ -5,6 +5,7 @@ using System;
 using System.Dynamic;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,6 @@ namespace F4E_design
         public static Boolean PreventCloseStatus = false;
         public static Boolean RunInSafeModeStatus = false;
         public static Boolean PreventSystemFilesEditStatus = false;
-        
 
         private static FilteringSettings _filteringSettings;
         private static System.Timers.Timer defenseStatusChecker;
@@ -47,6 +47,7 @@ namespace F4E_design
         }
         public static void SaveChanges()
         {
+            FilesCathcer.StopCatchingSystemFiles();
             Stream stream = null;
             try
             {
@@ -56,29 +57,8 @@ namespace F4E_design
             finally
             {
                 stream.Close();
+                FilesCathcer.CatchSystemFiles();
             }
-        }
-
-        public static void SetAdminPassword(string password)
-        {
-            _filteringSettings.SetAdminPassword(password);
-        }
-        public static string GetAdminMail()
-        {
-            return _filteringSettings.GetAdminMail();
-        }
-        public static void SetAdminMail(string mail)
-        {
-            _filteringSettings.SetAdminMail(mail);
-        }
-        public static string GetAdminName()
-        {
-            return _filteringSettings.GetAdminName();
-        }
-
-        public static void SetAdminName(string name)
-        {
-            _filteringSettings.SetAdminName(name);
         }
 
         public static Boolean LoginWithAdminPassword(string password)
@@ -96,10 +76,12 @@ namespace F4E_design
             {
                 //TaskingScheduel.AddAppToStartupApplications("F4E by MMB", System.AppDomain.CurrentDomain.BaseDirectory + "\\" + System.AppDomain.CurrentDomain.FriendlyName);
                 ServiceAdapter.StartService("GUIAdapter", 10000);
+                HostsFileAdapter.Write(GetCurrentFilteringSettings());
+                CustomNotifyIcon.SetupNotificationIcon();
+                FilesCathcer.CatchSystemFiles();
+                SetSystemStatus(true);
                 StartDefenceCheck();
                 StartScheduelBlockTimer();
-                CustomNotifyIcon.SetupNotificationIcon();
-                FilteringSystem.SetSystemStatus(true);
             }
             catch(Exception e)
             {
@@ -147,7 +129,7 @@ namespace F4E_design
         public static void StartDefenceCheck()
         {
             defenseStatusChecker = new System.Timers.Timer();
-            defenseStatusChecker.Interval = 3000;
+            defenseStatusChecker.Interval = 2000;
             defenseStatusChecker.Elapsed += DefenceChecker_Elapsed;
             defenseStatusChecker.Start();
         }
@@ -190,6 +172,7 @@ namespace F4E_design
         internal static void StopDefenceCheck()
         {
             defenseStatusChecker.Stop();
+            defenseStatusChecker.Close();
         }
 
         private static int tick_count = 0;
@@ -209,6 +192,7 @@ namespace F4E_design
             }
         }
 
+        private static int prevent_close_attempts = 0;
         public static void PreventClose()
         {
             new Thread(() =>
@@ -216,9 +200,15 @@ namespace F4E_design
                 if (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Running")
                 {
                     PreventCloseStatus = true;
+                    prevent_close_attempts = 0;
                 }
                 else
                 {
+                    if (prevent_close_attempts == 0)
+                    {
+                        MailsSender.SendUnusualActivityAlert();
+                    }
+                    prevent_close_attempts++;
                     ServiceAdapter.StartService("GUIAdapter", 10000);
                     PreventCloseStatus = false;
                 }
@@ -255,78 +245,20 @@ namespace F4E_design
         {
             new Thread(() =>
             {
-                PreventSystemFilesEditStatus = false;
+                Stream stream = null;
+                try
+                {
+                    stream = File.Open("SavedFilteringSettings", FileMode.Create);
+                    stream.Close();
+                    PreventSystemFilesEditStatus = false;
+                    FilesCathcer.CatchSystemFiles();
+                }
+                catch
+                {
+                    PreventSystemFilesEditStatus = true;
+                }
             }).Start();
+
         }
-        
-        public static string AddSiteToBlackList(string url)
-        {
-            if (url.CheckURLValid())
-            {
-                if (!GetCurrentFilteringSettings().GetCustomBlackList().Contains(url))
-                {
-                    if (!GetCurrentFilteringSettings().GetCustomExceptionsList().Contains(url))
-                    {
-                        GetCurrentFilteringSettings().addSiteToBlacklist(url);
-                        HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
-                        SaveChanges();
-                        return "";
-                    }
-                    else
-                    {
-                        return "כתובת זה מופיעה ברשימת החריגים, על מנת לחוסמה, יש להסירה תחילה מרשימה זו";
-                    }
-                }
-                else
-                {
-                    return "הכתובת כבר קיימת ברשימת האתרים לחסימה";
-                }
-            }
-            else
-            {
-                return "הכתובת אינה כתובת אינטרנט תקינה";
-            }
-        }
-        public static void RemoveSiteFromBlackList(string url)
-        {
-            GetCurrentFilteringSettings().removeSiteFromBlacklist(url);
-            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
-            SaveChanges();
-        }
-        public static string AddSiteToExceptionList(string url)
-        {
-            if (url.CheckURLValid())
-            {
-                if (!GetCurrentFilteringSettings().GetCustomExceptionsList().Contains(url))
-                {
-                    if (!GetCurrentFilteringSettings().GetCustomBlackList().Contains(url))
-                    {
-                        GetCurrentFilteringSettings().addSiteToExceptionsList(url);
-                        HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
-                        SaveChanges();
-                        return "";
-                    }
-                    else
-                    {
-                        return "כתובת זה מופיעה ברשימת החסומים, על מנת להחריגה, יש להסירה תחילה מרשימה זו";
-                    }
-                }
-                else
-                {
-                    return "הכתובת כבר קיימת ברשימה";
-                }
-            }
-            else
-            {
-                return "הכתובת אינה כתובת אינטרנט תקינה";
-            }
-        }
-        public static void RemoveSiteFromExceptionList(string url)
-        {
-            GetCurrentFilteringSettings().removeSiteFromExceptionsList(url);
-            HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
-            SaveChanges();
-        }
-    
     }
 }

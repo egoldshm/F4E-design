@@ -21,8 +21,7 @@ namespace F4E_design
             {
                 if (HasAdministratorPrivilege())
                 {
-                    FilteringSystem.LoadSavedFilteringSettings();
-                    NotifyForNewVersion();
+                    FilteringSystem.LoadSavedFilteringSettings();                
                     if (IsFirstOpening())
                     {
                         new SignUpWindowFiles.SignUpWindow().Show();     
@@ -55,14 +54,22 @@ namespace F4E_design
             }
         }
 
-        private void NotifyForNewVersion()
+        public static void NotifyForNewVersion(Window window)
         {
            if(CheckForUpdates()==true)
             {
-                if (CustomMessageBox.ShowDialog(null, "גרסה חדשה זמינה להורדה עכשיו באתר. האם ברצונך לעבור לאתר כעת?", "גרסה חדשה זמינה", CustomMessageBox.CustomMessageBoxTypes.Question, "עבור לאתר", "יותר מאוחר")==true)
+                if (CustomMessageBox.ShowDialog(window, "גרסה חדשה זמינה להורדה עכשיו באתר. האם ברצונך לעבור לאתר כעת?", "גרסה חדשה זמינה", CustomMessageBox.CustomMessageBoxTypes.Question, "עבור לאתר", "יותר מאוחר")==true)
                 {
                     Process.Start("https://f4e.mmb.org.il");
                 }
+            }
+        }
+        public static void NotifyForVersionOutOfUse(Window window)
+        {
+            if (IsActiveVersion() == false)
+            {
+                CustomMessageBox.ShowDialog(window, "נראה כי גרסה זו הינה גרסה ישנה של האפליקציה וכי היא יצאה מכלל שימוש. יש לעדכן את התוכנה דרך האתר ולאחר מכן לנסות שנית.", "גרסה זו מחוץ לשימוש", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                App.FullExit();
             }
         }
 
@@ -106,15 +113,44 @@ namespace F4E_design
 
         public static Boolean CheckForUpdates()
         {
-            string last_version_path = "http://f4e.mmb.org.il/data/last_version";
-            System.Net.WebClient client = new System.Net.WebClient();
-            client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.BypassCache);
-            client.Headers.Add("Cache-Control", "no-cache");
-
-            string last_version = client.DownloadString(last_version_path);
+            string last_version = Tools.GetTextFromUri("http://f4e.mmb.org.il/data/last_version");
             string current_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            return !(last_version == current_version);
+            if (last_version != null)
+            {
+                return !(last_version == current_version);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static Boolean IsActiveVersion()
+        {
+            string active_versions = Tools.GetTextFromUri("http://f4e.mmb.org.il/data/active_versions");
+            string current_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            if (active_versions != null)
+            {
+                return (active_versions.Contains(current_version));
+            }
+            else
+            {
+                return false;
+            }
+        }
+    
+        public static void FullExit()
+        {
+            FilteringSystem.StopDefenceCheck();
+            InternetBlocker.Block(false);
+            CustomNotifyIcon.Hide();
+            while (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Running")
+            {
+                ServiceAdapter.CustomCommend("GUIAdapter", (int)ServiceAdapter.CustomCommends.kill);
+                ServiceAdapter.StopService("GUIAdapter", 10000);
+                Environment.Exit(Environment.ExitCode);
+            }
         }
     }
 }
