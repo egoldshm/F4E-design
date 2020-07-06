@@ -27,13 +27,37 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_26248455D0374361991A01CE9D1631B4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2D9EB7C4A04F4A628FC0DBE6AA32BF76"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_40A2AE70D14F40B4B6FEEDA277246D5D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4C77E7709ED441B6A55290D8A245AB93"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4EAD9668F32B4CBC8302E44F6C74BEFB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_62A7F65C42F3485AAE46806770E49264"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -64,6 +88,18 @@
         "Entry"
         {
         "MsmKey" = "8:_BAEB7A1B71C64079903CDB9EAA8681AC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CE8257025A9F4AB0B753C2334EBC4A7D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EE028846A3614A15B7973381023BC10D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -166,6 +202,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -255,6 +299,86 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26248455D0374361991A01CE9D1631B4"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-ExtraLight.ttf"
+            "TargetName" = "8:Assistant-ExtraLight.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_40A2AE70D14F40B4B6FEEDA277246D5D"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-Regular.ttf"
+            "TargetName" = "8:Assistant-Regular.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4EAD9668F32B4CBC8302E44F6C74BEFB"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-Bold.ttf"
+            "TargetName" = "8:Assistant-Bold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62A7F65C42F3485AAE46806770E49264"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-SemiBold.ttf"
+            "TargetName" = "8:Assistant-SemiBold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_80F11CB8233425BB920B3291BE21ED01"
             {
             "AssemblyRegister" = "3:1"
@@ -337,6 +461,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CE8257025A9F4AB0B753C2334EBC4A7D"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-ExtraBold.ttf"
+            "TargetName" = "8:Assistant-ExtraBold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE028846A3614A15B7973381023BC10D"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-Light.ttf"
+            "TargetName" = "8:Assistant-Light.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F72302632AE44415B9D316536C47E5FE"
             {
             "SourcePath" = "8:..\\..\\..\\Filter 0.2\\graphics\\icons\\active_icon.ico"
@@ -363,6 +527,17 @@
         }
         "Folder"
         {
+            "{1525181F-901A-416C-8A58-119130FE478E}:_0F692C8BFFC6459EB80E3CEAED062069"
+            {
+            "Name" = "8:#1911"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:FontsFolder"
+                "Folders"
+                {
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_153ABED56F284D64A20E9ECE5E9DEC19"
             {
             "Name" = "8:#1916"
@@ -414,7 +589,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:F4E by MMB"
         "ProductCode" = "8:{B63E71E5-764E-4E04-AB76-28FA7F7174CC}"
-        "PackageCode" = "8:{2F269622-A7DD-41D8-BE10-CEA502C6D9CA}"
+        "PackageCode" = "8:{7CC6F3FC-AC0F-4018-B97E-1F410CC2AA0F}"
         "UpgradeCode" = "8:{68A79374-766D-43DD-AE6B-6E2742158529}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -945,7 +1120,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_07C1C283DA4F4187ADD03AAF13C572EF"
             {
-            "SourcePath" = "8:..\\F4E - Service\\obj\\Debug\\F4E-Service.exe"
+            "SourcePath" = "8:..\\F4E - Service\\obj\\Release\\F4E-Service.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_41249D082A244FA9B6CD36D2994803E9"
@@ -973,7 +1148,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2D9EB7C4A04F4A628FC0DBE6AA32BF76"
             {
-            "SourcePath" = "8:..\\F4E - Uninstaller\\obj\\Debug\\F4E-Uninstaller.exe"
+            "SourcePath" = "8:..\\F4E - Uninstaller\\obj\\Release\\F4E-Uninstaller.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_41249D082A244FA9B6CD36D2994803E9"
@@ -1001,7 +1176,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4C77E7709ED441B6A55290D8A245AB93"
             {
-            "SourcePath" = "8:..\\F4E-design\\obj\\x86\\Debug\\F4E by MMB.exe"
+            "SourcePath" = "8:..\\F4E-design\\obj\\x86\\Release\\F4E by MMB.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_41249D082A244FA9B6CD36D2994803E9"
