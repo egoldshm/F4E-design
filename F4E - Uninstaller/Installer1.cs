@@ -30,6 +30,11 @@ namespace F4E___Uninstaller
         {
             base.OnBeforeInstall(savedState);
 
+            if(Process.GetProcessesByName("F4E by MMB.exe").Length>0)
+            {
+                throw new InstallException("לא ניתן להסיר התקנה כאשר מופע של התוכנה פעיל. יש לסגור את כל המופעים של התוכנה ולאחר מכן לנסות שנית.");
+            }
+
             EnterPasswordForm enterPasswordForm = new EnterPasswordForm(true);
             enterPasswordForm.ShowDialog();
 

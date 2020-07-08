@@ -65,7 +65,7 @@ namespace F4E_design
             FilteringSystem.PreventSystemFilesEdit();
             Dispatcher.Invoke(new Action(() =>
             {
-                if (FilteringSystem.PreventSystemFilesEditStatus == true)
+                if (FilteringSystem.preventSystemFilesEditStatus == true)
                 {
                     hostCatchStatusLabel.Content = "פעיל";
                     hostCatchStatusLabel.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 9, 163, 3));
@@ -83,7 +83,7 @@ namespace F4E_design
             FilteringSystem.RunInSafeMode();
             Dispatcher.Invoke(new Action(() =>
             {
-                if ((FilteringSystem.PreventCloseStatus && FilteringSystem.RunInSafeModeStatus) == true)
+                if ((FilteringSystem.preventCloseStatus && FilteringSystem.runInSafeModeStatus && FilteringSystem.runInStartUpStatus) == true)
                 {
                     preventClosingStatusLabel.Content = "פעיל";
                     preventClosingStatusLabel.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 9, 163, 3));
@@ -169,6 +169,14 @@ namespace F4E_design
         private void safeServerToggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             UpdateGUIStatus("/images/statusPage/safeserver_on.png", "/images/statusPage/safeserver_off.png", DnsController.IsSafe(true), safeServerToggle);
+        }
+
+        private void preventClosingStatusLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (preventClosingStatusLabel.Content.ToString() == "לא פעיל")
+            {
+                FilteringSystem.PostDefenceStatus();
+            }
         }
     }
 }

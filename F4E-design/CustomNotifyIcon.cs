@@ -25,7 +25,6 @@ namespace F4E_design
             _notifyIcon.Click += NotifyIcon_Click;
             _notifyIcon.BalloonTipClicked += NotifyIcon_Click;
         }
-
         private static void NotifyIcon_Click(object sender, EventArgs e)
         {
             MainWindow window = App.Current.MainWindow as MainWindow;

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Windows;
+using System.Windows.Forms;
 
-namespace F4E_design
+namespace F4E___Uninstaller
 {
     class TaskingScheduel
     {

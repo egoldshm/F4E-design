@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Management;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -40,7 +33,7 @@ namespace F4E___Service
         {
             timer.Elapsed += new ElapsedEventHandler(OnElapsedTime);
             timer.Interval = 3500; //number in milisecinds  
-            timer.Enabled = true;
+            timer.Start();
         }
 
         private void OnElapsedTime(object sender, ElapsedEventArgs e)
@@ -62,8 +55,6 @@ namespace F4E___Service
             }
         }
 
-        int count = 0;
-
         Boolean processAlreadyDetected = false;
 
         private void PreventClosing()
@@ -71,29 +62,42 @@ namespace F4E___Service
             if (!IsProcessOpen())
             {
                 if (processAlreadyDetected)
-                    BootController.DoExitWin(BootController.EWX_REBOOT);
-                else
-                    RunGUIProcess();
-
-                if (count % 15 == 0 && count > 3)
                 {
                     ShowMessage("F4E Filtering Sysetm", "The system recognized that the main process was unexpectedly shut down. PC REBOOT");
+                    BootController.DoExitWin(BootController.EWX_REBOOT);
                 }
-                count++;
             }
             else
             {
                 processAlreadyDetected = true;
-                count = 15;
             }
         }
 
-        private void RunGUIProcess()
+        private static void SetInterActWithDesktop()
         {
-            string processePath = Assembly.GetExecutingAssembly().CodeBase;
-            processePath = processePath.Replace("F4E-Service.exe", "F4E by MMB.exe");
-            Process.Start(processePath);
+            var service = new System.Management.ManagementObject(
+                    String.Format("WIN32_Service.Name='{0}'", "GUIAdapter"));
+            try
+            {
+                var paramList = new object[11];
+                paramList[5] = true;
+                service.InvokeMethod("Change", paramList);
+            }
+            finally
+            {
+                service.Dispose();
+            }
+
+
         }
+
+        //private void RunGUIProcess()
+        //{
+        //    SetInterActWithDesktop();
+        //    string processePath = Assembly.GetExecutingAssembly().CodeBase;
+        //    processePath = processePath.Replace("F4E-Service.exe", "F4E by MMB.exe");
+        //    Process.Start(processePath);
+        //}
 
         private bool IsProcessOpen()
         {
@@ -121,9 +125,11 @@ namespace F4E___Service
             switch (command)
             {
                 case 128:
+                    ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled internet blocking has started.");
                     InternetBlocker.Block(true);
                     break;
                 case 129:
+                    ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled web blocking is over.");
                     InternetBlocker.Block(false);
                     break;
                 case 131:

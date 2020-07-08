@@ -93,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SafemodeAdapter.cs" />
     <Compile Include="ServiceAdapter.cs" />
+    <Compile Include="TaskingScheduel.cs" />
     <Compile Include="Tools.cs" />
     <EmbeddedResource Include="EnterPasswordForm.resx">
       <DependentUpon>EnterPasswordForm.cs</DependentUpon>

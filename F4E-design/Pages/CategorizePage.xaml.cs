@@ -130,19 +130,26 @@ namespace F4E_design.Pages
         {
             if (InternetBlocker.isInternetReachable())
             {
-                FilteringSystem.GetCurrentFilteringSettings().isSocialNetworksBlocked = _isSocialNetworksBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isGamblingBlocked = _isGamblingBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isNewsBlocked = _isNewsBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isSportBlocked = _isSportBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isVideoPlayersBlocked = _isVideoPlayersBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isDatingBlocked = _isDatingBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isGamesBlocked = _isGamesBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isPhotosStackBlocked = _isPhotosStackBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isLifeStyleBlocked = _isLifeStyleBlocked;
-                FilteringSystem.GetCurrentFilteringSettings().isViolenceBlocked = _isViolenceBlocked;
-                FilteringSystem.SaveChanges();
-                HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
-                CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "קטגוריות סינון", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+                try
+                {
+                    FilteringSystem.GetCurrentFilteringSettings().isSocialNetworksBlocked = _isSocialNetworksBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isGamblingBlocked = _isGamblingBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isNewsBlocked = _isNewsBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isSportBlocked = _isSportBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isVideoPlayersBlocked = _isVideoPlayersBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isDatingBlocked = _isDatingBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isGamesBlocked = _isGamesBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isPhotosStackBlocked = _isPhotosStackBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isLifeStyleBlocked = _isLifeStyleBlocked;
+                    FilteringSystem.GetCurrentFilteringSettings().isViolenceBlocked = _isViolenceBlocked;
+                    FilteringSystem.SaveChanges();
+                    HostsFileAdapter.Write(FilteringSystem.GetCurrentFilteringSettings());
+                    CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "השינויים נשמרו", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+                }
+                catch(Exception ex)
+                {
+                    CustomMessageBox.ShowDialog(Window, "כתיבת הנתונים לא הצליחה"+ Environment.NewLine + ex.Message, "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+                }
             }
             else
             {

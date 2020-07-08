@@ -22,7 +22,7 @@ namespace F4E_design
             {
                 ManagedInstallerClass.InstallHelper(new string[] { exePath });
             }
-            catch (Exception e)
+            catch
             { }
         }
 
@@ -52,7 +52,7 @@ namespace F4E_design
                 service.Start();
                 service.WaitForStatus(ServiceControllerStatus.Running, timeout);
             }
-            catch (Exception e)
+            catch
             {
                 string servicePath = Assembly.GetExecutingAssembly().CodeBase;
                 servicePath = servicePath.Replace("F4E by MMB.exe", "F4E-Service.exe");

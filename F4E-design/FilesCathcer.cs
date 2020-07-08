@@ -18,19 +18,30 @@ namespace F4E_GUI
             DirectoryInfo directory = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory);
             foreach (FileInfo file in directory.GetFiles())
             {
+                CatchFile(file);
+            }
+
+            //catch hosts file:
+            FileInfo hosts = new FileInfo(Environment.SystemDirectory+@"\drivers\etc\hosts");
+            CatchFile(hosts);
+        }
+
+        private static void CatchFile(FileInfo file)
+        {     
+            try
+            {
                 if (!file.FullName.Contains("SavedFilteringSettings"))
                 {
                     File.SetAttributes(file.FullName, FileAttributes.ReadOnly | FileAttributes.Encrypted | FileAttributes.System | FileAttributes.Hidden);
                 }
-                try
-                {
-                    //streamReaders.Add(new StreamReader(file.FullName));
-                    fileStreams.Add(File.Open(file.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
-                }
-                catch
-                { }
+
+                fileStreams.Add(File.Open(file.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+            }
+            catch
+            {
             }
         }
+
         public static void StopCatchingSystemFiles()
         {
             DirectoryInfo directory = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory);
@@ -42,6 +53,10 @@ namespace F4E_GUI
             {
                 stream.Close();
             }
+
+            //release hosts:
+            FileInfo hosts = new FileInfo(Environment.SystemDirectory + @"\drivers\etc\hosts");
+            File.SetAttributes(hosts.FullName, FileAttributes.Normal);
         }
         private static void SetDirectoryOnlySystemAccess(string path)
         {

@@ -48,18 +48,21 @@ namespace F4E___Service
         {
             try
             {
-                int description;
-                return InternetGetConnectedState(out description, 0);
+                NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+                foreach (NetworkInterface adapter in adapters)
+                {
+                    IPInterfaceProperties properties = adapter.GetIPProperties();
+                    if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
             catch
             {
-                return false;
+                return true;
             }
-        }
-
-        private static bool InternetGetConnectedState(out int description, int v)
-        {
-            throw new NotImplementedException();
         }
 
         public static Boolean GetBlockStatus()

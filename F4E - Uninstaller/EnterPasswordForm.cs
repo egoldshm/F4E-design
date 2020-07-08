@@ -55,6 +55,7 @@ namespace F4E___Uninstaller
                 {
                     DnsController.SetMode(false);
                     HostsFileAdapter.ClearAll();
+                    TaskingScheduel.RemoveApplicationFromAllUserStartup();
                     DeleteUninstallerEXEItSelf();
 
                     _successfullyUninstalled = true;

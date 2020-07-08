@@ -139,18 +139,15 @@ namespace F4E_design
                 return false;
             }
         }
-    
+
         public static void FullExit()
         {
             FilteringSystem.StopDefenceCheck();
             InternetBlocker.Block(false);
             CustomNotifyIcon.Hide();
-            while (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Running")
-            {
-                ServiceAdapter.CustomCommend("GUIAdapter", (int)ServiceAdapter.CustomCommends.kill);
-                ServiceAdapter.StopService("GUIAdapter", 10000);
-                Environment.Exit(Environment.ExitCode);
-            }
+            ServiceAdapter.CustomCommend("GUIAdapter", (int)ServiceAdapter.CustomCommends.kill);
+            ServiceAdapter.StopService("GUIAdapter", 10000);
+            Environment.Exit(Environment.ExitCode);
         }
     }
 }

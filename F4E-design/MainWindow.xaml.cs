@@ -169,7 +169,8 @@ namespace F4E_design
 
         private void HelpButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            FilesCathcer.CatchSystemFiles();
+            TaskingScheduel.RemoveApplicationFromAllUserStartup();
+            CustomMessageBox.ShowDialog(null, "הוסר!", "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
         }
     }
 }

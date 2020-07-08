@@ -27,7 +27,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_26248455D0374361991A01CE9D1631B4"
+        "MsmKey" = "8:_1FA43540F6B24C08A0B310A24E9A2C18"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,7 +39,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_40A2AE70D14F40B4B6FEEDA277246D5D"
+        "MsmKey" = "8:_3445CAE5F09C4CC2A49F3C271EA9597D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -51,13 +51,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4EAD9668F32B4CBC8302E44F6C74BEFB"
+        "MsmKey" = "8:_683979E620FA4BE9A9769B9D3637F7E4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_62A7F65C42F3485AAE46806770E49264"
+        "MsmKey" = "8:_75D8F09A44744EFB88588224FBF8C3FB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -93,19 +93,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CE8257025A9F4AB0B753C2334EBC4A7D"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_C318B97E00609FEC6DAE9A033C4A0FDE"
+        "OwnerKey" = "8:_4C77E7709ED441B6A55290D8A245AB93"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EE028846A3614A15B7973381023BC10D"
+        "MsmKey" = "8:_CCAEFBE98D104F5B945662A7E1007D2E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F72302632AE44415B9D316536C47E5FE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FC8A6B12A7234B65AC421C249C7AFEFD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -125,6 +131,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_80F11CB8233425BB920B3291BE21ED01"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C318B97E00609FEC6DAE9A033C4A0FDE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -299,9 +311,9 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26248455D0374361991A01CE9D1631B4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1FA43540F6B24C08A0B310A24E9A2C18"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-ExtraLight.ttf"
+            "SourcePath" = "8:..\\F4E-design\\Fonts\\Assistant-ExtraLight.ttf"
             "TargetName" = "8:Assistant-ExtraLight.ttf"
             "Tag" = "8:"
             "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
@@ -319,9 +331,29 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_40A2AE70D14F40B4B6FEEDA277246D5D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3445CAE5F09C4CC2A49F3C271EA9597D"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-Regular.ttf"
+            "SourcePath" = "8:..\\F4E-design\\Fonts\\Assistant-ExtraBold.ttf"
+            "TargetName" = "8:Assistant-ExtraBold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_683979E620FA4BE9A9769B9D3637F7E4"
+            {
+            "SourcePath" = "8:..\\F4E-design\\Fonts\\Assistant-Regular.ttf"
             "TargetName" = "8:Assistant-Regular.ttf"
             "Tag" = "8:"
             "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
@@ -339,30 +371,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4EAD9668F32B4CBC8302E44F6C74BEFB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75D8F09A44744EFB88588224FBF8C3FB"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-Bold.ttf"
-            "TargetName" = "8:Assistant-Bold.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:5"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62A7F65C42F3485AAE46806770E49264"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-SemiBold.ttf"
-            "TargetName" = "8:Assistant-SemiBold.ttf"
+            "SourcePath" = "8:..\\F4E-design\\Fonts\\Assistant-Light.ttf"
+            "TargetName" = "8:Assistant-Light.ttf"
             "Tag" = "8:"
             "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
             "Condition" = "8:"
@@ -461,12 +473,23 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CE8257025A9F4AB0B753C2334EBC4A7D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C318B97E00609FEC6DAE9A033C4A0FDE"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-ExtraBold.ttf"
-            "TargetName" = "8:Assistant-ExtraBold.ttf"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                "ScatterAssemblies"
+                {
+                    "_C318B97E00609FEC6DAE9A033C4A0FDE"
+                    {
+                    "Name" = "8:System.IO.Compression.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.IO.Compression.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Folder" = "8:_41249D082A244FA9B6CD36D2994803E9"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -476,15 +499,15 @@
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
-            "Register" = "3:5"
+            "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE028846A3614A15B7973381023BC10D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CCAEFBE98D104F5B945662A7E1007D2E"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\‏‏תיקיה חדשה\\Assistant-Light.ttf"
-            "TargetName" = "8:Assistant-Light.ttf"
+            "SourcePath" = "8:..\\F4E-design\\Fonts\\Assistant-SemiBold.ttf"
+            "TargetName" = "8:Assistant-SemiBold.ttf"
             "Tag" = "8:"
             "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
             "Condition" = "8:"
@@ -517,6 +540,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC8A6B12A7234B65AC421C249C7AFEFD"
+            {
+            "SourcePath" = "8:..\\F4E-design\\Fonts\\Assistant-Bold.ttf"
+            "TargetName" = "8:Assistant-Bold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_0F692C8BFFC6459EB80E3CEAED062069"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
@@ -588,15 +631,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:F4E by MMB"
-        "ProductCode" = "8:{B63E71E5-764E-4E04-AB76-28FA7F7174CC}"
-        "PackageCode" = "8:{6C498A97-15E1-487B-9F4E-2D6641FA141F}"
+        "ProductCode" = "8:{4386A700-6A6E-46DE-AFD3-04BAA1EE10D4}"
+        "PackageCode" = "8:{909F4004-389B-4B51-AAA2-1008CD86F65A}"
         "UpgradeCode" = "8:{68A79374-766D-43DD-AE6B-6E2742158529}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:MMB"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://f4e.mmb.org.il"

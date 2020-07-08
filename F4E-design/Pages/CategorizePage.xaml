@@ -88,11 +88,11 @@
                 <Image Source="/images/categorizepage/newsIcon.png" Grid.Column="2" Grid.Row="2" Margin="6.8,8.2,8.4,8.2"/>
                 <Image Source="/images/categorizepage/sportIcon.png" Grid.Column="2" Grid.Row="3" Margin="6.8,7.8,8.4,7.6"/>
                 <Image Source="/images/categorizepage/playersIcon.png" Grid.Column="2" Grid.Row="4" Margin="6.8,8.4,8.4,8"/>
-                <Image Source="/images/categorizepage/socialIcon.png" Grid.Column="2" Grid.Row="5" Margin="6.8,8,8.4,8.4"/>
-                <Image Source="/images/categorizepage/gamblingIcon.png" Grid.Column="2" Grid.Row="6" Margin="6.8,7.6,8.4,7.8"/>
-                <Image Source="/images/categorizepage/newsIcon.png" Grid.Column="2" Grid.Row="7" Margin="6.8,8.2,8.4,8.2"/>
-                <Image Source="/images/categorizepage/sportIcon.png" Grid.Column="2" Grid.Row="8" Margin="6.8,7.8,8.4,7.6"/>
-                <Image Source="/images/categorizepage/playersIcon.png" Grid.Column="2" Grid.Row="9" Margin="6.8,8.4,8.4,8"/>
+                <Image Source="/images/categorizepage/imagesIcon.png" Grid.Column="2" Grid.Row="5" Margin="6.8,8,8.4,8.4"/>
+                <Image Source="/images/categorizepage/gamesIcon.png" Grid.Column="2" Grid.Row="6" Margin="6.8,7.6,8.4,7.8"/>
+                <Image Source="/images/categorizepage/datingIcon.png" Grid.Column="2" Grid.Row="7" Margin="6.8,8.2,8.4,8.2"/>
+                <Image Source="/images/categorizepage/violenceIcon.png" Grid.Column="2" Grid.Row="8" Margin="6.8,7.8,8.4,7.6"/>
+                <Image Source="/images/categorizepage/lifestyleIcon.png" Grid.Column="2" Grid.Row="9" Margin="6.8,8.4,8.4,8"/>
                 <Label Content="רשתות חברתיות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="0" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
                 <Label Content="הימורים" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="1" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
                 <Label Content="חדשות" FontFamily="/F4E-design;component/Fonts/#Assistant" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" HorizontalContentAlignment="Right" Grid.Row="2" Margin="0,0,0.2,0.4" Grid.ColumnSpan="2" Width="185" VerticalContentAlignment="Center"/>
