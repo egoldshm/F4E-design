@@ -52,8 +52,13 @@ namespace F4E_design
             Stream stream = null;
             try
             {
-                stream = File.Open("SavedFilteringSettings", FileMode.Create);
+                stream = File.Open("SavedFilteringSettings", FileMode.OpenOrCreate);
+                MessageBox.Show("path of setting suceess:" + Environment.NewLine + Path.GetFullPath("SavedFilteringSettings"));
                 new BinaryFormatter().Serialize(stream, _filteringSettings);
+            }
+            catch
+            {
+                MessageBox.Show("path of setting eroor:" + Environment.NewLine + Path.GetFullPath("SavedFilteringSettings"));
             }
             finally
             {
@@ -153,14 +158,14 @@ namespace F4E_design
                 {
                     if (SchedulePage.Instance.IsBlockNow())
                     {
-                        if (InternetBlocker.isInternetReachable() == true)
+                        if (InternetBlocker.IsInternetReachable() == true)
                         {
                             InternetBlocker.Block(true);
                         }
                     }
                     else
                     {
-                        if (InternetBlocker.isInternetReachable() == false)
+                        if (InternetBlocker.IsInternetReachable() == false)
                         {
                             InternetBlocker.Block(false);
                         }

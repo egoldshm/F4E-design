@@ -26,13 +26,16 @@ namespace F4E_GUI
 
         public static void Write(FilteringSettings filteringSettings)
         {
-            File.SetAttributes(HOSTS_FILE_PATH, FileAttributes.Normal);
-            IEnumerable<string> urlsBlacklist = new[] { "" };
-            urlsBlacklist = urlsBlacklist.Concat(UrlsBlacklistsByCategories(filteringSettings));
-            urlsBlacklist = urlsBlacklist.Concat(filteringSettings.GetCustomBlackList());
-            urlsBlacklist = urlsBlacklist.Except(filteringSettings.GetCustomExceptionsList());
-            string HostsText = GetSafeSearchHostsText(filteringSettings) + Environment.NewLine + UrlsListToHostsText(urlsBlacklist);
-            File.WriteAllText(HOSTS_FILE_PATH, HostsText);
+            if (InternetBlocker.IsInternetReachable())
+            {
+                File.SetAttributes(HOSTS_FILE_PATH, FileAttributes.Normal);
+                IEnumerable<string> urlsBlacklist = new[] { "" };
+                urlsBlacklist = urlsBlacklist.Concat(UrlsBlacklistsByCategories(filteringSettings));
+                urlsBlacklist = urlsBlacklist.Concat(filteringSettings.GetCustomBlackList());
+                urlsBlacklist = urlsBlacklist.Except(filteringSettings.GetCustomExceptionsList());
+                string HostsText = GetSafeSearchHostsText(filteringSettings) + Environment.NewLine + UrlsListToHostsText(urlsBlacklist);
+                File.WriteAllText(HOSTS_FILE_PATH, HostsText);
+            }
         }
 
         private static string GetSafeSearchHostsText(FilteringSettings filteringSettings)

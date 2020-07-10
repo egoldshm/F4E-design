@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Management;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
 
@@ -44,6 +45,20 @@ namespace F4E___Service
             catch { }
         }
 
+        private static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204"))
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static bool IsInternetAvailable()
         {
             try
@@ -54,7 +69,7 @@ namespace F4E___Service
                     IPInterfaceProperties properties = adapter.GetIPProperties();
                     if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
                     {
-                        return true;
+                        return CheckForInternetConnection();
                     }
                 }
                 return false;

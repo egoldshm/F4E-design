@@ -125,11 +125,11 @@ namespace F4E___Service
             switch (command)
             {
                 case 128:
-                    ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled internet blocking has started.");
+                    //ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled internet blocking has started.");
                     InternetBlocker.Block(true);
                     break;
                 case 129:
-                    ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled web blocking is over.");
+                    //ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled web blocking is over.");
                     InternetBlocker.Block(false);
                     break;
                 case 131:

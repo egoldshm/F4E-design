@@ -632,7 +632,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:F4E by MMB"
         "ProductCode" = "8:{4386A700-6A6E-46DE-AFD3-04BAA1EE10D4}"
-        "PackageCode" = "8:{909F4004-389B-4B51-AAA2-1008CD86F65A}"
+        "PackageCode" = "8:{A6AE8470-898E-4001-8DAA-8721FA4B50EE}"
         "UpgradeCode" = "8:{68A79374-766D-43DD-AE6B-6E2742158529}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

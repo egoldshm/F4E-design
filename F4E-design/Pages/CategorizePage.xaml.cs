@@ -128,7 +128,7 @@ namespace F4E_design.Pages
         }
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            if (InternetBlocker.isInternetReachable())
+            if (InternetBlocker.IsInternetReachable())
             {
                 try
                 {

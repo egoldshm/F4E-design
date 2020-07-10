@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Management;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
 
@@ -45,7 +46,21 @@ namespace F4E_design
             catch { }
         }
 
-        public static Boolean isInternetReachable()
+        private static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204"))
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static Boolean IsInternetReachable()
         {
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface adapter in adapters)
@@ -53,7 +68,7 @@ namespace F4E_design
                 IPInterfaceProperties properties = adapter.GetIPProperties();
                 if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
                 {
-                    return true;
+                    return CheckForInternetConnection();
                 }
             }
             return false;

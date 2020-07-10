@@ -1,4 +1,5 @@
-﻿using System;
+﻿using F4E_GUI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -291,6 +292,7 @@ namespace F4E_design.Pages
 
         private void SaveChanges()
         {
+            FilesCathcer.StopCatchingSystemFiles();
             Stream stream = null;
             try
             {
@@ -300,6 +302,7 @@ namespace F4E_design.Pages
             finally
             {
                 stream.Close();
+                FilesCathcer.CatchSystemFiles();
             }
         }
 

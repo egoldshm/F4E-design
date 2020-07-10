@@ -30,7 +30,7 @@ namespace F4E_GUI
         {     
             try
             {
-                if (!file.FullName.Contains("SavedFilteringSettings"))
+                if (!file.FullName.Contains("SavedFilteringSettings") && !file.FullName.Contains("SavedScheduel"))
                 {
                     File.SetAttributes(file.FullName, FileAttributes.ReadOnly | FileAttributes.Encrypted | FileAttributes.System | FileAttributes.Hidden);
                 }
