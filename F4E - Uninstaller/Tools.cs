@@ -19,5 +19,25 @@ namespace F4E___Uninstaller
             process.StartInfo = startInfo;
             process.Start();
         }
+
+        public static string LocateEXE(String filename)
+        {
+            String path = Environment.GetEnvironmentVariable("path");
+            String[] folders = path.Split(';');
+            foreach (String folder in folders)
+            {
+                if (System.IO.File.Exists(folder + filename))
+                {
+                    return folder;
+                }
+                else if (System.IO.File.Exists(folder + "\\" + filename))
+                {
+                    return folder;
+                }
+            }
+
+            return String.Empty;
+        }
+
     }
 }

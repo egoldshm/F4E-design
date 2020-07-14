@@ -237,14 +237,14 @@ namespace F4E_design
                 {
                     try
                     {
-                        FilesCathcer.StopCatchingSystemFiles();
-                        string UninstallPasswordPath = "UniPass";
+                        ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
+                        string UninstallPasswordPath = Path.Combine(App.GetAppDataFolder(), "UniPass");
                         if (!File.Exists(UninstallPasswordPath))
                         {
                             File.Create(UninstallPasswordPath).Close();
                         }
                         File.WriteAllText(UninstallPasswordPath, _password);
-                        FilesCathcer.CatchSystemFiles();
+                        ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
                         savedSuccessfuly = true;
                     }
                     catch (Exception e)

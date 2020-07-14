@@ -16,7 +16,7 @@ namespace F4E___Uninstaller
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EnterPasswordForm(false));
+            Application.Run(new EnterPasswordForm(true));
         }
     }
 }

@@ -14,7 +14,20 @@ namespace F4E_design
     {
         private static readonly string SERVICE_NAME = "GUIAdapter";
 
-        public enum CustomCommends { startScheduelBlocking = 128, releaseScheduelBlocking = 129 , kill = 131 }
+        public enum CustomCommends
+        {
+            startScheduelBlocking = 128,
+            releaseScheduelBlocking = 129,
+            kill = 131,
+            setSafeDns = 132,
+            setDHCPDns = 133,
+            startCatchFiles = 134,
+            stopCatchFiles = 135,
+            updateHostsFile = 136,
+            addToSafeMode = 137,
+            removeFromSafeMode = 138,
+            addToStartUp = 139
+        }
 
         public static void InstallService(string exePath)
         {
@@ -22,8 +35,10 @@ namespace F4E_design
             {
                 ManagedInstallerClass.InstallHelper(new string[] { exePath });
             }
-            catch
-            { }
+            catch(Exception e)
+            {
+                //MessageBox.Show(exePath+Environment.NewLine+e.Message);
+            }
         }
 
         public static void UninstallService()
@@ -32,8 +47,8 @@ namespace F4E_design
             {
                 string servicePath = Assembly.GetExecutingAssembly().CodeBase;
                 servicePath = servicePath.Replace("F4E by MMB.exe", "F4E-Service.exe");
-                ServiceAdapter.CustomCommend("GUIAdapter", (int)CustomCommends.kill);
-                StopService("GUIAdapter", 10000);
+                ServiceAdapter.CustomCommend((int)CustomCommends.kill);
+                StopService(10000);
                 ManagedInstallerClass.InstallHelper(new string[] { "/u", servicePath});
             }
             catch
@@ -78,9 +93,9 @@ namespace F4E_design
             }
         }
 
-        public static Boolean StopService(string serviceName, int timeoutMilliseconds)
+        public static Boolean StopService(int timeoutMilliseconds)
         {
-            ServiceController service = new ServiceController(serviceName);
+            ServiceController service = new ServiceController(SERVICE_NAME);
             try
             {
                 TimeSpan timeout = TimeSpan.FromMilliseconds(timeoutMilliseconds);
@@ -94,12 +109,12 @@ namespace F4E_design
             }
         }
 
-        public static void CustomCommend(string serviceName, int commend)
+        public static void CustomCommend(int commend)
         {
             try
             {
-                ServiceController sc = new ServiceController(serviceName);
-                ServiceControllerPermission scp = new ServiceControllerPermission(ServiceControllerPermissionAccess.Control, Environment.MachineName, serviceName);//this will grant permission to access the Service
+                ServiceController sc = new ServiceController(SERVICE_NAME);
+                ServiceControllerPermission scp = new ServiceControllerPermission(ServiceControllerPermissionAccess.Control, Environment.MachineName, SERVICE_NAME);//this will grant permission to access the Service
                 scp.Assert();
                 sc.Refresh();
                 sc.ExecuteCommand(commend);
@@ -108,17 +123,7 @@ namespace F4E_design
             {
             }
         }
-
-        public static void StartInternetBlocking()
-        {
-            CustomCommend(SERVICE_NAME, (int)CustomCommends.startScheduelBlocking);
-        }
-
-        public static void StopInterntBlocking()
-        {
-            CustomCommend(SERVICE_NAME, (int)CustomCommends.releaseScheduelBlocking);
-        }
-
+  
         public static string GetServiceStatus(string serviceName)
         {
             try

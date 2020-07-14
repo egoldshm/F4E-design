@@ -22,19 +22,27 @@ namespace F4E_GUI
         {
             Social_Media, Gambling, News, Video_Players, Sports, Dating, Violence, Photos_Stack, Games, Life_Style
         }
-        private static readonly string HOSTS_FILE_PATH = @"C:\Windows\System32\drivers\etc\hosts";
+        private static readonly string FILE_PATH = Path.Combine(App.GetAppDataFolder(), "CustomBlackList");
 
         public static void Write(FilteringSettings filteringSettings)
         {
             if (InternetBlocker.IsInternetReachable())
             {
-                File.SetAttributes(HOSTS_FILE_PATH, FileAttributes.Normal);
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.releaseScheduelBlocking);
+
+                if (!File.Exists(FILE_PATH))
+                    File.Create(FILE_PATH);
+
+                File.SetAttributes(FILE_PATH, FileAttributes.Normal);
                 IEnumerable<string> urlsBlacklist = new[] { "" };
                 urlsBlacklist = urlsBlacklist.Concat(UrlsBlacklistsByCategories(filteringSettings));
                 urlsBlacklist = urlsBlacklist.Concat(filteringSettings.GetCustomBlackList());
                 urlsBlacklist = urlsBlacklist.Except(filteringSettings.GetCustomExceptionsList());
                 string HostsText = GetSafeSearchHostsText(filteringSettings) + Environment.NewLine + UrlsListToHostsText(urlsBlacklist);
-                File.WriteAllText(HOSTS_FILE_PATH, HostsText);
+
+                File.WriteAllText(FILE_PATH, HostsText);
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.updateHostsFile);
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startScheduelBlocking);
             }
         }
 

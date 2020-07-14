@@ -16,34 +16,41 @@ namespace F4E_design
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            // if app data's folder doesn't exists - create it.
+            if (!System.IO.Directory.Exists(GetAppDataFolder()))
+            {
+                System.IO.Directory.CreateDirectory(GetAppDataFolder());
+            }
+
+            //start the program
             Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             if (NoOtherProcessOpen())
             {
-                if (HasAdministratorPrivilege())
+                FilteringSystem.LoadSavedFilteringSettings();
+                if (IsFirstOpening())
                 {
-                    FilteringSystem.LoadSavedFilteringSettings();                
-                    if (IsFirstOpening())
+                    if (HasAdministratorPrivilege())
                     {
-                        new SignUpWindowFiles.SignUpWindow().Show();     
+                        new SignUpWindowFiles.SignUpWindow().Show();
                     }
                     else
                     {
-                        FilteringSystem.Load();
-                        new MainWindow().Show();
+                        if (StartAgainAsAdmin())
+                        {
+                            //By opening a new administrator-privileged process, close the current process.
+                            Application.Current.Shutdown();
+                        }
+                        else
+                        {
+                            CustomMessageBox.ShowDialog(null, "בהפעלה הראשונית יש לספק הרשאות מנהל מערכת, נסה להריץ את התוכנה שנית עם הרשאות אלו.", "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                            Application.Current.Shutdown();
+                        }
                     }
                 }
                 else
                 {
-                    if (StartAgainAsAdmin())
-                    {
-                        //By opening a new administrator-privileged process, close the current process.
-                        Application.Current.Shutdown();
-                    }
-                    else
-                    {
-                        CustomMessageBox.ShowDialog(null, "אפליקציה זו חייבת לרוץ כמנהל, האינטרנט מושבת.", "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
-                        Application.Current.Shutdown();
-                    }
+                    FilteringSystem.Load();
+                    new MainWindow().Show();
                 }
             }
             else
@@ -52,6 +59,11 @@ namespace F4E_design
                     if (Environment.GetCommandLineArgs()[0] != "runAgainAsAdmin")
                         Application.Current.Shutdown();
             }
+        }
+
+        public static string GetAppDataFolder()
+        {
+            return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB");
         }
 
         public static void NotifyForNewVersion(Window window)
@@ -145,8 +157,7 @@ namespace F4E_design
             FilteringSystem.StopDefenceCheck();
             InternetBlocker.Block(false);
             CustomNotifyIcon.Hide();
-            ServiceAdapter.CustomCommend("GUIAdapter", (int)ServiceAdapter.CustomCommends.kill);
-            ServiceAdapter.StopService("GUIAdapter", 10000);
+            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.kill);
             Environment.Exit(Environment.ExitCode);
         }
     }

@@ -79,11 +79,9 @@ namespace F4E_design
         }
         private void UpdateClosingPreventStatus()
         {
-            FilteringSystem.PreventClose();
-            FilteringSystem.RunInSafeMode();
             Dispatcher.Invoke(new Action(() =>
             {
-                if ((FilteringSystem.preventCloseStatus && FilteringSystem.runInSafeModeStatus && FilteringSystem.runInStartUpStatus) == true)
+                if ((FilteringSystem.isServiceIsOn && FilteringSystem.runInSafeModeStatus && FilteringSystem.runInStartUpStatus) == true)
                 {
                     preventClosingStatusLabel.Content = "פעיל";
                     preventClosingStatusLabel.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 9, 163, 3));
@@ -174,6 +172,14 @@ namespace F4E_design
         private void preventClosingStatusLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (preventClosingStatusLabel.Content.ToString() == "לא פעיל")
+            {
+                FilteringSystem.PostDefenceStatus();
+            }
+        }
+
+        private void hostCatchStatusLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (hostCatchStatusLabel.Content.ToString() == "לא פעיל")
             {
                 FilteringSystem.PostDefenceStatus();
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,11 +27,11 @@ namespace F4E___Uninstaller
             Process.Start(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\F4E by MMB.exe");
         }
 
-        protected override void OnBeforeUninstall (IDictionary savedState)
+        protected override void OnBeforeUninstall(IDictionary savedState)
         {
             base.OnBeforeInstall(savedState);
 
-            if(Process.GetProcessesByName("F4E by MMB.exe").Length>0)
+            if (Process.GetProcessesByName("F4E by MMB.exe").Length > 0)
             {
                 throw new InstallException("לא ניתן להסיר התקנה כאשר מופע של התוכנה פעיל. יש לסגור את כל המופעים של התוכנה ולאחר מכן לנסות שנית.");
             }
@@ -53,6 +54,16 @@ namespace F4E___Uninstaller
             {
                 throw new InstallException("Administrator password is incorrect, message has been sent to the administrator.");
             }
+        }
+
+        protected override void OnAfterInstall(IDictionary savedState)
+        {
+            base.OnAfterInstall(savedState);
+            string path = this.Context.Parameters["targetdir"];
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths", true);
+            key.CreateSubKey("F4E by MMB");
+            key = key.OpenSubKey("F4E by MMB", true);
+            key.SetValue("Path", path.Replace("\\",@"\"));
         }
     }
 }

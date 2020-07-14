@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>F4E___Service</RootNamespace>
     <AssemblyName>F4E-Service</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,15 +34,21 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.IWshRuntimeLibrary">
+      <HintPath>..\F4E-design\obj\x86\Release\Interop.IWshRuntimeLibrary.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
@@ -54,12 +61,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootController.cs" />
-    <Compile Include="FIlteringService.cs">
+    <Compile Include="DnsController.cs" />
+    <Compile Include="FilesCatcher.cs" />
+    <Compile Include="FilteringService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FIlteringService.Designer.cs">
-      <DependentUpon>FIlteringService.cs</DependentUpon>
+    <Compile Include="FilteringService.Designer.cs">
+      <DependentUpon>FilteringService.cs</DependentUpon>
     </Compile>
+    <Compile Include="HostsFileAdapter.cs" />
     <Compile Include="InternetBlocker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
@@ -69,6 +79,8 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SafemodeAdapter.cs" />
+    <Compile Include="StartupAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

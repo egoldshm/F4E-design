@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using F4E_design;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,78 +7,46 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace F4E_design
+namespace F4E_GUI
 {
-    class SafemodeAdapter
+    class SafeModeAdapter
     {
-        public static void AddToSafeMode()
+        private static String GetRegistryKeyValue(RegistryHive baseKey, string subKey, string value)
         {
-            new Thread(() =>
+            RegistryKey baseRegistryKey = RegistryKey.OpenBaseKey(baseKey, RegistryView.Registry64);
+            RegistryKey subRegistryKey = baseRegistryKey.OpenSubKey(subKey, RegistryKeyPermissionCheck.ReadSubTree);
+            if (subRegistryKey != null)
             {
-                AddToMinimalSafeMode();
-                AddToWithNetworkSafeMode();
-            }).Start();
-        }
-
-        public static void RemoveFromSafeMode()
-        {
-            DeleteFromMinimalSafeMode();
-            DeleteFromWithNetworkSafeMode();
-        }
-
-        private static void AddToMinimalSafeMode()
-        {
-            try
-            {
-                RegistryKey key;
-                key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\", true);
-                key.CreateSubKey("GUIAdapter");
-                key.Close();
-
-                RegistryKey key2;
-                key2 = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\GUIAdapter", true);
-                key2.SetValue("", "Service", RegistryValueKind.String);
-                key2.Close();
+                object value64 = subRegistryKey.GetValue(value);
+                if (value64 != null)
+                {
+                    baseRegistryKey.Close();
+                    subRegistryKey.Close();
+                    return (string)value64;
+                }
+                subRegistryKey.Close();
             }
-            catch(Exception e)
-            {
-                CustomMessageBox.ShowDialog(null, e.Message, @"\SafeBoot\Minimal\", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
-            }
+            baseRegistryKey.Close();
+            return null;
         }
 
-        private static void AddToWithNetworkSafeMode()
+        public static Boolean IsRunInSafeMode()
         {
-            try
+            string minimalSafeMode = GetRegistryKeyValue(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\GUIAdapter", "");
+            string networkSafeMode = GetRegistryKeyValue(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\SafeBoot\Network\GUIAdapter", "");
+            if (minimalSafeMode != null && networkSafeMode != null)
             {
-                RegistryKey key;
-                key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Network\", true);
-                key.CreateSubKey("GUIAdapter");
-                key.Close();
-
-                RegistryKey key2;
-                key2 = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Network\GUIAdapter", true);
-                key2.SetValue("", "Service", RegistryValueKind.String);
-                key2.Close();
+                if (minimalSafeMode == "Service" && networkSafeMode == "Service")
+                {
+                    return true;
+                }
+                return false;
             }
-            catch (Exception e)
+            else
             {
-                CustomMessageBox.ShowDialog(null, e.Message, @"\SafeBoot\Network\", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.addToSafeMode);
+                return false;
             }
-        }
-        private static void DeleteFromMinimalSafeMode()
-        {
-            RegistryKey key;
-            key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\", true);
-            key.DeleteSubKey("GUIAdapter");
-            key.Close();
-        }
-
-        private static void DeleteFromWithNetworkSafeMode()
-        {
-            RegistryKey key;
-            key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Network\", true);
-            key.DeleteSubKey("GUIAdapter");
-            key.Close();
         }
     }
 }

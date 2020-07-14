@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace F4E___Service
 {
-    public partial class FIlteringService : ServiceBase
+    public partial class FilteringService : ServiceBase
     {
         [DllImport("wtsapi32.dll", SetLastError = true)]
         static extern bool WTSSendMessage(IntPtr hServer, [MarshalAs(UnmanagedType.I4)] int SessionId, String pTitle, [MarshalAs(UnmanagedType.U4)] int TitleLength, String pMessage, [MarshalAs(UnmanagedType.U4)] int MessageLength, [MarshalAs(UnmanagedType.U4)] int Style, [MarshalAs(UnmanagedType.U4)] int Timeout, [MarshalAs(UnmanagedType.U4)] out int pResponse, bool bWait);
@@ -17,22 +17,36 @@ namespace F4E___Service
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int description, int reservedValue);
 
+        public enum CustomCommends
+        {
+            startScheduelBlocking = 128,
+            releaseScheduelBlocking = 129,
+            kill = 131,
+            setSafeDns = 132,
+            setDHCPDns = 133,
+            startCatchFiles = 134,
+            stopCatchFiles = 135,
+            updateHostsFile = 136,
+            addToSafeMode = 137,
+            removeFromSafeMode = 138,
+            addToStartUp = 139
+        }
+
         public static IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
         public static int WTS_CURRENT_SESSION = 1;
         public static Boolean allowSafemode = false;
 
-        Boolean msgShowed = false;
+        static Boolean msgShowed = false;
 
         System.Timers.Timer timer = new System.Timers.Timer();
-        public FIlteringService()
+        public FilteringService()
         {
             InitializeComponent();
         }
-
         protected override void OnStart(string[] args)
         {
             timer.Elapsed += new ElapsedEventHandler(OnElapsedTime);
-            timer.Interval = 3500; //number in milisecinds  
+            timer.Interval = 100; //number in milisecinds  
             timer.Start();
         }
 
@@ -41,14 +55,14 @@ namespace F4E___Service
             PreventClosing();
             if(InternetBlocker.GetBlockStatus()==true)
             {
-                if(InternetBlocker.IsInternetAvailable())
+                if(InternetBlocker.IsInternetReachable())
                 {
                     InternetBlocker.Block(true);
                 }
             }
             else
             {
-                if(!InternetBlocker.IsInternetAvailable())
+                if(!InternetBlocker.IsInternetReachable())
                 {
                     InternetBlocker.Block(false);
                 }
@@ -73,32 +87,6 @@ namespace F4E___Service
             }
         }
 
-        private static void SetInterActWithDesktop()
-        {
-            var service = new System.Management.ManagementObject(
-                    String.Format("WIN32_Service.Name='{0}'", "GUIAdapter"));
-            try
-            {
-                var paramList = new object[11];
-                paramList[5] = true;
-                service.InvokeMethod("Change", paramList);
-            }
-            finally
-            {
-                service.Dispose();
-            }
-
-
-        }
-
-        //private void RunGUIProcess()
-        //{
-        //    SetInterActWithDesktop();
-        //    string processePath = Assembly.GetExecutingAssembly().CodeBase;
-        //    processePath = processePath.Replace("F4E-Service.exe", "F4E by MMB.exe");
-        //    Process.Start(processePath);
-        //}
-
         private bool IsProcessOpen()
         {
             foreach (Process p in Process.GetProcesses())
@@ -120,25 +108,48 @@ namespace F4E___Service
         }
 
 
-        protected override void OnCustomCommand(int command)
+        protected override void OnCustomCommand(int commend)
         {
-            switch (command)
+            CustomCommends customCommend = (CustomCommends)commend;
+            switch (customCommend)
             {
-                case 128:
-                    //ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled internet blocking has started.");
+                case CustomCommends.startScheduelBlocking: //Interet Block Start
                     InternetBlocker.Block(true);
                     break;
-                case 129:
-                    //ShowMessage("F4E - Schedueling Internet Blocking", "Scheduled web blocking is over.");
+                case CustomCommends.releaseScheduelBlocking: //Interet Block Stop
                     InternetBlocker.Block(false);
                     break;
-                case 131:
+                case CustomCommends.kill: //Kill Service
                     Stop();
                     Application.Exit();
                     break;
+                case CustomCommends.setSafeDns:
+                    DnsController.SetMode(true);
+                    break;
+                case CustomCommends.setDHCPDns:
+                    DnsController.SetMode(false);
+                    break;
+                case CustomCommends.startCatchFiles:
+                    FilesCatcher.CatchSystemFiles();
+                    break;
+                case CustomCommends.stopCatchFiles:
+                    FilesCatcher.StopCatchingSystemFiles();
+                    break;
+                case CustomCommends.updateHostsFile:
+                    HostsFileAdapter.WriteCustomBlackListToHostFile();
+                    break;
+                case CustomCommends.addToSafeMode:
+                    SafemodeAdapter.AddToSafeMode();
+                    break;
+                case CustomCommends.removeFromSafeMode:
+                    SafemodeAdapter.RemoveFromSafeMode();
+                    break;
+                case CustomCommends.addToStartUp:
+                    StartupAdapter.AddApplicationToAllUserStartup();
+                    break;
             }
         }
-        private void ShowMessage(string title, string msg)
+        public static void ShowMessage(string title, string msg)
         {
             if (!msgShowed)
             {

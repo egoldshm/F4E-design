@@ -57,7 +57,7 @@ namespace F4E_design
                 this.DialogResult = true;
                 correctPassword = true;
                 this.Close();
-                ServiceAdapter.StopInterntBlocking();
+                InternetBlocker.Block(false);
             }
             else
             {
@@ -68,7 +68,7 @@ namespace F4E_design
                 {
                     CustomMessageBox.ShowDialog(this, "האינטרנט במחשב זה נחסם עקב שימוש בסיסמה שגויה", "האינטרנט נחסם", CustomMessageBox.CustomMessageBoxTypes.Error, "הבנתי");
                     MailsSender.SendWrongPasswordAlert();
-                    ServiceAdapter.StartInternetBlocking();
+                    InternetBlocker.Block(true);
                 }
 
             }

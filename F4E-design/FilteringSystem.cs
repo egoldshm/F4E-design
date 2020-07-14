@@ -1,5 +1,6 @@
 ﻿using F4E_design.Pages;
 using F4E_GUI;
+using IWshRuntimeLibrary;
 using Microsoft.Win32;
 using System;
 using System.Dynamic;
@@ -16,10 +17,12 @@ namespace F4E_design
 {
     internal class FilteringSystem
     {
-        public static Boolean preventCloseStatus = false;
+        public static Boolean isServiceIsOn = false;
         public static Boolean runInSafeModeStatus = false;
         public static Boolean preventSystemFilesEditStatus = false;
         public static Boolean runInStartUpStatus = false;
+
+        private static Boolean serviceHasDetected = false;
 
         private static FilteringSettings _filteringSettings;
         private static System.Timers.Timer defenseStatusChecker;
@@ -35,7 +38,8 @@ namespace F4E_design
             Stream stream = null;
             try
             {
-                stream = File.Open("SavedFilteringSettings", FileMode.Open);
+                string path = Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings");
+                stream = System.IO.File.Open(path, FileMode.Open);
                 _filteringSettings = (FilteringSettings)new BinaryFormatter().Deserialize(stream);
             }
             catch
@@ -48,22 +52,18 @@ namespace F4E_design
         }
         public static void SaveChanges()
         {
-            FilesCathcer.StopCatchingSystemFiles();
+            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
             Stream stream = null;
+            string path = Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings");
             try
-            {
-                stream = File.Open("SavedFilteringSettings", FileMode.OpenOrCreate);
-                MessageBox.Show("path of setting suceess:" + Environment.NewLine + Path.GetFullPath("SavedFilteringSettings"));
+            {            
+                stream = System.IO.File.Open(path, FileMode.OpenOrCreate);
                 new BinaryFormatter().Serialize(stream, _filteringSettings);
-            }
-            catch
-            {
-                MessageBox.Show("path of setting eroor:" + Environment.NewLine + Path.GetFullPath("SavedFilteringSettings"));
             }
             finally
             {
                 stream.Close();
-                FilesCathcer.CatchSystemFiles();
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
             }
         }
 
@@ -80,11 +80,10 @@ namespace F4E_design
         {
             try
             {
-                TaskingScheduel.AddApplicationToAllUserStartup();
                 ServiceAdapter.StartService("GUIAdapter", 10000);
                 HostsFileAdapter.Write(GetCurrentFilteringSettings());
                 CustomNotifyIcon.SetupNotificationIcon();
-                FilesCathcer.CatchSystemFiles();
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
                 SetSystemStatus(true);
                 StartDefenceCheck();
                 StartScheduelBlockTimer();
@@ -135,7 +134,7 @@ namespace F4E_design
         public static void StartDefenceCheck()
         {
             defenseStatusChecker = new System.Timers.Timer();
-            defenseStatusChecker.Interval = 2000;
+            defenseStatusChecker.Interval = 100;
             defenseStatusChecker.Elapsed += DefenceChecker_Elapsed;
             defenseStatusChecker.Start();
         }
@@ -184,59 +183,91 @@ namespace F4E_design
         private static int tick_count = 0;
         private static void DefenceChecker_Elapsed(object sender, ElapsedEventArgs e)
         {
-            PreventClose();
+            KeepServiceOn();
             RunInSafeMode();
             RunInStartUp();
             PreventSystemFilesEdit();
             tick_count++;
-            if (preventCloseStatus == false || runInSafeModeStatus == false || preventSystemFilesEditStatus == false || runInStartUpStatus == false)
+            if (isServiceIsOn == true)
             {
-                if (tick_count == 15)
+                if (runInSafeModeStatus == false || preventSystemFilesEditStatus == false || runInStartUpStatus == false)
                 {
-                    CustomNotifyIcon.ShowNotificationMessage(500, "המערכת זיהתה חריגה", "המערכת זיהתה כי אחת ממערכות ההגנה אינה פעילה. לחץ כאן לפרטים", System.Windows.Forms.ToolTipIcon.Error);
+                    if (!runInSafeModeStatus)
+                        RunInSafeMode();
+
+                    if (!preventSystemFilesEditStatus)
+                        PreventSystemFilesEdit();
+
+                    if (!runInStartUpStatus)
+                        RunInStartUp();
+
+                    if (tick_count == 1200)
+                    {
+                        CustomNotifyIcon.ShowNotificationMessage(500, "המערכת זיהתה חריגה", "המערכת זיהתה כי אחת ממערכות ההגנה אינה פעילה. לחץ כאן לפרטים", System.Windows.Forms.ToolTipIcon.Error);
+                        tick_count = 0;
+                    }
+                }
+            }
+            else
+            {
+                if (tick_count == 1200)
+                {
+                    CustomNotifyIcon.ShowNotificationMessage(500, "הסינון אינו יציב", "אחת מהמערכות הקריטיות לפעילות הסינון אינה פעילה, הודעה נשלחה למנהל המערכת.", System.Windows.Forms.ToolTipIcon.Error);
                     tick_count = 0;
                 }
             }
         }
 
-        private static void RunInStartUp()
+        public static void RunInStartUp()
         {
             new Thread(() =>
             {
-                RegistryKey key1;
-                key1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
-                string path = System.AppDomain.CurrentDomain.BaseDirectory + "\\" + System.AppDomain.CurrentDomain.FriendlyName;
-
-                if (key1 != null)
+                try
                 {
-                    if (key1.GetValue("F4E by MMB").ToString()!=path)
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Microsoft\Windows\Start Menu\Programs\StartUp\‏‏F4E by MMB.lnk";
+                    if (System.IO.File.Exists(path))
                     {
-                        TaskingScheduel.AddApplicationToAllUserStartup();
+                        // WshShellClass shell = new WshShellClass();
+                        WshShell shell = new WshShell(); //Create a new WshShell Interface
+                        IWshShortcut link = (IWshShortcut)shell.CreateShortcut(path); //Link the interface to our shortcut
+
+                        if (link.TargetPath == Assembly.GetExecutingAssembly().Location)
+                        {
+                            runInStartUpStatus = true;
+                        }
+                        else
+                        {       
+                            runInStartUpStatus = false;
+                            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.addToStartUp);
+                        }
                     }
-                    runInStartUpStatus = true;
+                    else
+                    {
+                        runInStartUpStatus = false;
+                        ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.addToStartUp);
+                    }
                 }
-                else
+                catch(Exception e)
                 {
-                    SafemodeAdapter.AddToSafeMode();
-                    runInStartUpStatus = false;
+                    MessageBox.Show(e.Message);
                 }
             }).Start();
         }
 
         internal static void PostDefenceStatus()
         {
-            MessageBox.Show("Service Status: " + preventCloseStatus + Environment.NewLine + "Run in safemode: " + runInSafeModeStatus + Environment.NewLine + "Files Catching: " + preventSystemFilesEditStatus + Environment.NewLine + "Run in startup" + runInStartUpStatus);
+            MessageBox.Show("Service Status: " + isServiceIsOn + Environment.NewLine + "Run in safemode: " + runInSafeModeStatus + Environment.NewLine + "Files Catching: " + preventSystemFilesEditStatus + Environment.NewLine + "Run in Startup: " + runInStartUpStatus);
         }
 
         private static int prevent_close_attempts = 0;
-        public static void PreventClose()
+        public static void KeepServiceOn()
         {
             new Thread(() =>
             {
                 if (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Running")
                 {
-                    preventCloseStatus = true;
+                    isServiceIsOn = true;
+                    serviceHasDetected = true;
                     prevent_close_attempts = 0;
                 }
                 else
@@ -246,8 +277,16 @@ namespace F4E_design
                         MailsSender.SendUnusualActivityAlert();
                     }
                     prevent_close_attempts++;
+
                     ServiceAdapter.StartService("GUIAdapter", 10000);
-                    preventCloseStatus = false;
+
+                    if(InternetBlocker.IsInternetReachable())
+                        InternetBlocker.Block(true);
+
+                    if(serviceHasDetected)
+                        BootController.DoExitWin(BootController.EWX_REBOOT);
+
+                    isServiceIsOn = false;
                 }
             }).Start();
         }
@@ -256,30 +295,10 @@ namespace F4E_design
         {
             new Thread(() =>
             {
-                RegistryKey minimalSafeMode;
-                minimalSafeMode = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\GUIAdapter", true);
-
-                RegistryKey networkSafeMode;
-                networkSafeMode = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\SafeBoot\Network\GUIAdapter", true);
-
-                if (minimalSafeMode != null && networkSafeMode != null)
+                runInSafeModeStatus = SafeModeAdapter.IsRunInSafeMode();
+                if (!runInSafeModeStatus)
                 {
-                    if (minimalSafeMode.GetValue("").ToString() != "Service")
-                    {
-                        minimalSafeMode.SetValue("", "Service", RegistryValueKind.String);
-                    }
-
-                    if (networkSafeMode.GetValue("").ToString() != "Service")
-                    {
-                        networkSafeMode.SetValue("", "Service", RegistryValueKind.String);
-                    }
-
-                    runInSafeModeStatus = true;
-                }
-                else
-                {
-                    SafemodeAdapter.AddToSafeMode();
-                    runInSafeModeStatus = false;
+                    ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.addToSafeMode);
                 }
             }).Start();
         }
@@ -291,10 +310,11 @@ namespace F4E_design
                 Stream stream = null;
                 try
                 {
-                    stream = File.Open("SavedFilteringSettings", FileMode.Open);
+                    string path = Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings");
+                    stream = System.IO.File.Open(path, FileMode.Open);
                     stream.Close();
                     preventSystemFilesEditStatus = false;
-                    FilesCathcer.CatchSystemFiles();
+                    ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
                 }
                 catch
                 {

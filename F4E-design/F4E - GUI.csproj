@@ -116,6 +116,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BootController.cs" />
     <Compile Include="CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
@@ -124,7 +125,6 @@
     <Compile Include="EnterAdminPasswordWindow.xaml.cs">
       <DependentUpon>EnterAdminPasswordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FilesCathcer.cs" />
     <Compile Include="FilteringSettings.cs" />
     <Compile Include="FilteringSystem.cs" />
     <Compile Include="HostsFileAdapter.cs" />
@@ -157,7 +157,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SafemodeAdapter.cs" />
+    <Compile Include="SafeModeAdapter.cs" />
     <Compile Include="ServiceAdapter.cs" />
     <Compile Include="SignUpWindowFiles\pages\EndPage.xaml.cs">
       <DependentUpon>EndPage.xaml</DependentUpon>
@@ -180,7 +180,6 @@
     <Compile Include="SignUpWindowFiles\SignUpWindow.xaml.cs">
       <DependentUpon>SignUpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TaskingScheduel.cs" />
     <Compile Include="Tools.cs" />
     <Page Include="CustomMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -419,6 +418,17 @@
     <Resource Include="SignUpWindowFiles\pages\images\[4].png" />
     <Resource Include="SignUpWindowFiles\pages\images\[5].png" />
     <Resource Include="SignUpWindowFiles\pages\images\[6].png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.1.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.1\build\MaterialDesignThemes.targets')" />

@@ -157,7 +157,7 @@ namespace F4E_design
             if (!CustomMessageBox.ShowDialog(this, "התנתקות תוביל לסגירה מוחלטת של מערכת הסינון ותוביל לכך שהמחשב יהיה לא מסונן. האם אתה בטוח שברצונך לצאת?", "שים לב!", CustomMessageBox.CustomMessageBoxTypes.Stop, "בטל", "התנתק"))
             {
                 exitLabel.Content = "יוצא....";
-                FilesCathcer.StopCatchingSystemFiles();
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
                 App.FullExit();
             }
         }
@@ -169,7 +169,9 @@ namespace F4E_design
 
         private void HelpButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("http://f4e.mmb.org.il");
+            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
+            FilteringSystem.RunInStartUp();
+            //Process.Start("http://f4e.mmb.org.il");
         }
     }
 }

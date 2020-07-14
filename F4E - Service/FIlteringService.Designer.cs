@@ -1,6 +1,6 @@
 ﻿namespace F4E___Service
 {
-    partial class FIlteringService
+    partial class FilteringService
     {
         /// <summary> 
         /// Required designer variable.

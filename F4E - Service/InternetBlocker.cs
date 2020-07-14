@@ -8,42 +8,31 @@ namespace F4E___Service
 {
     class InternetBlocker
     {
-        static Thread thread = new Thread(new ParameterizedThreadStart(BlockByStatus));
         private static Boolean blockedStatus = false;
         public static void Block(Boolean status)
         {
-            try
+            new Thread(() =>
             {
-                thread.Start(status);
-            }
-            catch
-            {
-                thread = new Thread(new ParameterizedThreadStart(BlockByStatus));
-                thread.Start(status);
-            }
-        }
-
-        private static void BlockByStatus(object data)
-        {
-            blockedStatus = (Boolean)data;
-            try
-            {
-                ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-                ManagementObjectCollection objMOC = objMC.GetInstances();
-                foreach (ManagementObject objMO in objMOC)
+                try
                 {
-                    if (blockedStatus)
+                    ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                    ManagementObjectCollection objMOC = objMC.GetInstances();
+                    foreach (ManagementObject objMO in objMOC)
                     {
-                        objMO.InvokeMethod("ReleaseDHCPLease", null, null);
-                    }
-                    else
-                    {
-                        objMO.InvokeMethod("RenewDHCPLease", null, null);
+                        if (status)
+                        {
+                            objMO.InvokeMethod("ReleaseDHCPLease", null, null);
+                        }
+                        else
+                        {
+                            objMO.InvokeMethod("RenewDHCPLease", null, null);
+                        }
                     }
                 }
-            }
-            catch { }
+                catch { }
+            }).Start();
         }
+    
 
         private static bool CheckForInternetConnection()
         {
@@ -59,25 +48,18 @@ namespace F4E___Service
             }
         }
 
-        public static bool IsInternetAvailable()
+        public static Boolean IsInternetReachable()
         {
-            try
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in adapters)
             {
-                NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-                foreach (NetworkInterface adapter in adapters)
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+                if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
                 {
-                    IPInterfaceProperties properties = adapter.GetIPProperties();
-                    if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
-                    {
-                        return CheckForInternetConnection();
-                    }
+                    return CheckForInternetConnection();
                 }
-                return false;
             }
-            catch
-            {
-                return true;
-            }
+            return false;
         }
 
         public static Boolean GetBlockStatus()

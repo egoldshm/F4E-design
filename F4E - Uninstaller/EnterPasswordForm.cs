@@ -20,7 +20,8 @@ namespace F4E___Uninstaller
     {
         private bool _isCorrectPassword = false;
         private bool _successfullyUninstalled = false;
-        private string AppFolder;
+        //private string exePath;
+        private string dataPath;
         private readonly string masterPassord= "Hv6qER3rfNPWB5mYvIdu7i9V8VL0zQi0wUfgoPA8RujiAWfJ1kBUx+A91sRpyh/tOyKm8N5wzeTExuXir1XQYCRwO1Iy0vXk7gcYlFQkMwM=";
 
         Boolean _isMsiSended;
@@ -29,7 +30,8 @@ namespace F4E___Uninstaller
         {
             InitializeComponent();
             _isMsiSended = isMsiSendedToHere;
-            AppFolder = Assembly.GetExecutingAssembly().CodeBase.Replace("F4E-Uninstaller.exe", "").Replace("file:///", "");
+            dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB");
+            //exePath = 
         }
 
         internal bool IsCorrectPassword()
@@ -74,39 +76,39 @@ namespace F4E___Uninstaller
 
         private void DeleteUninstallerEXEItSelf()
         {
-            Process procDestruct = new Process();
-            string strName = "destruct.bat";
-            string strPath = Path.Combine(Directory.GetCurrentDirectory(), strName);
-            string strExe = new FileInfo(AppFolder+"/F4E-Uninstaller.exe").Name;
+            //Process procDestruct = new Process();
+            //string strName = "destruct.bat";
+            //string strPath = Path.Combine(Directory.GetCurrentDirectory(), strName);
+            //string strExe = new FileInfo(exePath+ "/F4E-Uninstaller.exe").Name;
 
-            StreamWriter swDestruct = new StreamWriter(strPath);
+            //StreamWriter swDestruct = new StreamWriter(strPath);
 
-            swDestruct.WriteLine("attrib \"" + strExe + "\"" + " -a -s -r -h");
-            swDestruct.WriteLine(":Repeat");
-            swDestruct.WriteLine("del " + "\"" + strExe + "\"");
-            swDestruct.WriteLine("if exist \"" + strExe + "\"" + " goto Repeat");
-            swDestruct.WriteLine("del \"" + strName + "\"");
-            swDestruct.Close();
+            //swDestruct.WriteLine("attrib \"" + strExe + "\"" + " -a -s -r -h");
+            //swDestruct.WriteLine(":Repeat");
+            //swDestruct.WriteLine("del " + "\"" + strExe + "\"");
+            //swDestruct.WriteLine("if exist \"" + strExe + "\"" + " goto Repeat");
+            //swDestruct.WriteLine("del \"" + strName + "\"");
+            //swDestruct.Close();
 
-            procDestruct.StartInfo.FileName = "destruct.bat";
+            //procDestruct.StartInfo.FileName = "destruct.bat";
 
-            procDestruct.StartInfo.CreateNoWindow = true;
-            procDestruct.StartInfo.UseShellExecute = false;
+            //procDestruct.StartInfo.CreateNoWindow = true;
+            //procDestruct.StartInfo.UseShellExecute = false;
 
-            try
-            {
-                procDestruct.Start();
-            }
-            catch (Exception)
-            {
-                Close();
-            }
+            //try
+            //{
+            //    procDestruct.Start();
+            //}
+            //catch (Exception)
+            //{
+            //    Close();
+            //}
         }
 
         private Boolean DeleteFiles()
         {
-            FilesCathcer.StopCatchingSystemFiles(AppFolder);
-            DirectoryInfo directory = new DirectoryInfo(AppFolder);
+            FilesCathcer.StopCatchingSystemFiles(dataPath);
+            DirectoryInfo directory = new DirectoryInfo(dataPath);
             foreach (FileInfo file in directory.GetFiles())
             {
                 try
@@ -116,12 +118,25 @@ namespace F4E___Uninstaller
                 catch
                 { }
             }
+
+            //FilesCathcer.StopCatchingSystemFiles(exePath);
+            //DirectoryInfo directory1 = new DirectoryInfo(exePath);
+            //foreach (FileInfo file in directory.GetFiles())
+            //{
+            //    try
+            //    {
+            //        file.Delete();
+            //    }
+            //    catch
+            //    { }
+            //}
             return true;
         }
 
         private Boolean UninstallService()
         {
-            return ServiceAdapter.UninstallService(AppFolder+ "/F4E-Service.exe");
+            return true;
+            //return ServiceAdapter.UninstallService(exePath + "/F4E-Service.exe");
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -149,7 +164,7 @@ namespace F4E___Uninstaller
         {
             try
             {
-                string UninstallPassPath = AppFolder + "/UniPass";
+                string UninstallPassPath = dataPath + "/UniPass";
                 return File.ReadAllText(UninstallPassPath);
             }
             catch(Exception e)

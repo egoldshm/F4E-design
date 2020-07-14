@@ -292,7 +292,7 @@ namespace F4E_design.Pages
 
         private void SaveChanges()
         {
-            FilesCathcer.StopCatchingSystemFiles();
+            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
             Stream stream = null;
             try
             {
@@ -302,7 +302,7 @@ namespace F4E_design.Pages
             finally
             {
                 stream.Close();
-                FilesCathcer.CatchSystemFiles();
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
             }
         }
 

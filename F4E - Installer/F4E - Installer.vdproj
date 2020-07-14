@@ -229,19 +229,33 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_79332897CE6C4C96AC3E2A71E492C835"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_4B515F91EE2C4A65873C7643BB467B7D"
             {
-            "Name" = "8:Primary output from F4E - GUI (Active)"
+            "Name" = "8:Primary output from F4E - Uninstaller (Active)"
             "Condition" = "8:"
-            "Object" = "8:_4C77E7709ED441B6A55290D8A245AB93"
+            "Object" = "8:_2D9EB7C4A04F4A628FC0DBE6AA32BF76"
             "FileType" = "3:2"
             "InstallAction" = "3:1"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_5035954E_2D88_44FA_9907_14CB5D33B1EC"
+            "Identifier" = "8:_26810239_D1F2_4A26_B4D6_F0AAC01A447B"
             "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
+            "CustomActionData" = "8:/targetdir=\"[TARGETDIR]\\\""
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_9A0C4CDD22404C26ABAEC9752428FAC4"
+            {
+            "Name" = "8:Primary output from F4E - Uninstaller (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_2D9EB7C4A04F4A628FC0DBE6AA32BF76"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_FAECE72C_63B9_4DC4_8628_71DB0138156E"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targetdir=\"[TARGETDIR]\\\""
             }
             "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_C4AD7E79183B4508A4AB73828C5CA865"
             {
@@ -255,7 +269,21 @@
             "Sequence" = "3:1"
             "Identifier" = "8:_D0810D29_AF46_4661_9D9B_716BC27FB15C"
             "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
+            "CustomActionData" = "8:/targetdir=\"[TARGETDIR]\\\""
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_EBA2CA4AD3FD4E9E86DADFBA5E7B8E35"
+            {
+            "Name" = "8:Primary output from F4E - Uninstaller (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_2D9EB7C4A04F4A628FC0DBE6AA32BF76"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_97B63A7B_C224_4681_B1DE_0C61C8B98B89"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:/targetdir=\"[TARGETDIR]\\\""
             }
         }
         "DefaultFeature"
@@ -632,7 +660,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:F4E by MMB"
         "ProductCode" = "8:{4386A700-6A6E-46DE-AFD3-04BAA1EE10D4}"
-        "PackageCode" = "8:{A6AE8470-898E-4001-8DAA-8721FA4B50EE}"
+        "PackageCode" = "8:{99D55F36-7037-4F13-8243-6A2567E8723D}"
         "UpgradeCode" = "8:{68A79374-766D-43DD-AE6B-6E2742158529}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -664,34 +692,6 @@
             {
                 "Keys"
                 {
-                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_49A108B4777C44C6BC332A7670E7F424"
-                    {
-                    "Name" = "8:Software"
-                    "Condition" = "8:"
-                    "AlwaysCreate" = "11:FALSE"
-                    "DeleteAtUninstall" = "11:FALSE"
-                    "Transitive" = "11:FALSE"
-                        "Keys"
-                        {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_5BBC60D67A594B64A8C667CD834A7495"
-                            {
-                            "Name" = "8:[Manufacturer]"
-                            "Condition" = "8:"
-                            "AlwaysCreate" = "11:FALSE"
-                            "DeleteAtUninstall" = "11:FALSE"
-                            "Transitive" = "11:FALSE"
-                                "Keys"
-                                {
-                                }
-                                "Values"
-                                {
-                                }
-                            }
-                        }
-                        "Values"
-                        {
-                        }
-                    }
                 }
             }
             "HKCU"

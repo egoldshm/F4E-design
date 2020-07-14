@@ -8,44 +8,53 @@ namespace F4E_design
 {
     class InternetBlocker
     {
-        static Thread thread = new Thread(new ParameterizedThreadStart(BlockByStatus));
         public static void Block(Boolean status)
         {
-            try
+            new Thread(() =>
             {
-                thread.Start(status);
-            }
-            catch
-            {
-                thread = new Thread(new ParameterizedThreadStart(BlockByStatus));
-                thread.Start(status);
-            }
-        }
-
-        private static void BlockByStatus(object data)
-        {
-            Boolean status = (Boolean)data;
-            try
-            {
-                ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-                ManagementObjectCollection objMOC = objMC.GetInstances();
-                foreach (ManagementObject objMO in objMOC)
+                try
                 {
+                    ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                    ManagementObjectCollection objMOC = objMC.GetInstances();
+                    foreach (ManagementObject objMO in objMOC)
+                    {
+                        if (status)
+                        {
+                            objMO.InvokeMethod("ReleaseDHCPLease", null, null);
+                        }
+                        else
+                        {
+                            objMO.InvokeMethod("RenewDHCPLease", null, null);
+                        }
+                    }
+
+
                     if (status)
                     {
-                        objMO.InvokeMethod("ReleaseDHCPLease", null, null);
-                        ServiceAdapter.StartInternetBlocking();
+                        ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startScheduelBlocking);
                     }
                     else
                     {
-                        objMO.InvokeMethod("RenewDHCPLease", null, null);
-                        ServiceAdapter.StopInterntBlocking();
+                        ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.releaseScheduelBlocking);
                     }
                 }
-            }
-            catch { }
+                catch { }
+            }).Start();
+
+
+
+            //try
+            //{
+            //    thread.Start(status);
+            //}
+            //catch
+            //{
+            //    thread = new Thread(new ParameterizedThreadStart(BlockByStatus));
+            //    thread.Start(status);
+            //}
         }
 
+    
         private static bool CheckForInternetConnection()
         {
             try
@@ -62,17 +71,24 @@ namespace F4E_design
 
         public static Boolean IsInternetReachable()
         {
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (NetworkInterface adapter in adapters)
+            try
             {
-                IPInterfaceProperties properties = adapter.GetIPProperties();
-                if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
+                NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+                foreach (NetworkInterface adapter in adapters)
                 {
-                    return CheckForInternetConnection();
+                    IPInterfaceProperties properties = adapter.GetIPProperties();
+                    if (properties.DnsSuffix != "" || properties.GatewayAddresses.Count > 0)
+                    {
+                        return CheckForInternetConnection();
+                    }
                 }
+                return false;
             }
-            return false;
+            catch(Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("Error Code: IS_INTERNET_REACHABLE" + Environment.NewLine + e.Message);
+                return false;
+            }
         }
-
     }
 }
