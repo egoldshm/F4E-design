@@ -33,7 +33,7 @@ namespace F4E___Service
 
         public static string GetAppDataFolder()
         {
-            return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MMB");
+            return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB");
         }
     }
 }

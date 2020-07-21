@@ -134,7 +134,7 @@
                     <GradientStop Color="#FF1D60AE" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Button Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Click="SaveChangesButton_Click" Height="Auto" Margin="0,0,0.2,0.2"/>
+            <Button x:Name="saveChangesButton" Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0" Background="{x:Null}" Content="שמור שינויים" FontFamily="Assistant Bold" Foreground="White" Click="SaveChangesButton_Click" Height="Auto" Margin="0,0,0.2,0.2"/>
         </Border>
     </Grid>
 </Page>

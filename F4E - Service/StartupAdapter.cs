@@ -21,7 +21,7 @@ namespace F4E___Service
 
                 WshShell wsh = new WshShell();
                 string shurtcutPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Microsoft\Windows\Start Menu\Programs\StartUp\‏‏F4E by MMB.lnk";
-                IWshShortcut shortcut = wsh.CreateShortcut(shurtcutPath) as IWshRuntimeLibrary.IWshShortcut;
+                IWshShortcut shortcut = wsh.CreateShortcut(shurtcutPath) as IWshShortcut;
                 shortcut.Arguments = "";
                 shortcut.TargetPath = path;
                 // not sure about what this is for

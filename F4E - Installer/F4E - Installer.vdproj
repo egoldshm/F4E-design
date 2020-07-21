@@ -660,7 +660,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:F4E by MMB"
         "ProductCode" = "8:{4386A700-6A6E-46DE-AFD3-04BAA1EE10D4}"
-        "PackageCode" = "8:{99D55F36-7037-4F13-8243-6A2567E8723D}"
+        "PackageCode" = "8:{7716F173-5D25-46F7-8B0C-C25B32D1E779}"
         "UpgradeCode" = "8:{68A79374-766D-43DD-AE6B-6E2742158529}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1191,7 +1191,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_07C1C283DA4F4187ADD03AAF13C572EF"
             {
-            "SourcePath" = "8:..\\F4E - Service\\obj\\Release\\F4E-Service.exe"
+            "SourcePath" = "8:..\\F4E - Service\\obj\\Debug\\F4E-Service.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_41249D082A244FA9B6CD36D2994803E9"
@@ -1219,7 +1219,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2D9EB7C4A04F4A628FC0DBE6AA32BF76"
             {
-            "SourcePath" = "8:..\\F4E - Uninstaller\\obj\\Release\\F4E-Uninstaller.exe"
+            "SourcePath" = "8:..\\F4E - Uninstaller\\obj\\Debug\\F4E-Uninstaller.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_41249D082A244FA9B6CD36D2994803E9"
@@ -1247,7 +1247,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4C77E7709ED441B6A55290D8A245AB93"
             {
-            "SourcePath" = "8:..\\F4E-design\\obj\\x86\\Release\\F4E by MMB.exe"
+            "SourcePath" = "8:..\\F4E-design\\obj\\x86\\Debug\\F4E by MMB.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_41249D082A244FA9B6CD36D2994803E9"

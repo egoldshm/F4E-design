@@ -8,23 +8,39 @@ namespace F4E___Service
 {
     class FilesCatcher
     {
-        private static List<FileStream> fileStreams = new List<FileStream>();
+        private static List<FileStream> fileStreams;
         public static void CatchSystemFiles()
         {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MMB");
-            FilteringService.ShowMessage("CatchSystemFiles", path);
+            fileStreams = new List<FileStream>();
+            string dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB");
+            string exePath = System.AppDomain.CurrentDomain.BaseDirectory;
+
+            DirectoryInfo dataDirectory = new DirectoryInfo(dataPath);
+            foreach (FileInfo file in dataDirectory.GetFiles())
+            {
+                CatchFile(file);
+            }
+
+            DirectoryInfo exeFolder = new DirectoryInfo(exePath);
+            foreach (FileInfo file in exeFolder.GetFiles())
+            {
+                CatchFile(file);
+            }
         }
 
         private static void CatchFile(FileInfo file)
         {     
             try
             {
-                if (!file.FullName.Contains("SavedFilteringSettings") && !file.FullName.Contains("SavedScheduel"))
+                if (!file.FullName.Contains("SavedFilteringSettings") && !file.FullName.Contains("SavedScheduel") && !file.FullName.Contains("CustomBlackList") && !file.FullName.Contains("F4E by MMB"))
                 {
                     File.SetAttributes(file.FullName, FileAttributes.ReadOnly | FileAttributes.Encrypted | FileAttributes.System | FileAttributes.Hidden);
                 }
 
-                fileStreams.Add(File.Open(file.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+                if (!file.FullName.Contains("CustomBlackList") && !file.FullName.Contains("SavedFilteringSettings"))
+                {
+                    fileStreams.Add(File.Open(file.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+                }
             }
             catch
             {
@@ -33,30 +49,44 @@ namespace F4E___Service
 
         public static void StopCatchingSystemFiles()
         {
-            DirectoryInfo programFolder = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory);
-            foreach (FileInfo file in programFolder.GetFiles())
+            string dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB");
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+
+            DirectoryInfo dataDirectory = new DirectoryInfo(dataPath);
+            foreach (FileInfo file in dataDirectory.GetFiles())
             {
-                File.SetAttributes(file.FullName, FileAttributes.Normal);
+                try
+                {
+                    File.SetAttributes(file.FullName, FileAttributes.Normal);
+                }
+                catch
+                {}
             }
+
+            DirectoryInfo exeFolder = new DirectoryInfo(exePath);
+            foreach (FileInfo file in exeFolder.GetFiles())
+            {
+                try
+                {
+                    File.SetAttributes(file.FullName, FileAttributes.Normal);
+                }
+                catch
+                { }
+            }
+
             foreach (FileStream stream in fileStreams)
             {
-                stream.Close();
+                try
+                {
+                    stream.Close();
+                    stream.Dispose();
+                    fileStreams.Remove(stream);
+                }
+                catch
+                { }
             }
-
-            DirectoryInfo appData = new DirectoryInfo(Program.GetAppDataFolder());
-            foreach (FileInfo file in appData.GetFiles())
-            {
-                File.SetAttributes(file.FullName, FileAttributes.Normal);
-            }
-            foreach (FileStream stream in fileStreams)
-            {
-                stream.Close();
-            }
-
-
-            //release hosts:
-            FileInfo hosts = new FileInfo(Environment.SystemDirectory + @"\drivers\etc\hosts");
-            File.SetAttributes(hosts.FullName, FileAttributes.Normal);
+            fileStreams.Clear();
+            fileStreams = null;
         }
     }
 }

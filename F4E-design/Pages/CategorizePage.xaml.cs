@@ -149,11 +149,13 @@ namespace F4E_design.Pages
                 catch(Exception ex)
                 {
                     CustomMessageBox.ShowDialog(Window, "כתיבת הנתונים לא הצליחה"+ Environment.NewLine + ex.Message, "שגיאה", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
+                    ResetToggles();
                 }
             }
             else
             {
-                CustomMessageBox.ShowDialog(Window, "יש צורך בחיבור לאינטרנט", "על מנת לעדכן את הקטגוריות יש צורך בחיבור לאינטרנט.", CustomMessageBox.CustomMessageBoxTypes.Stop, "הבנתי");
+                CustomMessageBox.ShowDialog(Window, "על מנת לעדכן את הקטגוריות יש צורך בחיבור לאינטרנט.", "יש צורך בחיבור לאינטרנט", CustomMessageBox.CustomMessageBoxTypes.Stop, "הבנתי");
+                ResetToggles();
             }
         }
         private void SaveChangesReminderAnimation()

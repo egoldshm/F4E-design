@@ -152,6 +152,7 @@
       <DependentUpon>StatusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PasswordEncryption.cs" />
+    <Compile Include="ProblematicAppsBlocker.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

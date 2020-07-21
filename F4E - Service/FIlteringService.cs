@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -29,12 +30,15 @@ namespace F4E___Service
             updateHostsFile = 136,
             addToSafeMode = 137,
             removeFromSafeMode = 138,
-            addToStartUp = 139
+            addToStartUp = 139,
+            blockIncognitoMode=140,
+            unblockIncognitoMode = 141,
         }
 
         public static IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
         public static int WTS_CURRENT_SESSION = 1;
         public static Boolean allowSafemode = false;
+        public static Boolean incognitoBlock = true;
 
         static Boolean msgShowed = false;
 
@@ -53,6 +57,7 @@ namespace F4E___Service
         private void OnElapsedTime(object sender, ElapsedEventArgs e)
         {
             PreventClosing();
+            IncognitoBlock(incognitoBlock);
             if(InternetBlocker.GetBlockStatus()==true)
             {
                 if(InternetBlocker.IsInternetReachable())
@@ -105,6 +110,8 @@ namespace F4E___Service
             timer.Stop();
             timer.Enabled = false;
             InternetBlocker.Block(false);
+            IncognitoBlock(false);
+            ShowMessage("Stopeed", "Stopped");
         }
 
 
@@ -120,6 +127,7 @@ namespace F4E___Service
                     InternetBlocker.Block(false);
                     break;
                 case CustomCommends.kill: //Kill Service
+                    incognitoBlock = false;
                     Stop();
                     Application.Exit();
                     break;
@@ -149,6 +157,19 @@ namespace F4E___Service
                     break;
             }
         }
+
+        private void IncognitoBlock(Boolean mode)
+        {
+            int value = mode == true ? 1 : 0;
+            try
+            {
+                RegistryKey key2;
+                key2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Google\Chrome", true);
+                key2.SetValue("IncognitoModeAvailability", value.ToString());
+            }
+            catch { }
+        }
+
         public static void ShowMessage(string title, string msg)
         {
             if (!msgShowed)

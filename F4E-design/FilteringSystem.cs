@@ -21,8 +21,9 @@ namespace F4E_design
         public static Boolean runInSafeModeStatus = false;
         public static Boolean preventSystemFilesEditStatus = false;
         public static Boolean runInStartUpStatus = false;
-
+        public static Boolean dataCatched = false, exeCatched = false;
         private static Boolean serviceHasDetected = false;
+
 
         private static FilteringSettings _filteringSettings;
         private static System.Timers.Timer defenseStatusChecker;
@@ -52,18 +53,18 @@ namespace F4E_design
         }
         public static void SaveChanges()
         {
-            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
-            Stream stream = null;
             string path = Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings");
             try
-            {            
-                stream = System.IO.File.Open(path, FileMode.OpenOrCreate);
-                new BinaryFormatter().Serialize(stream, _filteringSettings);
-            }
-            finally
             {
+                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
+                Stream stream = System.IO.File.Open(path, FileMode.Create);
+                new BinaryFormatter().Serialize(stream, _filteringSettings);
                 stream.Close();
                 ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message,"SaveChanges Error");
             }
         }
 
@@ -78,21 +79,13 @@ namespace F4E_design
 
         public static void Load()
         {
-            try
-            {
-                ServiceAdapter.StartService("GUIAdapter", 10000);
-                HostsFileAdapter.Write(GetCurrentFilteringSettings());
-                CustomNotifyIcon.SetupNotificationIcon();
-                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
-                SetSystemStatus(true);
-                StartDefenceCheck();
-                StartScheduelBlockTimer();
-            }
-            catch(Exception e)
-            {
-                CustomMessageBox.ShowDialog(null, "מסיבה לא ידועה, חלה שגיאה בהעלאת המערכת. נסה שוב מאוחר יותר או התקן מחדש את התוכנה", "שגיאה בטעינת המערכת", CustomMessageBox.CustomMessageBoxTypes.Error, "יציאה");
-                MessageBox.Show(e.ToString());
-            }
+            HostsFileAdapter.Write(GetCurrentFilteringSettings());
+            CustomNotifyIcon.SetupNotificationIcon();
+            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
+            SetSystemStatus(true);
+            StartDefenceCheck();
+            StartScheduelBlockTimer();
+
         }
 
         public static void SetSystemStatus(Boolean status)
@@ -187,6 +180,7 @@ namespace F4E_design
             RunInSafeMode();
             RunInStartUp();
             PreventSystemFilesEdit();
+            ProblematicAppsBlocker.Block();
             tick_count++;
             if (isServiceIsOn == true)
             {
@@ -201,7 +195,7 @@ namespace F4E_design
                     if (!runInStartUpStatus)
                         RunInStartUp();
 
-                    if (tick_count == 1200)
+                    if (tick_count > 1200)
                     {
                         CustomNotifyIcon.ShowNotificationMessage(500, "המערכת זיהתה חריגה", "המערכת זיהתה כי אחת ממערכות ההגנה אינה פעילה. לחץ כאן לפרטים", System.Windows.Forms.ToolTipIcon.Error);
                         tick_count = 0;
@@ -210,14 +204,13 @@ namespace F4E_design
             }
             else
             {
-                if (tick_count == 1200)
+                if (tick_count > 1200)
                 {
                     CustomNotifyIcon.ShowNotificationMessage(500, "הסינון אינו יציב", "אחת מהמערכות הקריטיות לפעילות הסינון אינה פעילה, הודעה נשלחה למנהל המערכת.", System.Windows.Forms.ToolTipIcon.Error);
                     tick_count = 0;
                 }
             }
         }
-
         public static void RunInStartUp()
         {
             new Thread(() =>
@@ -256,7 +249,7 @@ namespace F4E_design
 
         internal static void PostDefenceStatus()
         {
-            MessageBox.Show("Service Status: " + isServiceIsOn + Environment.NewLine + "Run in safemode: " + runInSafeModeStatus + Environment.NewLine + "Files Catching: " + preventSystemFilesEditStatus + Environment.NewLine + "Run in Startup: " + runInStartUpStatus);
+            MessageBox.Show("Service Status: " + isServiceIsOn + Environment.NewLine + "Run in safemode: " + runInSafeModeStatus + Environment.NewLine + "Files Catching: " + preventSystemFilesEditStatus + Environment.NewLine + "Run in Startup: " + runInStartUpStatus+ " |dataCatched: " + dataCatched+ " |exeCatched: " + exeCatched);
         }
 
         private static int prevent_close_attempts = 0;
@@ -283,8 +276,11 @@ namespace F4E_design
                     if(InternetBlocker.IsInternetReachable())
                         InternetBlocker.Block(true);
 
-                    if(serviceHasDetected)
-                        BootController.DoExitWin(BootController.EWX_REBOOT);
+                    if (ServiceAdapter.GetServiceStatus("GUIAdapter") == "Stopped")
+                    {
+                        if (serviceHasDetected)
+                            BootController.DoExitWin(BootController.EWX_REBOOT);
+                    }
 
                     isServiceIsOn = false;
                 }
@@ -313,13 +309,28 @@ namespace F4E_design
                     string path = Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings");
                     stream = System.IO.File.Open(path, FileMode.Open);
                     stream.Close();
-                    preventSystemFilesEditStatus = false;
+                    dataCatched = false;
                     ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
                 }
                 catch
                 {
-                    preventSystemFilesEditStatus = true;
+                    dataCatched = true;
                 }
+
+                try
+                {
+                    string path = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "F4E by MMB.exe");
+                    stream = System.IO.File.Open(path, FileMode.Open);
+                    stream.Close();
+                    exeCatched = false;
+                    ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
+                }
+                catch(Exception e)
+                {
+                    exeCatched = true;
+                }
+
+                preventSystemFilesEditStatus = (dataCatched && exeCatched);
             }).Start();
 
         }

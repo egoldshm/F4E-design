@@ -20,11 +20,33 @@ namespace F4E_design
 
         public static void SetupNotificationIcon()
         {
-            _notifyIcon.Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName);
-            _notifyIcon.Visible = true;
-            _notifyIcon.Click += NotifyIcon_Click;
-            _notifyIcon.BalloonTipClicked += NotifyIcon_Click;
+            try
+            {
+                MenuItem update = new MenuItem();
+                update.Text = "עדכן הגדרות";
+                update.Click += Update_Click;
+
+                ContextMenu menu = new ContextMenu();
+                menu.MenuItems.Add(update);
+
+
+                _notifyIcon.Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName);
+                _notifyIcon.Visible = true;
+                _notifyIcon.Click += NotifyIcon_Click;
+                _notifyIcon.BalloonTipClicked += NotifyIcon_Click;
+                _notifyIcon.ContextMenu = menu;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "CustomNotifyIcon.SetupNotificationIcon Error");
+            }
         }
+
+        private static void Update_Click(object sender, EventArgs e)
+        {
+            ProblematicAppsBlocker.UpdateBlockedList();
+        }
+
         private static void NotifyIcon_Click(object sender, EventArgs e)
         {
             MainWindow window = App.Current.MainWindow as MainWindow;

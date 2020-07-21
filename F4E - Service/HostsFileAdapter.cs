@@ -10,16 +10,17 @@ namespace F4E___Service
     {
         public static void WriteCustomBlackListToHostFile()
         {
-            string hostFilePath = Environment.SystemDirectory + @"\drivers\etc\hosts";
-            string blackListPath = Path.Combine(Program.GetAppDataFolder(), "MMB");
-            try
+            string blackListPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB"), "CustomBlackList");
+
+            var OSInfo = Environment.OSVersion;
+            string pathpart = "hosts";
+            if (OSInfo.Platform == PlatformID.Win32NT)
             {
-                File.WriteAllText(hostFilePath, File.ReadAllText(blackListPath));
+                //is windows NT
+                pathpart = "system32\\drivers\\etc\\hosts";
             }
-            catch(Exception e)
-            {
-                FilteringService.ShowMessage("Error Host Write", "hostFilePath: " + hostFilePath + Environment.NewLine + "BlackListFilePath: " + blackListPath + Environment.NewLine + e.Message);
-            }
+            string hostFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), pathpart);
+            File.WriteAllText(hostFilePath, File.ReadAllText(blackListPath));
         }
     }
 }
