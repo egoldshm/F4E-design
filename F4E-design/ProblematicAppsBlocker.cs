@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace F4E_design
@@ -15,21 +16,28 @@ namespace F4E_design
 
         public static void UpdateBlockedList()
         {
-            blockedApp = Regex.Split(Tools.GetTextFromUri("http://f4e.mmb.org.il/data/blockedApp"), "\r\n|\r|\n");
+            if(InternetBlocker.IsInternetReachable())
+                blockedApp = Regex.Split(Tools.GetTextFromUri("http://f4e.mmb.org.il/data/blockedApp"), "\r\n|\r|\n");
         }
 
         public static void Block()
         {
-            times++;
-            if(times==600)
-            {
-                UpdateBlockedList();
-                times = 0;
-            }
-            foreach(string app in blockedApp)
-            {
-                CloseProcess(app);
-            }
+            //new Thread(() =>
+            //{
+                    times++;
+                    if (times == 600)
+                    {
+                        UpdateBlockedList();
+                        times = 0;
+                    }
+                    if (blockedApp != null)
+                    {
+                        foreach (string app in blockedApp)
+                        {
+                            CloseProcess(app);
+                        }
+                    }
+            //}).Start();
         }
 
         public static void CloseProcess(string name)

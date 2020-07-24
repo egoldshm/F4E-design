@@ -26,7 +26,9 @@ namespace F4E_design
             updateHostsFile = 136,
             addToSafeMode = 137,
             removeFromSafeMode = 138,
-            addToStartUp = 139
+            addToStartUp = 139,
+            _pause = 140,
+            _continue = 141
         }
 
         public static void InstallService(string exePath)

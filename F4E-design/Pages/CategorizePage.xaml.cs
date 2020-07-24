@@ -164,5 +164,20 @@ namespace F4E_design.Pages
             sb.RepeatBehavior = new RepeatBehavior(1);
             sb.Begin();
         }
+
+        private void goToSiteButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            goToSiteButton.Foreground = new SolidColorBrush(Colors.MediumBlue);
+        }
+
+        private void goToSiteButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            goToSiteButton.Foreground = new SolidColorBrush(Color.FromArgb(100, 20, 123, 173));
+        }
+
+        private void goToSiteButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start("f4e.mmb.co.il/categories");
+        }
     }
 }

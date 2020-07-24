@@ -14,7 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Media.TextFormatting;
 using System.Xml;
 
-namespace F4E_GUI
+namespace F4E_design
 {
     class HostsFileAdapter
     {
@@ -150,11 +150,19 @@ namespace F4E_GUI
             List<string> urlsList = new List<string>();
             string path= "http://f4e.mmb.org.il/sites/"+category.ToString().ToLower()+".html";
             string[] socialMediaUrlList = Regex.Split(Tools.GetTextFromUri(path), "\r\n|\r|\n");
-            foreach (string line in socialMediaUrlList)
+            if (socialMediaUrlList[0].Contains("F4E by MMB"))
             {
-                urlsList.Add(line);
+                foreach (string line in socialMediaUrlList.Skip(1))
+                {
+                    urlsList.Add(line);
+                }
+                return urlsList;
             }
-            return urlsList;
+            else
+            {
+                CustomMessageBox.ShowDialog(null, "כתיבת הקטוגריה לא הצליחה, המידע שהתקבל אינו תואם לתבנית רשימה שחורה.", category.ToString() + " Writing Error", CustomMessageBox.CustomMessageBoxTypes.Error, "המשך");
+                return null;
+            }
         }
     }
 }

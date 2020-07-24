@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Cache;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Threading;
 using System.Windows;
 
 namespace F4E_design
@@ -14,6 +16,12 @@ namespace F4E_design
 
     public partial class App : Application
     {
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(String lpClassName, String lpWindowName);
+
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // if app data's folder doesn't exists - create it.
@@ -56,9 +64,34 @@ namespace F4E_design
             else
             {
                 if (Environment.GetCommandLineArgs().Length > 1)
+                {
                     if (Environment.GetCommandLineArgs()[0] != "runAgainAsAdmin")
                         Application.Current.Shutdown();
+                }
+                else
+                {
+                    BringProcessToFront("F4E by MMB");
+                }
             }
+        }
+
+        public static void BringProcessToFront(string name)
+        {
+            try
+            {
+                IntPtr handle = FindWindow(null, name);
+
+                // Verify that Calculator is a running process.
+                if (handle == IntPtr.Zero)
+                {
+                    return;
+                }
+
+                // Make Calculator the foreground application
+                SetForegroundWindow(handle);
+            }
+            catch
+            { }
         }
 
         public static string GetAppDataFolder()
@@ -68,9 +101,9 @@ namespace F4E_design
 
         public static void NotifyForNewVersion(Window window)
         {
-           if(CheckForUpdates()==true)
+            if (CheckForUpdates() == true)
             {
-                if (CustomMessageBox.ShowDialog(window, "גרסה חדשה זמינה להורדה עכשיו באתר. האם ברצונך לעבור לאתר כעת?", "גרסה חדשה זמינה", CustomMessageBox.CustomMessageBoxTypes.Question, "עבור לאתר", "יותר מאוחר")==true)
+                if (CustomMessageBox.ShowDialog(window, "גרסה חדשה זמינה להורדה עכשיו באתר. האם ברצונך לעבור לאתר כעת?", "גרסה חדשה זמינה", CustomMessageBox.CustomMessageBoxTypes.Question, "עבור לאתר", "יותר מאוחר") == true)
                 {
                     Process.Start("https://f4e.mmb.org.il");
                 }
@@ -125,31 +158,39 @@ namespace F4E_design
 
         public static Boolean CheckForUpdates()
         {
-            string last_version = Tools.GetTextFromUri("http://f4e.mmb.org.il/data/last_version");
-            string current_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            if (InternetBlocker.IsInternetReachable())
+            {
+                string last_version = Tools.GetTextFromUri("http://f4e.mmb.org.il/data/last_version");
+                string current_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-            if (last_version != null)
-            {
-                return !(last_version == current_version);
+                if (last_version != null)
+                {
+                    return !(last_version == current_version);
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static Boolean IsActiveVersion()
         {
-            string active_versions = Tools.GetTextFromUri("http://f4e.mmb.org.il/data/active_versions");
-            string current_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            if (active_versions != null)
+            if (InternetBlocker.IsInternetReachable())
             {
-                return (active_versions.Contains(current_version));
+                string active_versions = Tools.GetTextFromUri("http://f4e.mmb.org.il/data/active_versions");
+                string current_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                if (active_versions != null)
+                {
+                    return (active_versions.Contains(current_version));
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return true;
         }
 
         public static void FullExit()
@@ -157,7 +198,7 @@ namespace F4E_design
             FilteringSystem.StopDefenceCheck();
             InternetBlocker.Block(false);
             CustomNotifyIcon.Hide();
-            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.kill);
+            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends._pause);
             Environment.Exit(Environment.ExitCode);
         }
     }

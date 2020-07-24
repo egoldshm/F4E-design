@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            // 
+            // FilteringService
+            // 
+            this.AutoLog = false;
             this.ServiceName = "Service1";
+
         }
 
         #endregion

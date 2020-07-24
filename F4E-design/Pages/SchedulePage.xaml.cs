@@ -32,6 +32,8 @@ namespace F4E_design.Pages
         const int NUM_OF_DAYS = 7;
         const int NUM_OF_HOURS = 48;
 
+        private static Stream savedSettingsStream;
+
         static private bool[,] tableOfHours = new bool[NUM_OF_DAYS, NUM_OF_HOURS];
 
         /* Notice:
@@ -275,34 +277,29 @@ namespace F4E_design.Pages
 
         private void LoadSavedTable()
         {
-            Stream stream = null;
             try
             {
-                stream = File.Open("SavedScheduel", FileMode.Open);
-                tableOfHours = (bool[,])new BinaryFormatter().Deserialize(stream);
+                savedSettingsStream = System.IO.File.Open(System.IO.Path.Combine(App.GetAppDataFolder(), "SavedScheduel"), FileMode.OpenOrCreate);
+                tableOfHours = (bool[,])new BinaryFormatter().Deserialize(savedSettingsStream);
             }
-            catch
-            { }
-            finally
+            catch(Exception e)
             {
-                if (stream != null)
-                    stream.Close();
+                //MessageBox.Show(e.Message, "LoadSavedTable");
             }
         }
 
         private void SaveChanges()
         {
-            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
-            Stream stream = null;
             try
             {
-                stream = File.Open("SavedScheduel", FileMode.Create);
-                new BinaryFormatter().Serialize(stream, tableOfHours);
+                savedSettingsStream.Close();
+                System.IO.File.Delete(System.IO.Path.Combine(App.GetAppDataFolder(), "SavedScheduel"));
+                savedSettingsStream = System.IO.File.Open(System.IO.Path.Combine(App.GetAppDataFolder(), "SavedScheduel"), FileMode.OpenOrCreate);
+                new BinaryFormatter().Serialize(savedSettingsStream, tableOfHours);
             }
-            finally
+            catch (Exception e)
             {
-                stream.Close();
-                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
+               // MessageBox.Show(e.Message, "Scheduel SaveChanges");
             }
         }
 
@@ -358,9 +355,8 @@ namespace F4E_design.Pages
             FromArrayOfBoolToButton(tableOfHours);
         }
 
-        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        public void UpdateBlockingMode()
         {
-            SaveChanges();
             if (IsBlockNow())
             {
                 InternetBlocker.Block(true);
@@ -369,6 +365,12 @@ namespace F4E_design.Pages
             {
                 InternetBlocker.Block(false);
             }
+        }
+
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveChanges();
+            UpdateBlockingMode();
             CustomMessageBox.ShowDialog(Window, "השינויים נשמרו בהצלחה!", "מערכת שעות", CustomMessageBox.CustomMessageBoxTypes.Success, "המשך");
         }
     }

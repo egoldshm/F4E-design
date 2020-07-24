@@ -1,4 +1,5 @@
 ﻿using F4E_design;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,9 +21,9 @@ namespace F4E___Uninstaller
     {
         private bool _isCorrectPassword = false;
         private bool _successfullyUninstalled = false;
-        //private string exePath;
+        private string exePath;
         private string dataPath;
-        private readonly string masterPassord= "Hv6qER3rfNPWB5mYvIdu7i9V8VL0zQi0wUfgoPA8RujiAWfJ1kBUx+A91sRpyh/tOyKm8N5wzeTExuXir1XQYCRwO1Iy0vXk7gcYlFQkMwM=";
+        private readonly string masterPassword= "Hv6qER3rfNPWB5mYvIdu7i9V8VL0zQi0wUfgoPA8RujiAWfJ1kBUx+A91sRpyh/tOyKm8N5wzeTExuXir1XQYCRwO1Iy0vXk7gcYlFQkMwM=";
 
         Boolean _isMsiSended;
 
@@ -31,7 +32,7 @@ namespace F4E___Uninstaller
             InitializeComponent();
             _isMsiSended = isMsiSendedToHere;
             dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB");
-            //exePath = 
+            exePath = Assembly.GetExecutingAssembly().CodeBase.Replace("F4E-Uninstaller.exe", "").Replace("file:///", "");
         }
 
         internal bool IsCorrectPassword()
@@ -59,6 +60,7 @@ namespace F4E___Uninstaller
                     HostsFileAdapter.ClearAll();
                     TaskingScheduel.RemoveApplicationFromAllUserStartup();
                     DeleteUninstallerEXEItSelf();
+                    AllowIncognitoMode();
 
                     _successfullyUninstalled = true;
                     this.Close();
@@ -74,35 +76,46 @@ namespace F4E___Uninstaller
             }
         }
 
+        private void AllowIncognitoMode()
+        {
+            try
+            {
+                RegistryKey key2;
+                key2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Google\Chrome", true);
+                key2.SetValue("IncognitoModeAvailability", 0);
+            }
+            catch { }
+        }
+
         private void DeleteUninstallerEXEItSelf()
         {
-            //Process procDestruct = new Process();
-            //string strName = "destruct.bat";
-            //string strPath = Path.Combine(Directory.GetCurrentDirectory(), strName);
-            //string strExe = new FileInfo(exePath+ "/F4E-Uninstaller.exe").Name;
+            Process procDestruct = new Process();
+            string strName = "destruct.bat";
+            string strPath = Path.Combine(Directory.GetCurrentDirectory(), strName);
+            string strExe = new FileInfo(exePath + "/F4E-Uninstaller.exe").Name;
 
-            //StreamWriter swDestruct = new StreamWriter(strPath);
+            StreamWriter swDestruct = new StreamWriter(strPath);
 
-            //swDestruct.WriteLine("attrib \"" + strExe + "\"" + " -a -s -r -h");
-            //swDestruct.WriteLine(":Repeat");
-            //swDestruct.WriteLine("del " + "\"" + strExe + "\"");
-            //swDestruct.WriteLine("if exist \"" + strExe + "\"" + " goto Repeat");
-            //swDestruct.WriteLine("del \"" + strName + "\"");
-            //swDestruct.Close();
+            swDestruct.WriteLine("attrib \"" + strExe + "\"" + " -a -s -r -h");
+            swDestruct.WriteLine(":Repeat");
+            swDestruct.WriteLine("del " + "\"" + strExe + "\"");
+            swDestruct.WriteLine("if exist \"" + strExe + "\"" + " goto Repeat");
+            swDestruct.WriteLine("del \"" + strName + "\"");
+            swDestruct.Close();
 
-            //procDestruct.StartInfo.FileName = "destruct.bat";
+            procDestruct.StartInfo.FileName = "destruct.bat";
 
-            //procDestruct.StartInfo.CreateNoWindow = true;
-            //procDestruct.StartInfo.UseShellExecute = false;
+            procDestruct.StartInfo.CreateNoWindow = true;
+            procDestruct.StartInfo.UseShellExecute = false;
 
-            //try
-            //{
-            //    procDestruct.Start();
-            //}
-            //catch (Exception)
-            //{
-            //    Close();
-            //}
+            try
+            {
+                procDestruct.Start();
+            }
+            catch (Exception)
+            {
+                Close();
+            }
         }
 
         private Boolean DeleteFiles()
@@ -119,24 +132,23 @@ namespace F4E___Uninstaller
                 { }
             }
 
-            //FilesCathcer.StopCatchingSystemFiles(exePath);
-            //DirectoryInfo directory1 = new DirectoryInfo(exePath);
-            //foreach (FileInfo file in directory.GetFiles())
-            //{
-            //    try
-            //    {
-            //        file.Delete();
-            //    }
-            //    catch
-            //    { }
-            //}
+            FilesCathcer.StopCatchingSystemFiles(exePath);
+            DirectoryInfo directory1 = new DirectoryInfo(exePath);
+            foreach (FileInfo file in directory.GetFiles())
+            {
+                try
+                {
+                    file.Delete();
+                }
+                catch
+                { }
+            }
             return true;
         }
 
         private Boolean UninstallService()
         {
-            return true;
-            //return ServiceAdapter.UninstallService(exePath + "/F4E-Service.exe");
+            return ServiceAdapter.UninstallService(exePath + "/F4E-Service.exe");
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -157,7 +169,7 @@ namespace F4E___Uninstaller
 
         private Boolean IsCorrectPassword(string password)
         {
-            return ((GetUninstallingPassword() == PasswordEncryption.Encrypt(password)) || (masterPassord == PasswordEncryption.Encrypt(password)));
+            return ((GetUninstallingPassword() == PasswordEncryption.Encrypt(password)) || (masterPassword == PasswordEncryption.Encrypt(password)));
         }
 
         private string GetUninstallingPassword()
@@ -170,7 +182,7 @@ namespace F4E___Uninstaller
             catch(Exception e)
             {
                 MessageBox.Show(e.Message);
-                return "1111";
+                return masterPassword;
             }
         }
 

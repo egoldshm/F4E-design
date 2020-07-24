@@ -37,7 +37,7 @@ namespace F4E___Service
                     File.SetAttributes(file.FullName, FileAttributes.ReadOnly | FileAttributes.Encrypted | FileAttributes.System | FileAttributes.Hidden);
                 }
 
-                if (!file.FullName.Contains("CustomBlackList") && !file.FullName.Contains("SavedFilteringSettings"))
+                if (!file.FullName.Contains("CustomBlackList") && !file.FullName.Contains("SavedFilteringSettings") && !file.FullName.Contains("SavedScheduel"))
                 {
                     fileStreams.Add(File.Open(file.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
                 }

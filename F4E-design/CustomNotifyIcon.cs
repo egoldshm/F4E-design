@@ -44,7 +44,7 @@ namespace F4E_design
 
         private static void Update_Click(object sender, EventArgs e)
         {
-            ProblematicAppsBlocker.UpdateBlockedList();
+            FilteringSystem.UpdateAllSettings();
         }
 
         private static void NotifyIcon_Click(object sender, EventArgs e)

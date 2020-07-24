@@ -47,12 +47,19 @@ namespace F4E_GUI
 
         private static string ReplaceCustomTagsToData(string original, DateTime date)
         {
-            string formatted;
-            formatted = original.Replace("%name%", FilteringSystem.GetCurrentFilteringSettings().GetAdminName());
-            formatted = formatted.Replace("%date%", date.ToShortDateString() + " בשעה: " + date.ToShortTimeString());
-            formatted = formatted.Replace("%pc_name%", FilteringSystem.GetCurrentFilteringSettings().GetComputerName());
-            formatted = formatted.Replace("%password%",PasswordEncryption.Decrypt(FilteringSystem.GetCurrentFilteringSettings().GetAdminPassword()));
-            return formatted;
+            try
+            {
+                string formatted;
+                formatted = original.Replace("%name%", FilteringSystem.GetCurrentFilteringSettings().GetAdminName());
+                formatted = formatted.Replace("%date%", date.ToShortDateString() + " בשעה: " + date.ToShortTimeString());
+                formatted = formatted.Replace("%pc_name%", FilteringSystem.GetCurrentFilteringSettings().GetComputerName());
+                formatted = formatted.Replace("%password%", PasswordEncryption.Decrypt(FilteringSystem.GetCurrentFilteringSettings().GetAdminPassword()));
+                return formatted;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private static void ReloadPassword()

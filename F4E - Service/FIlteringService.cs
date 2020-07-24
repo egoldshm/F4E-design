@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -31,14 +32,17 @@ namespace F4E___Service
             addToSafeMode = 137,
             removeFromSafeMode = 138,
             addToStartUp = 139,
-            blockIncognitoMode=140,
-            unblockIncognitoMode = 141,
+            _pause = 140,
+            _continue=141
         }
 
         public static IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
         public static int WTS_CURRENT_SESSION = 1;
+
         public static Boolean allowSafemode = false;
         public static Boolean incognitoBlock = true;
+        private static Boolean shutdownOnStop = true;
+        private static string serviceStatus;
 
         static Boolean msgShowed = false;
 
@@ -49,6 +53,8 @@ namespace F4E___Service
         }
         protected override void OnStart(string[] args)
         {
+            shutdownOnStop = true;
+            serviceStatus = "Running";
             timer.Elapsed += new ElapsedEventHandler(OnElapsedTime);
             timer.Interval = 100; //number in milisecinds  
             timer.Start();
@@ -56,20 +62,45 @@ namespace F4E___Service
 
         private void OnElapsedTime(object sender, ElapsedEventArgs e)
         {
-            PreventClosing();
-            IncognitoBlock(incognitoBlock);
-            if(InternetBlocker.GetBlockStatus()==true)
+            if (serviceStatus == "Running")
             {
-                if(InternetBlocker.IsInternetReachable())
+                PreventClosing();
+                SafeModeBlock();
+                IncognitoBlock(incognitoBlock);
+                if (InternetBlocker.GetBlockStatus() == true)
                 {
-                    InternetBlocker.Block(true);
+                    if (InternetBlocker.IsInternetReachable())
+                    {
+                        InternetBlocker.Block(true);
+                    }
+                }
+                else
+                {
+                    if (!InternetBlocker.IsInternetReachable())
+                    {
+                        InternetBlocker.Block(false);
+                    }
                 }
             }
-            else
+            if(serviceStatus == "Pausing")
             {
-                if(!InternetBlocker.IsInternetReachable())
+                InternetBlocker.Block(false);
+                IncognitoBlock(false);
+                ShowMessage("F4E - Service", "היציאה הושלמה בהצלחה.");
+                serviceStatus = "Paused";
+            }
+        }
+
+        int time = 600;
+        private void SafeModeBlock()
+        {
+            if (SystemInformation.BootMode != BootMode.Normal)
+            {
+                ShowMessage("F4E Filtering Sysetm", "You have 1 minute to exit safe mode");
+                time--;
+                if(time<=0)
                 {
-                    InternetBlocker.Block(false);
+                    BootController.DoExitWin(BootController.EWX_REBOOT);
                 }
             }
         }
@@ -107,11 +138,16 @@ namespace F4E___Service
         protected override void OnStop()
         {
             base.OnStop();
+            if (serviceStatus == "Running")
+            {
+                if (shutdownOnStop)
+                {
+                    ShowMessage("F4E Filtering Sysetm", "The system recognized that the service was unexpectedly shut down. PC REBOOT");
+                    BootController.DoExitWin(BootController.EWX_REBOOT);
+                }
+            }
             timer.Stop();
             timer.Enabled = false;
-            InternetBlocker.Block(false);
-            IncognitoBlock(false);
-            ShowMessage("Stopeed", "Stopped");
         }
 
 
@@ -128,6 +164,7 @@ namespace F4E___Service
                     break;
                 case CustomCommends.kill: //Kill Service
                     incognitoBlock = false;
+                    shutdownOnStop = false;
                     Stop();
                     Application.Exit();
                     break;
@@ -155,6 +192,14 @@ namespace F4E___Service
                 case CustomCommends.addToStartUp:
                     StartupAdapter.AddApplicationToAllUserStartup();
                     break;
+                case CustomCommends._pause:
+                    serviceStatus = "Pausing";
+                    break;
+                case CustomCommends._continue:
+                    serviceStatus = "Running";
+                    shutdownOnStop = true;
+                    processAlreadyDetected = false;
+                    break;
             }
         }
 
@@ -165,7 +210,7 @@ namespace F4E___Service
             {
                 RegistryKey key2;
                 key2 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Google\Chrome", true);
-                key2.SetValue("IncognitoModeAvailability", value.ToString());
+                key2.SetValue("IncognitoModeAvailability", value);
             }
             catch { }
         }

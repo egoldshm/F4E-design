@@ -108,7 +108,6 @@ namespace F4E_design.Pages
         private void UpdatePageGUI()
         {
             safeServerToggle.Source = new BitmapImage(new Uri(SafeServer ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
-            adBlockToggle.Source = new BitmapImage(new Uri(AdBlock ? URI_ON_IMAGE : URI_OFF_IMAGE, UriKind.Relative));
         }
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)

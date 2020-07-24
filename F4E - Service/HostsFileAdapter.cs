@@ -11,15 +11,7 @@ namespace F4E___Service
         public static void WriteCustomBlackListToHostFile()
         {
             string blackListPath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "MMB"), "CustomBlackList");
-
-            var OSInfo = Environment.OSVersion;
-            string pathpart = "hosts";
-            if (OSInfo.Platform == PlatformID.Win32NT)
-            {
-                //is windows NT
-                pathpart = "system32\\drivers\\etc\\hosts";
-            }
-            string hostFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), pathpart);
+            string hostFilePath = Path.Combine(Environment.SystemDirectory, @"drivers\etc\hosts");
             File.WriteAllText(hostFilePath, File.ReadAllText(blackListPath));
         }
     }

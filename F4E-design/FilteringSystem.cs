@@ -27,7 +27,8 @@ namespace F4E_design
 
         private static FilteringSettings _filteringSettings;
         private static System.Timers.Timer defenseStatusChecker;
-        private static System.Timers.Timer scheduelBlockTimer;
+        private static Stream savedSettingsStream;
+
 
         public static FilteringSettings GetCurrentFilteringSettings()
         {
@@ -36,31 +37,22 @@ namespace F4E_design
 
         public static void LoadSavedFilteringSettings()
         {
-            Stream stream = null;
             try
             {
-                string path = Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings");
-                stream = System.IO.File.Open(path, FileMode.Open);
-                _filteringSettings = (FilteringSettings)new BinaryFormatter().Deserialize(stream);
+                savedSettingsStream = System.IO.File.Open(Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings"), FileMode.OpenOrCreate);
+                _filteringSettings = (FilteringSettings)new BinaryFormatter().Deserialize(savedSettingsStream);
             }
             catch
             { }
-            finally
-            {
-                if (stream != null)
-                    stream.Close();
-            }
         }
         public static void SaveChanges()
         {
-            string path = Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings");
             try
             {
-                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.stopCatchFiles);
-                Stream stream = System.IO.File.Open(path, FileMode.Create);
-                new BinaryFormatter().Serialize(stream, _filteringSettings);
-                stream.Close();
-                ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
+                savedSettingsStream.Close();
+                System.IO.File.Delete(Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings"));
+                savedSettingsStream = System.IO.File.Open(Path.Combine(App.GetAppDataFolder(), "SavedFilteringSettings"), FileMode.OpenOrCreate);
+                new BinaryFormatter().Serialize(savedSettingsStream, _filteringSettings);
             }
             catch (Exception e)
             {
@@ -81,11 +73,10 @@ namespace F4E_design
         {
             HostsFileAdapter.Write(GetCurrentFilteringSettings());
             CustomNotifyIcon.SetupNotificationIcon();
+            ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends._continue);
             ServiceAdapter.CustomCommend((int)ServiceAdapter.CustomCommends.startCatchFiles);
             SetSystemStatus(true);
             StartDefenceCheck();
-            StartScheduelBlockTimer();
-
         }
 
         public static void SetSystemStatus(Boolean status)
@@ -124,49 +115,21 @@ namespace F4E_design
         {
             _filteringSettings = new FilteringSettings();
         }
+        public static void UpdateAllSettings()
+        {
+            HostsFileAdapter.Write(GetCurrentFilteringSettings());
+            SchedulePage.Instance.UpdateBlockingMode();
+            ProblematicAppsBlocker.UpdateBlockedList();
+        }
+        
         public static void StartDefenceCheck()
         {
             defenseStatusChecker = new System.Timers.Timer();
-            defenseStatusChecker.Interval = 100;
+            defenseStatusChecker.Interval = 1000;
             defenseStatusChecker.Elapsed += DefenceChecker_Elapsed;
             defenseStatusChecker.Start();
         }
-        public static void StartScheduelBlockTimer()
-        {
-            scheduelBlockTimer = new System.Timers.Timer();
-            scheduelBlockTimer.Interval = 60000;
-            scheduelBlockTimer.Elapsed += ScheduelBlockTimer_Elapsed;
-            scheduelBlockTimer.Start();
-        }
-
-
-        private static void ScheduelBlockTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            new Thread(() =>
-            {
-                Application.Current.Dispatcher.Invoke((Action)delegate
-            {
-                if (GetBlockSchedulingStatus() == true)
-                {
-                    if (SchedulePage.Instance.IsBlockNow())
-                    {
-                        if (InternetBlocker.IsInternetReachable() == true)
-                        {
-                            InternetBlocker.Block(true);
-                        }
-                    }
-                    else
-                    {
-                        if (InternetBlocker.IsInternetReachable() == false)
-                        {
-                            InternetBlocker.Block(false);
-                        }
-                    }
-                }
-            });
-            }).Start();
-        }
-
+     
         internal static void StopDefenceCheck()
         {
             defenseStatusChecker.Stop();
@@ -174,6 +137,7 @@ namespace F4E_design
         }
 
         private static int tick_count = 0;
+        private static int scheduelUpdate = 0;
         private static void DefenceChecker_Elapsed(object sender, ElapsedEventArgs e)
         {
             KeepServiceOn();
@@ -209,6 +173,34 @@ namespace F4E_design
                     CustomNotifyIcon.ShowNotificationMessage(500, "הסינון אינו יציב", "אחת מהמערכות הקריטיות לפעילות הסינון אינה פעילה, הודעה נשלחה למנהל המערכת.", System.Windows.Forms.ToolTipIcon.Error);
                     tick_count = 0;
                 }
+            }
+
+            scheduelUpdate++;
+            if(scheduelUpdate==60)
+            {
+                new Thread(() =>
+                {
+                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        if (GetBlockSchedulingStatus() == true)
+                        {
+                            if (SchedulePage.Instance.IsBlockNow())
+                            {
+                                if (InternetBlocker.IsInternetReachable() == true)
+                                {
+                                    InternetBlocker.Block(true);
+                                }
+                            }
+                            else
+                            {
+                                if (InternetBlocker.IsInternetReachable() == false)
+                                {
+                                    InternetBlocker.Block(false);
+                                }
+                            }
+                        }
+                    });
+                }).Start();
             }
         }
         public static void RunInStartUp()
